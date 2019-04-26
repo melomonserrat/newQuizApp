@@ -15,7 +15,7 @@
 		session_start();
 	?>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="welcome.php">Quiz App</a>
+	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -57,7 +57,7 @@
 	</li>	
 	<form class="form-inline" action="manageCourses.php">
 		<input type="hidden" name="form" value="logout">
-		<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
+		<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 	</form>
     </nav>
     <br>

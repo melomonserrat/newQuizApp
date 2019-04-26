@@ -94,22 +94,7 @@
         <form action="manageCourses.php" method="post" id="editCourseForm">
             <input type="hidden" name="form" value="editCourse">
             <select class="chooseCourseToEdit" name="courseToEdit" form="editCourseForm">
-            <?php
-                $con = mysqli_connect('localhost', 'root', '', 'newquizapp');
-
-                if(mysqli_connect_errno()){
-                    echo "Failed to connect to database! " . mysqli_connect_error();
-                    die();
-                }
-
-                $result = mysqli_query($con, 'SELECT course_name FROM course');
-
-                while($row = mysqli_fetch_array($result)){
-                    echo "<option value=\"" . $row['course_name'] . "\">" . $row['course_name'] . "</option>";
-                }
-
-                mysqli_close($con);
-            ?>
+    
             </select> <br> <br>
             <button type="submit" class="btn btn-primary">Edit!</button>
             <button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>
@@ -127,25 +112,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                    $con = mysqli_connect('localhost','root', '', 'newquizapp');
 
-                    if(mysqli_connect_errno()){
-                        echo "Failed to connect to database! " . mysqli_connect_error();
-                        die();
-                    }
-
-                    $result = mysqli_query($con, "SELECT course_name, course_description FROM course;");
-
-                    while($row = mysqli_fetch_array($result)){
-                        echo "<tr>";
-                        echo "<td>" . $row['course_name'] . "</td>";
-                        echo "<td>" . $row['course_description'] . "</td>";
-                        echo "</tr>";
-                    }
-
-                    mysqli_close($con);
-                ?>
             </tbody>
         </table>
         <button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>

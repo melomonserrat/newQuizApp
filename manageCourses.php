@@ -15,7 +15,7 @@
 		session_start();
 	?>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="welcome.php">Quiz App</a>
+	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -57,7 +57,7 @@
 	</li>	
 	<form class="form-inline" action="manageCourses.php">
 		<input type="hidden" name="form" value="logout">
-		<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
+		<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 	</form>
     </nav>
     <br>
@@ -95,16 +95,25 @@
     </div>
 
     <div class="container createCourse">
-        <h4>Creating a course... </h4>
-        <hr>
+        <h4 style="font-weight: bolder; text-shadow: 4px 4px 8px #000000;">Creating a course... </h4>
+        <hr class="new1">
         <form action="manageCourses.php" method="post">
             <div class="form-group">
+
+                <label for="createCourseName" style="text-shadow: 4px 4px 8px #000000;">Course Name</label>
+                <input type="text" class="form-control" id="createCourseName">
+            </div>
+            <div class="form-group">
+                <label for="createCourseDesc" style="text-shadow: 4px 4px 8px #000000;">Course Description</label>
+                <input type="text" class="form-control" id="createCourseDesc">
+
                 <label for="createCourseName">Course Name</label>
                 <input type="text" class="form-control" id="createCourseName" name="createName">
             </div>
             <div class="form-group">
                 <label for="createCourseDesc">Course Description</label>
                 <input type="text" class="form-control" id="createCourseDesc" name="createDesc">
+
             </div>
             <input type="hidden" name="form" value="createCourse">
             <button type="submit" class="btn btn-primary">Create!</button>
@@ -113,9 +122,9 @@
     </div>
 
     <div class="container editCourse">
-        <h4>Editing a course... </h4>
-        <hr>
-        <p class="lead">Pick a course to edit</p>
+        <h4 style="font-weight: bolder; text-shadow: 4px 4px 8px #000000;">Editing a course... </h4>
+        <hr class="new1">
+        <p class="lead" style="text-shadow: 4px 4px 8px #000000;">Pick a course to edit</p>
 
         <form action="editingCourse.php" method="post" id="editCourseForm">
             <input type="hidden" name="form" value="editCourse">
@@ -142,7 +151,7 @@
         </form>
     </div>
 
-    <div class="container viewCourses">
+    <div class="container viewCourses" style="text-shadow: 4px 4px 8px #000000;">
         <h4>Viewing all courses... </h4>
         <hr>
         <table class="table">

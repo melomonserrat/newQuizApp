@@ -12,12 +12,12 @@
     <title>Quiz App</title>
   
   </head>
-  <body style="background-image: url('pic5.jpg');">
+  <body style="background-image: url('pic5.jpg'); background-size: cover;">
 	<?php
 		session_start();
 	?>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="welcome.php">Quiz App</a>
+		<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -46,6 +46,15 @@
 			<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 		</form>
 	</nav>
+	<section id="hero4">
+		<div class="h-txt text-light">
+			<div class="starter-template">
+				 <h1 style="font-weight:bolder; text-shadow: 4px 4px 8px #000000;"> Take a Quiz </h1>
+				<p class="lead" style="text-shadow: 4px 4px 8px #000000;"> Pick a quiz from its corresponding course that you would like to take.</p>
+			</div>
+		</div>
+	</section>
+	
 	<div class="card-columns" align="center">
 	<?php
 		$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
@@ -65,8 +74,8 @@
 			    	$quizCourseID = $mysqli->query($sql1);
 			    	$count = $count +1;
 	?>	
-
-			<div class="card text-white bg-dark mb-0" style="margin-top:100px; margin-left:400px;">
+		<div class="container cardQuiz">
+			<div class="card text-white bg-dark mb-0" style="margin-top:50px; margin-left:275px; max-width: 25rem;">
 				<div class="card-body text-center">
 					<div class="title">
 						<h4><?php echo $record['Course_Name']; ?></h4>
@@ -75,7 +84,7 @@
 				</div>
 					<button type="button" class="btn btn-primary" data-toggle="modal" <?php echo "data-target='#myModal".$count."'" ?> >View Quiz List</button>
 			</div>
-
+		</div>
 
 		<div class="modal" <?php echo "id='myModal". $count."'" ?> >
 			<div class="modal-dialog modal-lg">

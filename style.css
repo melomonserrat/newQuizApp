@@ -22,7 +22,7 @@
 
 .navbar .navbar-brand{
 	font-weight: bolder;
-	color: blue;
+	color: white;
 }
 
 .navbar-nav > li{
@@ -57,6 +57,16 @@
 #hero3{
 	margin-left: 800px;
 	margin-top:-150px;
+}
+
+#hero4{
+	margin-left: 275px;
+	margin-top:-150px;
+}
+
+.cardQuiz{
+	margin-left: -250px;
+	margin-bottom: 10px;
 }
 
 .h-txt{

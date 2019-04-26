@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2019 at 04:53 AM
+-- Generation Time: Apr 26, 2019 at 09:31 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -81,6 +81,13 @@ CREATE TABLE `identification` (
   `Answer` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `identification`
+--
+
+INSERT INTO `identification` (`Question_ID`, `Answer`) VALUES
+(2, '#include<stdio.h>');
+
 -- --------------------------------------------------------
 
 --
@@ -92,9 +99,16 @@ CREATE TABLE `multiplechoice` (
   `Choice1` varchar(50) DEFAULT NULL,
   `Choice2` varchar(50) DEFAULT NULL,
   `Choice3` varchar(50) DEFAULT NULL,
-  `Choice4` varchar(50) DEFAULT NULL,
-  `Answer` varchar(50) NOT NULL
+  `Choice4` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `multiplechoice`
+--
+
+INSERT INTO `multiplechoice` (`Question_ID`, `Choice1`, `Choice2`, `Choice3`, `Choice4`) VALUES
+(1, 'printf', 'echo', 'System.out.println', 'cout'),
+(4, 'Object-Oriented', 'Procedural', 'Functional', 'Scripting');
 
 -- --------------------------------------------------------
 
@@ -106,8 +120,19 @@ CREATE TABLE `question` (
   `Quiz_ID` int(11) NOT NULL,
   `Question_ID` int(11) NOT NULL,
   `Question_Description` varchar(250) NOT NULL,
-  `Quiz_Type` enum('I','MC','MT','ToF') NOT NULL
+  `Quiz_Type` enum('I','MC','MT','ToF') NOT NULL,
+  `Quiz_Answer` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `question`
+--
+
+INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Quiz_Answer`) VALUES
+(1, 1, 'How to print text?', 'MC', 'printf'),
+(1, 2, 'The way to import the header file for standard input and output', 'I', '#include<stdio.h>'),
+(1, 3, 'To access the values that the user enters, the syntax to use is scanf.', 'ToF', 'True'),
+(1, 4, 'What kind of a programming language is C', 'MC', 'Procedural');
 
 -- --------------------------------------------------------
 
@@ -131,7 +156,6 @@ CREATE TABLE `quiz` (
 INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`) VALUES
 (1, 'C Test no. 1', 'EASY', 'Test to see basic C syntax', 11, 60),
 (2, 'C Test no. 2', 'EASY', NULL, 11, 60),
-(3, 'Python Exam no. 1', 'MEDIUM', NULL, NULL, 50),
 (4, 'Can you Java 1', 'EASY', NULL, 23, 60),
 (5, 'Can you Java 2', 'MEDIUM', NULL, 23, 60),
 (6, 'Data Structures Exam 1', 'MEDIUM', NULL, 123, 50),
@@ -146,20 +170,22 @@ INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description
 CREATE TABLE `quiz_log` (
   `Quiz_ID` int(11) NOT NULL,
   `User_ID` int(11) NOT NULL,
-  `Quiz_Score` int(4) NOT NULL
+  `Quiz_Score` int(4) NOT NULL,
+  `Quiz_Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quiz_log`
 --
 
-INSERT INTO `quiz_log` (`Quiz_ID`, `User_ID`, `Quiz_Score`) VALUES
-(1, 2, 75),
-(1, 3, 85),
-(1, 4, 95),
-(2, 2, 93),
-(3, 4, 55),
-(4, 3, 85);
+INSERT INTO `quiz_log` (`Quiz_ID`, `User_ID`, `Quiz_Score`, `Quiz_Date`) VALUES
+(1, 2, 75, '0000-00-00'),
+(1, 3, 85, '0000-00-00'),
+(1, 4, 95, '0000-00-00'),
+(1, 4, 0, '2019-04-26'),
+(2, 2, 93, '0000-00-00'),
+(4, 3, 85, '0000-00-00'),
+(6, 4, 0, '2019-04-26');
 
 -- --------------------------------------------------------
 
@@ -183,29 +209,8 @@ INSERT INTO `registered_user` (`User_ID`, `User_Name`, `User_Email`, `User_Addre
 (1, 'James Wallabee', 'jwbee@yahoo.com', 'No. 45 Rodeo Drive, LA, CA', 'chilloutmydudez'),
 (2, 'Bjorn Richardson', 'bjornrichson@yahoo.com', 'No. 54 Rodeo Drive, LA, CA', 'ilikeice'),
 (3, 'Neo Anderson', 'neo@yahoo.com', 'The Matrix, Everywhere', 'ilovetrinity'),
-(4, 'Johnny Blaze', 'grider@yahoo.com', '123 Mephisto St., 7th Ring, Hell', 'imissroxanne');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tag`
---
-
-CREATE TABLE `tag` (
-  `Tag_ID` int(11) NOT NULL,
-  `Tag_Name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tag_list`
---
-
-CREATE TABLE `tag_list` (
-  `Tag_ID` int(11) NOT NULL,
-  `Quiz_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(4, 'Johnny Blaze', 'grider@yahoo.com', '123 Mephisto St., 7th Ring, Hell', 'imissroxanne'),
+(5, 'ken', 'asdf@a.com', '123', 'ken');
 
 -- --------------------------------------------------------
 
@@ -217,6 +222,13 @@ CREATE TABLE `trueorfalse` (
   `Question_ID` int(11) NOT NULL,
   `Answer` enum('TRUE','FALSE') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trueorfalse`
+--
+
+INSERT INTO `trueorfalse` (`Question_ID`, `Answer`) VALUES
+(3, 'TRUE');
 
 --
 -- Indexes for dumped tables
@@ -265,7 +277,7 @@ ALTER TABLE `quiz`
 -- Indexes for table `quiz_log`
 --
 ALTER TABLE `quiz_log`
-  ADD PRIMARY KEY (`Quiz_ID`,`User_ID`),
+  ADD PRIMARY KEY (`Quiz_ID`,`User_ID`,`Quiz_Date`),
   ADD KEY `Quiz_ID` (`Quiz_ID`),
   ADD KEY `User_ID` (`User_ID`);
 
@@ -274,19 +286,6 @@ ALTER TABLE `quiz_log`
 --
 ALTER TABLE `registered_user`
   ADD PRIMARY KEY (`User_ID`);
-
---
--- Indexes for table `tag`
---
-ALTER TABLE `tag`
-  ADD PRIMARY KEY (`Tag_ID`);
-
---
--- Indexes for table `tag_list`
---
-ALTER TABLE `tag_list`
-  ADD KEY `Tag_ID` (`Tag_ID`),
-  ADD KEY `Quiz_ID` (`Quiz_ID`);
 
 --
 -- Indexes for table `trueorfalse`
@@ -308,7 +307,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `Question_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Question_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `quiz`
@@ -320,13 +319,7 @@ ALTER TABLE `quiz`
 -- AUTO_INCREMENT for table `registered_user`
 --
 ALTER TABLE `registered_user`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tag`
---
-ALTER TABLE `tag`
-  MODIFY `Tag_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -363,13 +356,6 @@ ALTER TABLE `question`
 ALTER TABLE `quiz_log`
   ADD CONSTRAINT `quiz_log_ibfk_1` FOREIGN KEY (`Quiz_ID`) REFERENCES `quiz` (`Quiz_ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `quiz_log_ibfk_2` FOREIGN KEY (`User_ID`) REFERENCES `registered_user` (`User_ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Constraints for table `tag_list`
---
-ALTER TABLE `tag_list`
-  ADD CONSTRAINT `tag_list_ibfk_1` FOREIGN KEY (`Quiz_ID`) REFERENCES `quiz` (`Quiz_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tag_list_ibfk_2` FOREIGN KEY (`Tag_ID`) REFERENCES `tag` (`Tag_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `trueorfalse`

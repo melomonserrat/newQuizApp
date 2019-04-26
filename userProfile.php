@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -12,11 +12,8 @@
     <title>Quiz App</title>
   
   </head>
-  <body style="font-family: 'Helvetica'; background-color: #a6b2c4;">
-	<?php
-		session_start();
-	?>
-	
+  <?php session_start(); ?>
+  <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,59 +60,32 @@
 		<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 	</form>
     </nav>
-	<div class="hero">
-	<section id="hero">
-		<div class="h-txt text-light">
-			<div class="starter-template">
-				 <h1 style="font-weight:bolder; text-shadow: 2px 2px 8px #000000;"> Quiz sharing has never been easier. </h1>
-				<p class="lead" style="text-shadow: 2px 2px 8px #000000;"> Search millions of existing courses, and quizzes to take or create your own!</p>
-			</div>
-		</div>
-	</section>
-	</div>
-	
-	<br><br>
 
-	<div class="homeSplash">
-	<div class="row" style="margin-left:20px;">
-		<div class="col-sm-4">
-			<div class="card text-white bg-dark mb-3" style="max-width: 25rem;">
-				<div class="card-body">
-					<h5 class="card-title">Manage Courses</h5>
-					<p class="card-text">Create, view statistics, and close a course.</p>
-					<a href="manageCourses.php" class="btn btn-primary">Manage Courses</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card text-white bg-dark mb-3" style="max-width: 25rem;">
-				<div class="card-body">
-					<h5 class="card-title">Manage Quizzes</h5>
-					<p class="card-text">Create, edit, view, and close quizzes.</p>
-					<a href="manageQuizzes.php" class="btn btn-primary">Manage Quizzes</a>				
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card text-white bg-dark mb-3" style="max-width: 25rem;">
-				<div class="card-body">
-					<h5 class="card-title">Take a Quiz</h5>
-					<p class="card-text">Take an existing quiz.</p>
-					<a href="quizTaker.php" class="btn btn-primary">Take a Quiz</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card text-white bg-dark mb-3" style="max-width: 25rem;">
-				<div class="card-body">
-					<h5 class="card-title">User Profile</h5>
-					<p class="card-text">View your personal statistics.</p>
-					<a href="userProfile.php" class="btn btn-primary">View Profile</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
+
+	<?php
+		$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
+		if($mysqli->connect_error){
+			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
+		}else{
+			$sql = "SELECT quiz.Quiz_Name, quiz.Quiz_Description, quiz_log.Quiz_Score, quiz_log.Quiz_Date FROM quiz INNER JOIN quiz_log ON quiz.quiz_ID = quiz_log.quiz_ID WHERE User_ID = ".$_SESSION['id'];
+
+			$result = $mysqli->query($sql);
+			
+
+			if ($result->num_rows > 0) {
+				echo "You have taken ".$result->num_rows." quizzes.<br>";
+				while($userhisto = mysqli_fetch_assoc($result)) {
+					echo $userhisto['Quiz_Name'].": ".$userhisto['Quiz_Description']." | Score: ".$userhisto['Quiz_Score']." | Date: ".$userhisto['Quiz_Date']."<br>";
+				}
+			}else{
+				echo "You haven't taken any quizzes yet. Proceed to Take a Quiz to do so.";
+			}
+
+
+			
+		}
+	?>
+
 	<?php
 		if(isset($_POST['form'])){
 			switch($_POST['form']){
@@ -129,13 +99,13 @@
 	
   
   
-	<!-- Optional JavaScript -->
+		
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="main.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="welcome.js"></script>
+  
   </body>
   
 </html>

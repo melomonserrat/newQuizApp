@@ -44,78 +44,54 @@
 	</nav>
 
 
-	<h3>You are currently taking the quiz: <?php echo $_POST['quizName']; ?></h3>
-	<form method="post" action="results.php">
-	<?php session_start();
-		$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
+
+	<?php session_start();?>
+	<div align="center">
+	<h3>You took the quiz: <?php echo $_POST['quizName']; ?></h3>
+	
+	<?php
+	$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
 		if($mysqli->connect_error){
 			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
 		}else{
 			$sql = "SELECT * FROM question where Quiz_ID = ".$_POST['quizID'];
 			$result = $mysqli->query($sql);
-			$count =0;
+			$count = 1;
+			$score = 0;
 			while($question = mysqli_fetch_assoc($result)) {
-				if($question['Quiz_Type'] == 'MC'){
-					$sql = "SELECT * FROM multiplechoice where Question_ID = ".$question['Question_ID'];
-					$choices = $mysqli->query($sql); ?>
-					<div class="card" align="center">
-						<div class="card-body text-center">
-							<div class="title">
-								<h4><?php 
-								$count++; 
-								echo $count.": ". $question['Question_Description']; ?></h4>
-							</div>
-							<div class="desc" align="text-left"><?php
-								while($choice = mysqli_fetch_assoc($choices)){
-									echo "A: ".$choice['Choice1']."<br>"."B: ".$choice['Choice2']."<br>"."C: ".$choice['Choice3']."<br>"."D: ".$choice['Choice4']."<br>";
-								}
-								//echo "Answer: ".$question['Quiz_Answer'];
-								echo "<br><input type='text' maxlength='50' name='question".$count."'>";
-							?>	
-							</div>
-						</div>
-					</div>
-				<?php }else if($question['Quiz_Type'] == 'I'){?>
-					<div class="card" align="center">
-						<div class="card-body text-center">
-							<div class="title">
-								<h4><?php 
-								$count++; 
-								echo $count.": ". $question['Question_Description']; ?></h4>
-							</div>
-							<div class="desc" align="text-left"><?php
-								//echo "Answer: ".$question['Quiz_Answer'];
-								echo "<br><input type='text' maxlength='50' name='question".$count."'>";
-							?>	
-							</div>
-						</div>
-					</div>
-				<?php }else if($question['Quiz_Type'] == 'ToF'){?>
-					<div class="card" align="center">
-						<div class="card-body text-center">
-							<div class="title">
-								<h4><?php 
-								$count++; 
-								echo $count.": ". $question['Question_Description']; ?></h4>
-							</div>
-							<div class="desc" align="text-left"><?php
-							// echo "Answer: ".$question['Quiz_Answer'];
-								echo "<br><input type='text' maxlength='4' name='question".$count."'>";
-				}?>	
-							</div>
-						</div>
-					</div>
-			<?php }
+
+
+
+
+				$index = "question".$count;
+				if($question['Quiz_Answer'] == $_POST[$index]){
+					$score++;
+				}
+				$count++;
+
+			}
+			echo 'Your score is: '.$score;
+			if($score > ($count/10)*6){
+				echo ", congratulations you passed!";
+			}else{
+				echo ". You failed, try again and study harder next time!";
+			}
 		}
 	?>
-	<input type="hidden" name="quizID" value="<?php echo $_POST['quizID'];?>">
-	<input type="hidden" name="quizName" value="<?php echo $_POST['quizName'];?>">
-	<input type="submit" name="submitQuiz" value="submit">
+	<p>You will be redirected in <span id="counter">5</span> second(s).</p>
+	<script type="text/javascript">
+	function countdown() {
+	    var i = document.getElementById('counter');
+	    if (parseInt(i.innerHTML)<=0) {
+	        location.href = 'welcome.php';
+	    }
+	    i.innerHTML = parseInt(i.innerHTML)-1;
+	}
+	setInterval(function(){ countdown(); },1000);
+	</script>
 
-	</form>
-
-	<?php
-		if(isset($_POST['form'])){
+	</div>
+	<?php if(isset($_POST['form'])){
 			switch($_POST['form']){
 				case 'logout':
 					session_destroy();

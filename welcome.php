@@ -51,7 +51,7 @@
 				<div class="card-body">
 					<h5 class="card-title">Manage Courses</h5>
 					<p class="card-text">Create, view statistics, and close a course.</p>
-					<a href="#" class="btn btn-primary">Manage Courses</a>
+					<a href="manageCourses.php" class="btn btn-primary">Manage Courses</a>
 				</div>
 			</div>
 		</div>
@@ -60,7 +60,7 @@
 				<div class="card-body">
 					<h5 class="card-title">Manage Quizzes</h5>
 					<p class="card-text">Create, edit, view, and close quizzes.</p>
-					<a href="#" class="btn btn-primary">Manage Quizzes</a>				
+					<a href="manageQuizzes.php" class="btn btn-primary">Manage Quizzes</a>				
 				</div>
 			</div>
 		</div>
@@ -69,7 +69,7 @@
 				<div class="card-body">
 					<h5 class="card-title">Take a Quiz</h5>
 					<p class="card-text">Take an existing quiz.</p>
-					<a href="#" class="btn btn-primary">Take a Quiz</a>
+					<a href="quizTaker.php" class="btn btn-primary">Take a Quiz</a>
 				</div>
 			</div>
 		</div>

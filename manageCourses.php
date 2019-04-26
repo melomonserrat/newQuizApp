@@ -89,11 +89,11 @@
         <form action="manageCourses.php" method="post">
             <div class="form-group">
                 <label for="createCourseName">Course Name</label>
-                <input type="text" class="form-control" id="createCourseName">
+                <input type="text" class="form-control" id="createCourseName" name="createName">
             </div>
             <div class="form-group">
                 <label for="createCourseDesc">Course Description</label>
-                <input type="text" class="form-control" id="createCourseDesc">
+                <input type="text" class="form-control" id="createCourseDesc" name="createDesc">
             </div>
             <input type="hidden" name="form" value="createCourse">
             <button type="submit" class="btn btn-primary">Create!</button>
@@ -169,8 +169,38 @@
 			switch($_POST['form']){
 				case 'logout':
 					session_destroy();
-					header('Location: main.php');
+                    header('Location: main.php');
+                    break;
+                case 'createCourse':
+                    if(empty($_POST['createName'])){
+                        echo "<script>alert('No course name entered!')</script>";
+                        echo "<script>window.location.href = 'manageCourses.php?edit' </script>";
+                    }
+
+                    if(empty($_POST['createDesc'])){
+                        echo "<script>alert('No course description entered!')</script>";
+                        echo "<script>window.location.href = 'manageCourses.php?edit' </script>";
+                    }
+
+                    $con = mysqli_connect('localhost', 'root', '', 'quizapp');
+
+                    $newName = test_input($_POST['createName']);
+                    $newDesc = test_input($_POST['createDesc']);
+
+                    mysqli_query($con, "INSERT INTO course (course_name, course_description, course_isopen) VALUES ('$newName', '$newDesc', 1)");
+
+                    mysqli_close($con);
+
+                    echo "<script>alert('Course created!')</script>";
+                    echo "<script>window.location.href = 'manageCourses.php' </script>";
 			}
+        }
+
+        function test_input($data){
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
         }
     ?>
     

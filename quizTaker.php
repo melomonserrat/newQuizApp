@@ -45,6 +45,7 @@
 	<div class="card-columns" align="center">
 	<?php
 		session_start();
+
 		echo $_SESSION['username'];
 		$mysqli = new mysqli( 'localhost', 'root', '', 'newquizapp');
 		if($mysqli->connect_error){
@@ -53,7 +54,6 @@
 			$sql = "SELECT * FROM course";
 			$result = $mysqli->query($sql);
 			$count = 0;
-
 
 			if ($result->num_rows > 0) {
 			    // output data of each row
@@ -103,7 +103,10 @@
 							      <td><?php echo $recordQuiz['Quiz_Difficulty']; ?></td>
 							      <td><?php echo $recordQuiz['Quiz_Description']; ?></td>
 							      <td><?php echo $recordQuiz['Quiz_PassingScore']; ?></td>
-							      <td><form action="quizTaking.php" method="post"><input type="hidden" name="quizID" value="<?php echo $recordQuiz['Quiz_ID'];?>"><input type="submit" name="takeQuiz" value="Take Quiz"></form></td>
+							      <td><form action="quizTaking.php" method="post">
+							      	<input type="hidden" name="quizID" value="<?php echo $recordQuiz['Quiz_ID'];?>">
+							      	<input type="hidden" name="quizName" value="<?php echo $recordQuiz['Quiz_Name'];?>">
+							      	<input type="submit" name="takeQuiz" value="Take Quiz"></form></td>
 							    </tr>
 					    	<?php } ?>
 					    		  </tbody>

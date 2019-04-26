@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="styles.css">
     <title>Manage Courses</title>
   </head>
-  <body>
-
+  <body style="background-image: url('pic3.jpg');">
+	<?php
+		session_start();
+	?>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" href="welcome.php">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,11 +22,10 @@
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav">
 			<li class="nav-item active">
-				<a class="nav-link" href="welcome.php">Home<span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">	
 				<div class="dropdown">
-					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; text-shadow: 2px 2px 8px #000000;">
 						Manage Courses
 					</button>
 					<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
@@ -36,7 +37,7 @@
 			</li>
             <li class="nav-item">	
 				<div class="dropdown">
-					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown" style="color:white; text-shadow: 2px 2px 8px #000000;">
 						Manage Quizzes
 					</button>	
 					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
@@ -47,38 +48,48 @@
 				</div>
 			</li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="quizTaker.php">Take a quiz</a>
+                <a class="btn btn-outline-dark" href="quizTaker.php" style="color:white; text-shadow: 2px 2px 8px #000000;">Take a quiz</a>
             </li>
 		</ul>
 	</div>
-		
+	<li class="loggedIn">
+			<p class="loggedIn">Logged in as <?php echo ("{$_SESSION['username']}"." ");  ?> </p>
+	</li>	
 	<form class="form-inline" action="manageCourses.php">
 		<input type="hidden" name="form" value="logout">
-		<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>
+		<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 	</form>
     </nav>
     <br>
+	<section id="hero3">
+		<div class="h-txt text-light">
+			<div class="starter-template">
+				 <h1 style="font-weight:bolder; text-shadow: 4px 4px 8px #000000;"> Manage Courses </h1>
+				<p class="lead" style="text-shadow: 4px 4px 8px #000000;"> Search millions of existing courses, and quizzes to take or create your own!</p>
+			</div>
+		</div>
+	</section>
 
-    <div class="row home">
-        <div class="card">
+    <div class="row home" style="margin-left:820px; margin-top:-50px; ">
+        <div class="card text-white bg-dark mb-3">
             <div class="card-body">
                 <h5 class="card-title">Create a course!</h5>
                 <p class="card-text">Create a course to put quizzes under.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="createCourse()">Go!</button>
+                <button type="button" class="btn btn-primary" onclick="createCourse()">Go!</button>
             </div>
         </div>
-        <div class="card">
+        <div class="card text-white bg-dark mb-3">
             <div class="card-body">
                 <h5 class="card-title">Edit a course!</h5>
                 <p class="card-text">Change the details of a course.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="editCourse()">Go!</button>
+                <button type="button" class="btn btn-primary" onclick="editCourse()">Go!</button>
             </div>
         </div> 
-        <div class="card">
+        <div class="card text-white bg-dark mb-3">
             <div class="card-body">
                 <h5 class="card-title">View courses!</h5>
                 <p class="card-text">Check the list of all courses.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="viewCourses()">Go!</button>
+                <button type="button" class="btn btn-primary" onclick="viewCourses()">Go!</button>
             </div>
         </div> 
     </div>

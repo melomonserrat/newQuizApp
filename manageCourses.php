@@ -70,26 +70,26 @@
 		</div>
 	</section>
 
-    <div class="row home" style="margin-left:800px;">
-        <div class="card">
+    <div class="row home" style="margin-left:820px; margin-top:-50px; ">
+        <div class="card text-white bg-dark mb-3">
             <div class="card-body">
                 <h5 class="card-title">Create a course!</h5>
                 <p class="card-text">Create a course to put quizzes under.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="createCourse()">Go!</button>
+                <button type="button" class="btn btn-primary" onclick="createCourse()">Go!</button>
             </div>
         </div>
-        <div class="card">
+        <div class="card text-white bg-dark mb-3">
             <div class="card-body">
                 <h5 class="card-title">Edit a course!</h5>
                 <p class="card-text">Change the details of a course.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="editCourse()">Go!</button>
+                <button type="button" class="btn btn-primary" onclick="editCourse()">Go!</button>
             </div>
         </div> 
-        <div class="card">
+        <div class="card text-white bg-dark mb-3">
             <div class="card-body">
                 <h5 class="card-title">View courses!</h5>
                 <p class="card-text">Check the list of all courses.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="viewCourses()">Go!</button>
+                <button type="button" class="btn btn-primary" onclick="viewCourses()">Go!</button>
             </div>
         </div> 
     </div>

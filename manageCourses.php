@@ -95,15 +95,15 @@
     </div>
 
     <div class="container createCourse">
-        <h4>Creating a course... </h4>
-        <hr>
+        <h4 style="font-weight: bolder; text-shadow: 4px 4px 8px #000000;">Creating a course... </h4>
+        <hr class="new1">
         <form action="manageCourses.php" method="post">
             <div class="form-group">
-                <label for="createCourseName">Course Name</label>
+                <label for="createCourseName" style="text-shadow: 4px 4px 8px #000000;">Course Name</label>
                 <input type="text" class="form-control" id="createCourseName">
             </div>
             <div class="form-group">
-                <label for="createCourseDesc">Course Description</label>
+                <label for="createCourseDesc" style="text-shadow: 4px 4px 8px #000000;">Course Description</label>
                 <input type="text" class="form-control" id="createCourseDesc">
             </div>
             <input type="hidden" name="form" value="createCourse">
@@ -113,9 +113,9 @@
     </div>
 
     <div class="container editCourse">
-        <h4>Editing a course... </h4>
-        <hr>
-        <p class="lead">Pick a course to edit</p>
+        <h4 style="font-weight: bolder; text-shadow: 4px 4px 8px #000000;">Editing a course... </h4>
+        <hr class="new1">
+        <p class="lead" style="text-shadow: 4px 4px 8px #000000;">Pick a course to edit</p>
 
         <form action="editingCourse.php" method="post" id="editCourseForm">
             <input type="hidden" name="form" value="editCourse">
@@ -142,7 +142,7 @@
         </form>
     </div>
 
-    <div class="container viewCourses">
+    <div class="container viewCourses" style="text-shadow: 4px 4px 8px #000000;">
         <h4>Viewing all courses... </h4>
         <hr>
         <table class="table">

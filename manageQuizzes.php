@@ -7,9 +7,10 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
     <title>Manage Quizzes</title>
   </head>
-  <body style="background-image: url('pic4.jpg');">
+  <body>
   
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="welcome.php">Quiz App</a>
@@ -29,9 +30,9 @@
 							Manage Quizzes
 						</button>	
 						<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
-							<a class="dropdown-item" href="">Create a quiz</a>
-							<a class="dropdown-item" href="">Edit a quiz</a>
-							<a class="dropdown-item" href="">View a quiz</a>
+							<a class="dropdown-item" href="manageQuizzes.php?create">Create a quiz</a>
+							<a class="dropdown-item" href="manageQuizzes.php?edit">Edit a quiz</a>
+							<a class="dropdown-item" href="manageQuizzes.php?view">View a quiz</a>
 						</div>
 					</div>
 				</li>
@@ -45,6 +46,41 @@
 		
     </nav>
     <br>
+	
+	 <?php
+		
+		if (isset($_POST["create"])) {
+		$conn = new mysqli('localhost','pio', '', 'quizapp');
+
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+			$conn->close(); 
+		}
+		
+		//echo "Connected successfully";
+		$sql = "INSERT INTO MyGuests (firstname, lastname, email)
+		VALUES ('John', 'Doe', 'john@example.com')";
+
+		if ($conn->query($sql) === TRUE) {
+			echo "New record created successfully";
+		} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+
+		$conn->close();
+		
+		}
+		// Create connection
+
+		
+		function test_input($data) {
+		  $data = trim($data);
+		  $data = stripslashes($data);
+		  $data = htmlspecialchars($data);
+		  return $data;
+		}		
+	?> 
 
     <div class="row home">
         <div class="card">
@@ -70,70 +106,93 @@
         </div> 
     </div>
 	
-	<div align="center" id="container">
-		<div class="card" style="width: 50rem;">
-			<div class="container createCourse">
-				<h5>Creating a quiz... </h5>
+	<div align="center" id="createQuiz">
+		<div class="" style="width: 50rem;">
+			<h5>Creating a quiz...</h5>		
+			<form action="manageQuizzes.php" method="post">
+				<div class="form-group">
+					<label for="createCourseName">Quiz Name</label>
+					<input type="text" class="form-control" id="createCourseName">
+				</div>
+				<div class="form-group">
+					<label for="createCourseDesc">Quiz Description</label>
+					<input type="text" class="form-control" id="createCourseDesc">
+				</div>
+				<div class="form-group">
+					<label for="createCourseDesc">Quiz Difficulty</label>
+					<select class="custom-select" id="quizDifficulty">
+					  <option selected disabled>Choose the difficulty...</option>
+					  <option value="easy">Easy</option>
+					  <option value="medium">Medium</option>
+					  <option value="hard">Hard</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="createCourseDesc">Quiz Passing Score</label>
+					<input type="text" class="form-control" id="createCourseDesc">
+				</div>
 				
-				<form action="manageCourses.php" method="post">
-					<div class="form-group">
-						<label for="createCourseName">Quiz Name</label>
-						<input type="text" class="form-control" id="createCourseName">
-					</div>
-					<div class="form-group">
-						<label for="createCourseDesc">Quiz Description</label>
-						<input type="text" class="form-control" id="createCourseDesc">
-					</div>
-					<div class="form-group">
-						<label for="createCourseDesc">Quiz Difficulty</label>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="difficultyCheck1">
-								<label class="form-check-label" for="difficultyCheck1">
-									Easy
-								</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="difficultyCheck2">
-								<label class="form-check-label" for="difficultyCheck2">
-									Medium
-								</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="difficultyCheck3">
-								<label class="form-check-label" for="difficultyCheck3">
-									Hard
-								</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="createCourseDesc">Quiz Passing Score</label>
-						<input type="text" class="form-control" id="createCourseDesc">
-					</div>
-					<input type="hidden" name="form" value="createCourse">
-					<button type="submit" class="btn btn-primary">Create!</button>
-					
-				</form>
-				<br>
-			</div>
+				<label class="form-check-label">
+					Quiz Type	<br>
+				</label>
+				
+				<select onchange="clearQuestionContainer()" onclick="getQuizType()" class="custom-select" id="quizType">
+				  <option selected disabled>Choose the quiz type...</option>
+				  <option value="identification">Identification</option>
+				  <option value="multipleChoice">Multiple choice</option>
+				  <option value="matchingType">Matching type</option>					  
+				  <option value="trueOrFalse">True or False</option>
+				</select>
+				
+				<div class="form-group">
+					<label for="quizTags">Tags</label>
+					<input type="text" class="form-control" id="quizTags">
+				</div>
+				
+				<br><br>
+				
+				<button type="button" class="btn btn-primary" onclick="addQuestion()">Add question</button>
+				
+				<br><br>
+				
+				<input type="hidden" name="form" value="createCourse">
+			
+				<button type="submit" class="btn btn-primary" name="create">Create!</button>
+				<button class="btn btn-primary" onclick="goBackToHome()">Go back</button>
+			</form>
+		</div>
+		<br>
+		<div align="center" id="questionContainer">
 		</div>
 	</div>
 	
-	<br><br>
 	
-	<div align="center">	
-		<div class="card" style="width: 50rem;">
-			<div class="container editCourse">
+	
+	<div class="container" align="center" id="editQuizzes">	
+		<div class="" style="width: 50rem;">
+			<div class="container">
 				<h5>Editing a quiz... </h5>
-				<p class="lead">Pick a quiz to edit</p>
-					<select class="chooseCourseToEdit">
+				<p class="lead">Pick a quiz to edit</p>					
+				<select class="">
 
 				</select>
+				
+				<button type="submit" class="btn btn-primary">Create!</button>
+				<button class="btn btn-primary" onclick="goBackToHome()">Go back</button>
 			</div>
 		</div>
 	</div>
 
-    <div class="container viewCourses">
-    </div>
+    <div class="container" align="center" id="viewQuizzes">
+		<div class="" style="width: 50rem;">
+		<h5>View Quizzes </h5>
+	
+	
+	
+	<button type="submit" class="btn btn-primary">Create!</button>
+	<button class="btn btn-primary" onclick="goBackToHome()">Go back</button>
+		</div>
+	</div>
     
     <?php
 		if(isset($_POST['form'])){
@@ -150,6 +209,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="manageQuizzes.js"></script>
+    <script type="text/javascript" src="initManageQuizzes.js"></script>
+	<script type="text/javascript" src="manageQuizzes.js"></script>
   </body>
 </html>

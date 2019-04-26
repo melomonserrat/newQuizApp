@@ -25,6 +25,11 @@
 	color: white;
 }
 
+.navbar-nav > li{
+  padding-left:30px;
+  padding-right:30px;
+}
+
 
 .signup {
 	margin-left: 10px;
@@ -54,32 +59,42 @@
 	margin-top:-150px;
 }
 
+#hero4{
+	margin-left: 275px;
+	margin-top:-150px;
+}
+
+.cardQuiz{
+	margin-left: -250px;
+	margin-bottom: 10px;
+}
+
 .h-txt{
 	padding: 20% 2%;
 }
 
 .createCourse{
 	color:white;
-	margin-right: 200px;
-    width: 700px;
+	margin-right: 90px;
+    width: 650px;
 }
 
 .editCourse{
 	color:white;
-	margin-right: 200px;
-    width: 700px;
+	margin-right: 90px;
+    width: 650px;
 }
 
 .viewCourses{
 	color:white;
-	margin-right: 200px;
-    width: 700px;
+	margin-right: 90px;
+    width: 650px;
 }
 
 .editingCourse{
 	color:white;
-	margin-right: 200px;
-    width: 700px;
+	margin-right: 90px;
+    width: 650px;
 }
 
 hr.new1 {

@@ -108,7 +108,7 @@
 
         <form action="editingCourse.php" method="post" id="editCourseForm">
             <input type="hidden" name="form" value="editCourse">
-            <select class="chooseCourseToEdit" name="courseToEdit" form="editCourseForm">
+            <select class="chooseCourseToEdit form-control" name="courseToEdit" form="editCourseForm">
             <?php
                 $con = mysqli_connect('localhost', 'root', '', 'quizapp');
 

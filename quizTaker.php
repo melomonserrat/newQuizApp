@@ -66,7 +66,7 @@
 			    	$count = $count +1;
 	?>	
 
-			<div class="card text-white bg-dark mb-3" style="margin-top:100px; margin-left:400px;">
+			<div class="card text-white bg-dark mb-0" style="margin-top:100px; margin-left:400px;">
 				<div class="card-body text-center">
 					<div class="title">
 						<h4><?php echo $record['Course_Name']; ?></h4>

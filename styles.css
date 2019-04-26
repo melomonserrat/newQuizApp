@@ -3,10 +3,11 @@
 }
 
 .homePageButtons {
-    text-align: center;
+    text-align: left;
 }
 
 .loginCredentials {
+	margin-left: 10px;
     width: 540px;
 }
 
@@ -24,6 +25,7 @@
 }
 
 .signup {
+	margin-left: 10px;
     width: 540px;
 }
 
@@ -38,6 +40,12 @@
 	background-size: cover;
 	height:500px;
 	margin-top:-50px;
+}
+
+#hero2{
+	background-image: url("pic2.jpg");
+	background-size: cover;
+	
 }
 
 .h-txt{

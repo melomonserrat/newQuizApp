@@ -34,6 +34,18 @@
 					</div>
 				</div>
 			</li>
+            <li class="nav-item">	
+				<div class="dropdown">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown">
+						Manage Quizzes
+					</button>	
+					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
+						<a class="dropdown-item" href="">Create a quiz</a>
+						<a class="dropdown-item" href="">Edit a quiz</a>
+						<a class="dropdown-item" href="">View a quiz</a>
+					</div>
+				</div>
+			</li>
             <li class="nav-item">
                 <a class="btn btn-outline-dark" href="quizTaker.php">Take a quiz</a>
             </li>
@@ -146,8 +158,6 @@
                         echo "<td>" . $row['course_description'] . "</td>";
                         echo "</tr>";
                     }
-
-                    mysqli_close($con);
                 ?>
             </tbody>
         </table>

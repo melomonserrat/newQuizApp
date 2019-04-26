@@ -42,7 +42,7 @@
 				</form> <br>
 			</div>
 
-			<div class="container signup">
+			<div class="container signup" style="margin-top: -325px; margin-left: 25px;">
 				<form action="main.php" method="post">
 					<input type="hidden" name="form" value="signup">
 					<div class="form-group">

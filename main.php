@@ -88,7 +88,7 @@
               echo "Failed to connect to database! " . mysqli_connect_error();
             }
             else{
-              $result = mysqli_query($con, "SELECT user_id, user_name FROM registered_user WHERE User_Name = '$username' AND User_Password = '$password'");
+              $result = mysqli_query($con, "SELECT user_id FROM registered_user WHERE user_name = '$username' AND user_password = '$password'");
 
               if(!mysqli_fetch_row($result)){
                 mysqli_close($con);
@@ -96,11 +96,13 @@
                 echo "<script type=\"text/javascript\">window.location.replace('main.php');</script>";
               }
               else{
+
                 $id = '';
 
-                while($row = mysqli_fetch_row($result)){
+                foreach($result as $row){
                   $id = $row['user_id'];
                 }
+
                 mysqli_close($con);
                 session_start();
                 $_SESSION['id'] = $id;

@@ -54,7 +54,7 @@
 		</ul>
 	</div>
 	<li class="loggedIn">
-			<p class="loggedIn">Logged in as <?php echo ("{$_SESSION['username']}"." {$_SESSION['id']}");  ?> </p>
+			<p class="loggedIn">Logged in as <?php echo ("{$_SESSION['username']}" . " ");  ?> </p>
 	</li>	
 	<form class="form-inline" action="manageCourses.php" method="post">
 		<input type="hidden" name="form" value="logout">
@@ -138,7 +138,7 @@
 
                 $id = $_SESSION['id'];
 
-                $result = mysqli_query($con, 'SELECT course_name FROM course WHERE user_id = $id');
+                $result = mysqli_query($con, "SELECT course_name FROM course WHERE user_id = $id");
 
                 while($row = mysqli_fetch_array($result)){
                     echo "<option value=\"" . $row['course_name'] . "\">" . $row['course_name'] . "</option>";
@@ -209,7 +209,7 @@
                     $newDesc = test_input($_POST['createDesc']);
                     $id = $_SESSION['id'];
 
-                    mysqli_query($con, "INSERT INTO course (course_name, course_description, course_isopen, user_id) VALUES ('$newName', '$newDesc', 1, $id)");
+                    mysqli_query($con, "INSERT INTO course (user_id, course_name, course_description, course_isopen) VALUES ($id, '$newName', '$newDesc', 1)");
 
                     mysqli_close($con);
 

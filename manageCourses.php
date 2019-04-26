@@ -14,6 +14,7 @@
 	<?php
 		session_start();
 	?>
+	<!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +56,7 @@
 	<li class="loggedIn">
 			<p class="loggedIn">Logged in as <?php echo ("{$_SESSION['username']}"." ");  ?> </p>
 	</li>	
-	<form class="form-inline" action="manageCourses.php">
+	<form class="form-inline" action="manageCourses.php" method="post">
 		<input type="hidden" name="form" value="logout">
 		<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 	</form>
@@ -70,28 +71,34 @@
 		</div>
 	</section>
 
-    <div class="row home" style="margin-left:820px; margin-top:-50px; ">
-        <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Create a course!</h5>
-                <p class="card-text">Create a course to put quizzes under.</p>
-                <button type="button" class="btn btn-primary" onclick="createCourse()">Go!</button>
-            </div>
-        </div>
-        <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Edit a course!</h5>
-                <p class="card-text">Change the details of a course.</p>
-                <button type="button" class="btn btn-primary" onclick="editCourse()">Go!</button>
-            </div>
-        </div> 
-        <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-                <h5 class="card-title">View courses!</h5>
-                <p class="card-text">Check the list of all courses.</p>
-                <button type="button" class="btn btn-primary" onclick="viewCourses()">Go!</button>
-            </div>
-        </div> 
+    <div class="row home" style="margin-left:800px; margin-top:-50px; ">
+		<div class="col-sm-4">
+			<div class="card text-white bg-dark mb-3" style="max-width: 25rem; max-height: 10rem;">
+				<div class="card-body">
+					<h5 class="card-title">Create a course!</h5>
+					<p class="card-text">Create a course to put quizzes under.</p>
+					<button type="button" class="btn btn-primary" onclick="createCourse()">Go!</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="card text-white bg-dark mb-3" style="max-width: 25rem; max-height: 25rem;">
+				<div class="card-body">
+					<h5 class="card-title">Edit a course!</h5>
+					<p class="card-text">Change the details of a course.</p>
+					<button type="button" class="btn btn-primary" onclick="editCourse()">Go!</button>
+				</div>
+			</div> 
+		</div>
+		<div class="col-sm-4">
+			<div class="card text-white bg-dark mb-3" style="max-width: 25rem; margin-right:20px; max-height: 25rem;">
+				<div class="card-body">
+					<h5 class="card-title">View courses!</h5>
+					<p class="card-text">Check the list of all courses.</p>
+					<button type="button" class="btn btn-primary" onclick="viewCourses()">Go!</button>
+				</div>
+			</div> 
+		</div>
     </div>
 
     <div class="container createCourse">
@@ -223,6 +230,17 @@
             return $data;
         }
     ?>
+	
+	<?php
+		if(isset($_POST['form'])){
+			switch($_POST['form']){
+				case 'logout':
+					session_destroy();
+					echo "<script>window.location.href = 'main.php' </script>";
+			}
+
+		}
+	?>
     
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>

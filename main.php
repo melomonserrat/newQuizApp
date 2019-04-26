@@ -135,27 +135,37 @@
 
             if(mysqli_connect_errno()){
               echo "Failed to connect to database! " . mysqli_connect_error();
+              die();
             }
             else{
-              $sql = "INSERT INTO registered_user (user_name, user_email, user_address, user_password) VALUES ('$username', '$email', '$address', '$password')";
 
-              if($con->query($sql) === true){
-                $result = mysqli_query($con, "SELECT user_id FROM registered_user WHERE user_name = '$username'");
+              $test = mysqli_query($con, "SELECT user_name FROM registered_user WHERE user_name = '$username'");
 
-                foreach($result as $row){
-                  $id = $row['user_id'];
-                }
-
-                mysqli_close($con);
-                session_start();
-                $_SESSION['username'] = $username;
-                $_SESSION['id'] = $id;
-                $_POST = array();
-                header('Location: welcome.php');
+              if(mysqli_num_rows($test) > 0){
+                echo "<script type=\"text/javascript\">alert('That username is taken!');</script>";
+                echo "<script type=\"text/javascript\">window.location.replace('main.php');</script>";
               }
               else{
-                echo "Error! Could not insert into database!" . $con->error;
-                die();
+                $sql = "INSERT INTO registered_user (user_name, user_email, user_address, user_password) VALUES ('$username', '$email', '$address', '$password')";
+
+                if($con->query($sql) === true){
+                  $result = mysqli_query($con, "SELECT user_id FROM registered_user WHERE user_name = '$username'");
+  
+                  foreach($result as $row){
+                    $id = $row['user_id'];
+                  }
+  
+                  mysqli_close($con);
+                  session_start();
+                  $_SESSION['username'] = $username;
+                  $_SESSION['id'] = $id;
+                  $_POST = array();
+                  header('Location: welcome.php');
+                }
+                else{
+                  echo "Error! Could not insert into database!" . $con->error;
+                  die();
+                }
               }
             }
             break;

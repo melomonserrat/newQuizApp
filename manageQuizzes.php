@@ -11,38 +11,39 @@
     <title>Manage Quizzes</title>
   </head>
   <body>
+  
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="welcome.php">Quiz App</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarNavDropdown">
-		<ul class="navbar-nav">
-			<li class="nav-item active">
-				<a class="nav-link" href="welcome.php">Home<span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">	
-				<div class="dropdown">
-					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Manage Quizzes
-					</button>	
-					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
-						<a class="dropdown-item" href="">Create</a>
-						<a class="dropdown-item" href="">Edit</a>
-						<a class="dropdown-item" href="javascript:manageCourse()">View</a>
-					</div>
-				</div>
-			</li>
-			<li class="nav-item active">
-				
-			</li>
-		</ul>
-	</div>
+		<a class="navbar-brand" href="welcome.php">Quiz App</a>
 		
-	<form class="form-inline" action="manageCourses.php">
-		<input type="hidden" name="form" value="logout">
-		<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>
-	</form>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav">	
+				<li class="nav-item active">
+					<a class="nav-link" href="welcome.php">Home<span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">	
+					<div class="dropdown">
+						<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown">
+							Manage Quizzes
+						</button>	
+						<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
+							<a class="dropdown-item" href="">Create a quiz</a>
+							<a class="dropdown-item" href="">Edit a quiz</a>
+							<a class="dropdown-item" href="">View a quiz</a>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+			
+		<form class="form-inline" action="main.php">
+			<input type="hidden" name="form" value="logout">
+			<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>
+		</form>
+		
     </nav>
     <br>
 
@@ -50,26 +51,27 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Create a quiz!</h5>
-                <p class="card-text">Create a quiz for your courses</p>
-                <button type="button" class="btn btn-primary-outline" onclick="createCourse()">Go!</button>
+                <p class="card-text">Create a quiz for your quizzes.</p>
+                <button type="button" class="btn btn-primary-outline" onclick="createQuiz()">Go!</button>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Edit a quiz!</h5>
                 <p class="card-text">Change the details of a quizzes.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="editCourse()">Go!</button>
+                <button type="button" class="btn btn-primary-outline" onclick="editQuiz()">Go!</button>
             </div>
         </div> 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">View courses!</h5>
+                <h5 class="card-title">View quizes!</h5>
                 <p class="card-text">Check the list of all quizzes.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="viewCourses()">Go!</button>
+                <button type="button" class="btn btn-primary-outline" onclick="viewQuizzes()">Go!</button>
             </div>
         </div> 
     </div>
-	<div align="center">
+	
+	<div align="center" id="container">
 		<div class="card" style="width: 50rem;">
 			<div class="container createCourse">
 				<h5>Creating a quiz... </h5>
@@ -121,30 +123,15 @@
 	
 	<div align="center">	
 		<div class="card" style="width: 50rem;">
-		<div class="container editCourse">
-			<h5>Editing a quiz... </h5>
-			<p class="lead">Pick a quiz to edit</p>
-				<select class="chooseCourseToEdit">
-					<?php
-						$con = mysqli_connect('localhost', 'root', '', 'newquizapp');
+			<div class="container editCourse">
+				<h5>Editing a quiz... </h5>
+				<p class="lead">Pick a quiz to edit</p>
+					<select class="chooseCourseToEdit">
 
-						if(mysqli_connect_errno()){
-							echo "Failed to connect to database! " . mysqli_connect_error();
-							die();
-						}
-
-						$result = mysqli_query($con, 'SELECT course_name FROM course');
-
-						while($row = mysqli_fetch_array($result)){
-							echo "<option value=\"" . $row['course_name'] . "\">" . $row['course_name'] . "</option>";
-						}
-
-						mysqli_close($con);
-					?>
 				</select>
+			</div>
 		</div>
-		</div>
-		</div>
+	</div>
 
     <div class="container viewCourses">
     </div>
@@ -164,6 +151,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="welcome.js"></script>
+    <script type="text/javascript" src="manageQuizzes.js"></script>
   </body>
 </html>

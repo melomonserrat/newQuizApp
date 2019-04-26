@@ -25,6 +25,11 @@
 	color: white;
 }
 
+.navbar-nav > li{
+  padding-left:30px;
+  padding-right:30px;
+}
+
 
 .signup {
 	margin-left: 10px;
@@ -60,26 +65,26 @@
 
 .createCourse{
 	color:white;
-	margin-right: 200px;
-    width: 700px;
+	margin-right: 90px;
+    width: 650px;
 }
 
 .editCourse{
 	color:white;
-	margin-right: 200px;
-    width: 700px;
+	margin-right: 90px;
+    width: 650px;
 }
 
 .viewCourses{
 	color:white;
-	margin-right: 200px;
-    width: 700px;
+	margin-right: 90px;
+    width: 650px;
 }
 
 .editingCourse{
 	color:white;
-	margin-right: 200px;
-    width: 700px;
+	margin-right: 90px;
+    width: 650px;
 }
 
 hr.new1 {

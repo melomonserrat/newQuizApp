@@ -106,19 +106,11 @@
         <hr class="new1">
         <form action="manageCourses.php" method="post">
             <div class="form-group">
-
                 <label for="createCourseName" style="text-shadow: 4px 4px 8px #000000;">Course Name</label>
-                <input type="text" class="form-control" id="createCourseName">
-            </div>
-            <div class="form-group">
-                <label for="createCourseDesc" style="text-shadow: 4px 4px 8px #000000;">Course Description</label>
-                <input type="text" class="form-control" id="createCourseDesc">
-
-                <label for="createCourseName">Course Name</label>
                 <input type="text" class="form-control" id="createCourseName" name="createName">
             </div>
             <div class="form-group">
-                <label for="createCourseDesc">Course Description</label>
+                <label for="createCourseDesc" style="text-shadow: 4px 4px 8px #000000;">Course Description</label>
                 <input type="text" class="form-control" id="createCourseDesc" name="createDesc">
 
             </div>

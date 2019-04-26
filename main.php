@@ -13,6 +13,7 @@
   </head>
   <body>
 	<section id="hero2">
+    <div class="splash">
 		<div class="h-txt text-dark">
 			<div class="starter-template">
 				 <h1 style="font-weight:bolder;"> QuizApp </h1>
@@ -23,6 +24,7 @@
 				<button type="button" class="btn btn-primary" onclick="login()">Login</button>
 				<button type="button" class="btn btn-secondary" onclick="signup()">Signup</button>
 			</div>
+      </div>
 			
 			<div class="container loginCredentials">
 				<form action="main.php" method="post">
@@ -94,8 +96,13 @@
                 echo "<script type=\"text/javascript\">window.location.replace('main.php');</script>";
               }
               else{
+                $id = '';
+                while($row = $result->fetch_assoc()){
+                  $id = $row['user_id'];
+                }
                 mysqli_close($con);
                 session_start();
+                $_SESSION['user_id'] = $id;
                 $_SESSION['username'] = $username;
                 $_POST = array();
                 header('Location: welcome.php');

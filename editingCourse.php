@@ -85,7 +85,7 @@
 	<li class="loggedIn">
 			<p class="loggedIn">Logged in as <?php echo ("{$_SESSION['username']}"." ");  ?> </p>
 	</li>	
-	<form class="form-inline" action="manageCourses.php">
+	<form class="form-inline" action="editingCourse.php" method="post">
 		<input type="hidden" name="form" value="logout" style="color:white; text-shadow: 2px 2px 8px #000000;">
 		<button class="btn btn-dark my-2 my-sm-0" type="submit">Logout</button>
 	</form>
@@ -95,18 +95,18 @@
             <?php
                 $courseName = $_POST['courseToEdit'];
 
-                echo "<h3>Editing $courseName</h3><hr>";
+                echo "<h3 style='font-weight:bolder; text-shadow: 4px 4px 8px #000000;'>Editing $courseName</h3><hr>";
             ?>
-
+			<hr class="new1">
             <form action="editingCourse.php" method="post">
                 <div class="form-group">
-                    <label for="editName">Course Name</label>
+                    <label for="editName" style="font-weight:bolder; text-shadow: 4px 4px 8px #000000;">Course Name</label>
                     <?php
                         echo "<input type=\"text\" class=\"form-control\" id=\"editName\" name=\"editName\" value=\"$courseName\">";
                     ?>
                 </div>
                 <div class="form-group">
-                    <label for="editDesc">Course Description</label>
+                    <label for="editDesc" style="font-weight:bolder; text-shadow: 4px 4px 8px #000000;">Course Description</label>
                     <?php
                         $con = mysqli_connect('localhost', 'root', '', 'quizapp');
 
@@ -133,7 +133,7 @@
                     ?>
                 </div>
                 <div class="form-group">
-                    <label for="isOpen">Is this course open?</label> <br>
+                    <label for="isOpen" style="text-shadow: 4px 4px 8px #000000;">Is this course open?</label> <br>
 
                     <div class="form-check-inline">
                     <?php
@@ -144,7 +144,7 @@
                             echo "<input class=\"form-check-input\" type=\"radio\" name=\"isOpen\" id=\"courseIsOpen\" value=\"1\">";
                         }
                     ?>
-                    <label class="form-check-label" for="isOpen">Yes</label>
+                    <label class="form-check-label" for="isOpen" style="text-shadow: 4px 4px 8px #000000;">Yes</label>
                     </div>
                     <div class="form-check-inline">
                     <?php
@@ -155,12 +155,23 @@
                             echo "<input class=\"form-check-input\" type=\"radio\" name=\"isOpen\" id=\"courseNotOpen\" value=\"0\" checked>";
                         }
                     ?>
-                    <label class="form-check-label" for="notOpen">No</label>
+                    <label class="form-check-label" for="notOpen" style="text-shadow: 4px 4px 8px #000000;">No</label>
                     </div>
                 </div>
                 <?php
                     echo "<input type=\"hidden\" name=\"edited\" value=\"$courseId\">";
                 ?>
+				
+				<?php
+					if(isset($_POST['form'])){
+						switch($_POST['form']){
+							case 'logout':
+							session_destroy();
+							echo "<script>window.location.href = 'main.php' </script>";
+						}
+
+					}
+				?>
                 <button type="submit" class="btn btn-primary">Edit</button>
                 <a class="btn btn-primary" href="manageCourses.php?edit">Go back</a>
             </form>

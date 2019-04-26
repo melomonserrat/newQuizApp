@@ -42,10 +42,7 @@
 			<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>
 		</form>
 	</nav>
-	
-	<div><h3>Quiz List</h3></div>
-	<div class="container">
-	<div class="row">
+	<div class="card-columns">
 	<?php
 		//session_start();
 		$mysqli = new mysqli( 'localhost', 'root', '', 'newquizapp');
@@ -54,18 +51,70 @@
 		}else{
 			$sql = "SELECT * FROM course";
 			$result = $mysqli->query($sql);
+			$count = 0;
 
 
 			if ($result->num_rows > 0) {
 			    // output data of each row
-			    while($record = mysqli_fetch_assoc($result)) {?>
-					<div class="card hovercard col-xl-3 col-md-6 mb-4 ">
-					<div class="card-body info">
+			    while($record = mysqli_fetch_assoc($result)) {
+
+
+			    	$sql1 = "SELECT * FROM quiz WHERE Course_ID = ". $record['Course_ID'];
+			    	$quizCourseID = $mysqli->query($sql1);
+			    	$count = $count +1;
+			    	?>	
+					<div class="card">
+					<div class="card-body text-center">
 					<div class="title">
-						<span><?php echo $record['Course_Name']; ?></span>
+						<h4><?php echo $record['Course_Name']; ?></h4>
 					</div>
 					<div class="desc"><?php echo $record['Course_Description']; ?></div>
 					</div>
+					<button type="button" class="btn btn-primary" data-toggle="modal" <?php echo "data-target='#myModal".$count."'" ?> >View Quiz List</button>
+					</div>
+					<div class="modal" <?php echo "id='myModal". $count."'" ?> >
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+
+					      <!-- Modal Header -->
+					      <div class="modal-header">
+					        <h4 class="modal-title"><?php echo $record['Course_Name']; ?></h4>
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					      </div>
+
+					      <!-- Modal body -->
+					      <div class="modal-body">
+					      		<table>
+								  <thead>
+								    <tr>
+									    <th>Title</th>
+									    <th>Difficulty</th>
+									    <th>Description<th>
+								      	<th>Passing Score</th>
+								      	<th></th>
+								    </tr>
+								  </thead>
+								  <tbody>
+					        <?php while($recordQuiz = mysqli_fetch_assoc($quizCourseID)) {?>
+				        	    <tr>
+							      <td><?php echo $recordQuiz['Quiz_Name']; ?></td>
+							      <td><?php echo $recordQuiz['Quiz_Difficulty']; ?></td>
+							      <th><?php echo $recordQuiz['Quiz_Description']; ?></th>
+							      <td><?php echo $recordQuiz['Quiz_PassingScore']; ?></td>
+							      <td><form action="quizTaking.php" method="post"><input type="submit" name="takeQuiz" value="Take Quiz"></form></td>
+							    </tr>
+					    	<?php } ?>
+					    		  </tbody>
+								  </table>
+					      </div>
+
+					      <!-- Modal footer -->
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					      </div>
+
+					    </div>
+					  </div>
 					</div>
 				<?php }
 			} else {
@@ -76,10 +125,6 @@
 	?>
 
 </div>
-</div>
-
-
-
 
 
 

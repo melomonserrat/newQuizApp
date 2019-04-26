@@ -44,12 +44,10 @@
 	</nav>
 
 
-	<h1>QUIZ UNDERGOING</h1>
+	<h3>You are currently taking the quiz: <?php echo $_POST['quizName']; ?></h3>
 	<?php session_start();
-		echo $_SESSION['username'];
-		echo $_POST['quizID'];
 
-		$mysqli = new mysqli( 'localhost', 'root', '', 'newquizapp');
+		$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
 		if($mysqli->connect_error){
 			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
 		}else{
@@ -67,7 +65,6 @@
 				}
 
 				?>
-
 				<div class="card" align="center">
 					<div class="card-body text-center">
 					<div class="title">

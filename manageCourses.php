@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Manage Courses</title>
   </head>
   <body>
@@ -28,10 +28,27 @@
 						Manage Courses
 					</button>
 					<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
-						<a class="dropdown-item" href="javascript:manageCourse()">Manage a course</a>
+						<a class="dropdown-item" href="manageCourses.php?create">Create a course</a>
+                        <a class="dropdown-item" href="manageCourses.php?edit">Edit a course</a>
+                        <a class="dropdown-item" href="manageCourses.php?view">View courses</a>
 					</div>
 				</div>
 			</li>
+            <li class="nav-item">	
+				<div class="dropdown">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown">
+						Manage Quizzes
+					</button>	
+					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
+						<a class="dropdown-item" href="">Create a quiz</a>
+						<a class="dropdown-item" href="">Edit a quiz</a>
+						<a class="dropdown-item" href="">View a quiz</a>
+					</div>
+				</div>
+			</li>
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" href="quizTaker.php">Take a quiz</a>
+            </li>
 		</ul>
 	</div>
 		
@@ -67,7 +84,8 @@
     </div>
 
     <div class="container createCourse">
-        <h5>Creating a course... </h5>
+        <h4>Creating a course... </h4>
+        <hr>
         <form action="manageCourses.php" method="post">
             <div class="form-group">
                 <label for="createCourseName">Course Name</label>
@@ -79,18 +97,20 @@
             </div>
             <input type="hidden" name="form" value="createCourse">
             <button type="submit" class="btn btn-primary">Create!</button>
+            <button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>
         </form>
     </div>
 
     <div class="container editCourse">
-        <h5>Editing a course... </h5>
+        <h4>Editing a course... </h4>
+        <hr>
         <p class="lead">Pick a course to edit</p>
 
-        <form action="manageCourses.php" method="post" id="editCourseForm">
+        <form action="editingCourse.php" method="post" id="editCourseForm">
             <input type="hidden" name="form" value="editCourse">
             <select class="chooseCourseToEdit" name="courseToEdit" form="editCourseForm">
             <?php
-                $con = mysqli_connect('localhost', 'root', '', 'newquizapp');
+                $con = mysqli_connect('localhost', 'root', '', 'quizapp');
 
                 if(mysqli_connect_errno()){
                     echo "Failed to connect to database! " . mysqli_connect_error();
@@ -107,11 +127,13 @@
             ?>
             </select> <br> <br>
             <button type="submit" class="btn btn-primary">Edit!</button>
+            <button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>
         </form>
     </div>
 
     <div class="container viewCourses">
-        <h5>Viewing all courses... </h5>
+        <h4>Viewing all courses... </h4>
+        <hr>
         <table class="table">
             <thead>
                 <tr>
@@ -121,7 +143,7 @@
             </thead>
             <tbody>
                 <?php
-                    $con = mysqli_connect('localhost','root', '', 'newquizapp');
+                    $con = mysqli_connect('localhost','root', '', 'quizapp');
 
                     if(mysqli_connect_errno()){
                         echo "Failed to connect to database! " . mysqli_connect_error();
@@ -136,11 +158,10 @@
                         echo "<td>" . $row['course_description'] . "</td>";
                         echo "</tr>";
                     }
-
-                    mysqli_close($con);
                 ?>
             </tbody>
         </table>
+        <button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>
     </div>
     
     <?php

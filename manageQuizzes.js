@@ -1,4 +1,4 @@
-function createCourse(){
+function createQuiz(){
     if($('.home').is(':visible')){
         $('.home').hide(1000);
     }
@@ -13,7 +13,7 @@ function createCourse(){
     }
 }
 
-function editCourse(){
+function editQuiz(){
     if($('.home').is(':visible')){
         $('.home').hide(1000);
     }
@@ -28,7 +28,7 @@ function editCourse(){
     }
 }
 
-function viewCourses(){
+function viewQuizzes(){
     if($('.home').is(':visible')){
         $('.home').hide(1000);
     }

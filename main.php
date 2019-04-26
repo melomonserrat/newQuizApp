@@ -7,59 +7,65 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 
     <title>Quiz App</title>
   </head>
   <body>
-    <div class="jumbotron">
-      <h1 class="display-4" id="mainDesign"> Quiz App </h1>
-    </div>
+	<section id="hero2">
+		<div class="h-txt text-dark">
+			<div class="starter-template">
+				 <h1 style="font-weight:bolder;"> QuizApp </h1>
+				<p class="lead" > The best quiz-taking and course management app on the internet!</p>
+			</div>
+			
+			<div class="container homePageButtons">
+				<button type="button" class="btn btn-primary" onclick="login()">Login</button>
+				<button type="button" class="btn btn-secondary" onclick="signup()">Signup</button>
+			</div>
+			
+			<div class="container loginCredentials">
+				<form action="main.php" method="post">
+					<input type="hidden" name="form" value="login">
+					<div class="form-group">
+						<label for="inputUsername" style="font-weight:bold;">Username</label>
+						<input type="text" class="form-control" id="inputUsername" name="username">
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" style="font-weight:bold;">Password</label>
+						<input type="password" class="form-control" id="inputPassword" name="password">
+					</div>
+						<button type="submit" class="btn btn-primary">Login</button>
+						<button type="button" class="btn btn-secondary" onclick="goBackToHome()">Back</button>
+				</form> <br>
+			</div>
 
-    <div class="container homePageButtons">
-      <button type="button" class="btn btn-primary" onclick="login()">Login</button>
-      <button type="button" class="btn btn-secondary" onclick="signup()">Signup</button>
-    </div>
+			<div class="container signup">
+				<form action="main.php" method="post">
+					<input type="hidden" name="form" value="signup">
+					<div class="form-group">
+						<label for="signupUser" style="font-weight:bold;">Username</label>
+						<input type="text" class="form-control" id="signupUser" name="signupUser">
+					</div>
+					<div class="form-group">
+						<label for="signupPassword" style="font-weight:bold;">Password</label>
+						<input type="password" class="form-control" id="signupPassword" name="signupPassword">
+					</div>
+					<div class="form-group">
+						<label for="signupEmail" style="font-weight:bold;">Email</label>
+						<input type="email" class="form-control" id="signupEmail" name="signupEmail">
+					</div>
+					<div class="form-group">
+						<label for="signupAddress" style="font-weight:bold;">Address</label>
+						<input type="text" class="form-control" id="signupAddress" name="signupAddress">
+					</div>
+						<button type="submit" class="btn btn-primary">Signup</button>
+						<button type="button" class="btn btn-secondary" onclick="goBackToHome()">Back</button>
+				</form> <br>
+			</div>
+		</div>
+	</section>
 
-    <div class="container loginCredentials">
-      <form action="main.php" method="post">
-        <input type="hidden" name="form" value="login">
-        <div class="form-group">
-          <label for="inputUsername">Username</label>
-          <input type="text" class="form-control" id="inputUsername" name="username">
-        </div>
-        <div class="form-group">
-          <label for="inputPassword">Password</label>
-          <input type="password" class="form-control" id="inputPassword" name="password">
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-        <button type="button" class="btn btn-secondary" onclick="goBackToHome()">Back</button>
-      </form> <br>
-    </div>
-
-    <div class="container signup">
-      <form action="main.php" method="post">
-        <input type="hidden" name="form" value="signup">
-        <div class="form-group">
-          <label for="signupUser">Username</label>
-          <input type="text" class="form-control" id="signupUser" name="signupUser">
-        </div>
-        <div class="form-group">
-          <label for="signupPassword">Password</label>
-          <input type="password" class="form-control" id="signupPassword" name="signupPassword">
-        </div>
-        <div class="form-group">
-          <label for="signupEmail">Email</label>
-          <input type="email" class="form-control" id="signupEmail" name="signupEmail">
-        </div>
-        <div class="form-group">
-          <label for="signupAddress">Address</label>
-          <input type="text" class="form-control" id="signupAddress" name="signupAddress">
-        </div>
-        <button type="submit" class="btn btn-primary">Signup</button>
-        <button type="button" class="btn btn-secondary" onclick="goBackToHome()">Back</button>
-      </form> <br>
-    </div>
 
     <?php
       //if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -74,7 +80,7 @@
             $username = test_input($_POST['username']);
             $password = test_input($_POST['password']);
 
-            $con = new mysqli('localhost', 'root', '', 'newquizapp');
+            $con = new mysqli('localhost', 'root', '', 'quizapp');
             
             if(mysqli_connect_errno()){
               echo "Failed to connect to database! " . mysqli_connect_error();

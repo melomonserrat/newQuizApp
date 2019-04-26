@@ -45,8 +45,6 @@
 	<div class="card-columns" align="center">
 	<?php
 		session_start();
-
-		echo $_SESSION['username'];
 		$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
 		if($mysqli->connect_error){
 			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);

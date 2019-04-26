@@ -47,7 +47,7 @@
 
 	<?php session_start();?>
 	<div align="center">
-	<h3>You took the quiz: <?php echo $_POST['quizName']; ?></h3>
+	<h1>You took the quiz: <?php echo $_POST['quizName']; ?></h1>
 	
 	<?php
 	$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
@@ -59,26 +59,32 @@
 			$count = 1;
 			$score = 0;
 			while($question = mysqli_fetch_assoc($result)) {
-
-
-
-
 				$index = "question".$count;
 				if($question['Quiz_Answer'] == $_POST[$index]){
 					$score++;
 				}
 				$count++;
-
 			}
-			echo 'Your score is: '.$score;
+
+			echo "<h3>".$_SESSION['username'].', your score is: '.$score;
 			if($score > ($count/10)*6){
-				echo ", congratulations you passed!";
+				echo ". Congratulations you passed!</h3>";
 			}else{
-				echo ". You failed, try again and study harder next time!";
+				echo ". You failed, try again and study harder next time!</h3>";
+			}
+
+			$formated_date = date("Y-m-d", time());
+
+			$sql = "INSERT INTO quiz_log (Quiz_ID, User_ID, Quiz_Score, Quiz_Date) VALUES (".$_POST['quizID'].",".$_SESSION['id'].",".$score.",'".$formated_date."')";
+
+			if(mysqli_query($mysqli, $sql)){
+				echo "<span>Your record has been updated! Thank you for using QuizApp</span>";
+			} else{
+			    echo "<span>Ohno! You have already taken this quiz today, try again tommorow</span>.";
 			}
 		}
 	?>
-	<p>You will be redirected in <span id="counter">5</span> second(s).</p>
+	<p>You will be redirected in <span id="counter">10</span> second(s).</p>
 	<script type="text/javascript">
 	function countdown() {
 	    var i = document.getElementById('counter');

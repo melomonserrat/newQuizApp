@@ -48,28 +48,53 @@
     <br>
 	
 	 <?php
+		session_start();
+		
 		
 		if (isset($_POST["create"])) {
-		$conn = new mysqli('localhost','pio', '', 'quizapp');
+		
+		if(empty($_POST["createQuizName"])){
+            echo "<script>alert('No quiz name entered!')</script>";
+			echo "<script>window.location.href = 'manageQuizzes.php?create' </script>";
+        }
+		
+		if(empty($_POST["createQuizDescription"])){
+            echo "<script>alert('No quiz description entered!')</script>";
+			echo "<script>window.location.href = 'manageQuizzes.php?create' </script>";
+        }
+		
+		if(empty($_POST["quizDifficulty"])){
+            echo "<script>alert('No quiz difficulty entered!')</script>";
+			echo "<script>window.location.href = 'manageQuizzes.php?create' </script>";
+        }
+		
+		if(empty($_POST["quizPassingScore"])){
+            echo "<script>alert('No quiz passing score entered!')</script>";
+			echo "<script>window.location.href = 'manageQuizzes.php?create' </script>";
+        }
+		
+		$newName = test_input($_POST["createQuizName"]);
+		$newDesc = test_input($_POST["createQuizDescription"]);
+		$newDiff = test_input($_POST["quizDifficulty"]);
+		$newPass = test_input($_POST["quizPassingScore"]);
+		$id = $_SESSION["id"];
+		
+		$conn = new mysqli('localhost','root', '', 'quizapp');
 
 		// Check connection
 		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
+			die("");
 			$conn->close(); 
 		}
 		
 		//echo "Connected successfully";
-		$sql = "INSERT INTO MyGuests (firstname, lastname, email)
-		VALUES ('John', 'Doe', 'john@example.com')";
-
-		if ($conn->query($sql) === TRUE) {
-			echo "New record created successfully";
-		} else {
-			echo "Error: " . $sql . "<br>" . $conn->error;
-		}
+		$sql ="INSERT INTO quiz (Quiz_ID, Quiz_Name, Quiz_Difficulty, Quiz_Description, Course_ID, Quiz_PassingScore, User_ID) VALUES 
+		(NULL, '$newName', '$newDiff', '$newDesc', '0', '$newPass', '$id')";
+		
+		//mysqli_query($con, "INSERT INTO course (user_id, course_name, course_description, course_isopen) VALUES ($id, '$newName', '$newDesc', 1)");
 
 		$conn->close();
-		
+		session_destroy();
 		}
 		// Create connection
 
@@ -111,32 +136,32 @@
 			<h5>Creating a quiz...</h5>		
 			<form action="manageQuizzes.php" method="post">
 				<div class="form-group">
-					<label for="createCourseName">Quiz Name</label>
-					<input type="text" class="form-control" id="createCourseName">
+					<label>Quiz Name</label>
+					<input type="text" class="form-control" name="createQuizName">
 				</div>
 				<div class="form-group">
-					<label for="createCourseDesc">Quiz Description</label>
-					<input type="text" class="form-control" id="createCourseDesc">
+					<label>Quiz Description</label>
+					<input type="text" class="form-control" name="createQuizDescription">
 				</div>
 				<div class="form-group">
 					<label for="createCourseDesc">Quiz Difficulty</label>
-					<select class="custom-select" id="quizDifficulty">
+					<select class="custom-select" name="quizDifficulty">
 					  <option selected disabled>Choose the difficulty...</option>
-					  <option value="easy">Easy</option>
-					  <option value="medium">Medium</option>
-					  <option value="hard">Hard</option>
+					  <option value="EASY">Easy</option>
+					  <option value="MEDIUM">Medium</option>
+					  <option value="HARD">Hard</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="createCourseDesc">Quiz Passing Score</label>
-					<input type="text" class="form-control" id="createCourseDesc">
+					<input type="text" class="form-control" name="quizPassingScore">
 				</div>
 				
 				<label class="form-check-label">
 					Quiz Type	<br>
 				</label>
 				
-				<select onchange="clearQuestionContainer()" onclick="getQuizType()" class="custom-select" id="quizType">
+				<select onchange="clearQuestionContainer()" onclick="getQuizType()" class="custom-select" id="quizType" name="quizType">
 				  <option selected disabled>Choose the quiz type...</option>
 				  <option value="identification">Identification</option>
 				  <option value="multipleChoice">Multiple choice</option>
@@ -144,10 +169,10 @@
 				  <option value="trueOrFalse">True or False</option>
 				</select>
 				
-				<div class="form-group">
+				<!--<div class="form-group">
 					<label for="quizTags">Tags</label>
 					<input type="text" class="form-control" id="quizTags">
-				</div>
+				</div>-->
 				
 				<br><br>
 				

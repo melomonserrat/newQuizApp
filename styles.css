@@ -45,7 +45,11 @@
 #hero2{
 	background-image: url("pic2.jpg");
 	background-size: cover;
-	
+}
+
+#hero3{
+	margin-left: 800px;
+	margin-top:-150px;
 }
 
 .h-txt{

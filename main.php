@@ -28,11 +28,11 @@
 				<form action="main.php" method="post">
 					<input type="hidden" name="form" value="login">
 					<div class="form-group">
-						<label for="inputUsername">Username</label>
+						<label for="inputUsername" style="font-weight:bold;">Username</label>
 						<input type="text" class="form-control" id="inputUsername" name="username">
 					</div>
 					<div class="form-group">
-						<label for="inputPassword">Password</label>
+						<label for="inputPassword" style="font-weight:bold;">Password</label>
 						<input type="password" class="form-control" id="inputPassword" name="password">
 					</div>
 						<button type="submit" class="btn btn-primary">Login</button>
@@ -44,19 +44,19 @@
 				<form action="main.php" method="post">
 					<input type="hidden" name="form" value="signup">
 					<div class="form-group">
-						<label for="signupUser">Username</label>
+						<label for="signupUser" style="font-weight:bold;">Username</label>
 						<input type="text" class="form-control" id="signupUser" name="signupUser">
 					</div>
 					<div class="form-group">
-						<label for="signupPassword">Password</label>
+						<label for="signupPassword" style="font-weight:bold;">Password</label>
 						<input type="password" class="form-control" id="signupPassword" name="signupPassword">
 					</div>
 					<div class="form-group">
-						<label for="signupEmail">Email</label>
+						<label for="signupEmail" style="font-weight:bold;">Email</label>
 						<input type="email" class="form-control" id="signupEmail" name="signupEmail">
 					</div>
 					<div class="form-group">
-						<label for="signupAddress">Address</label>
+						<label for="signupAddress" style="font-weight:bold;">Address</label>
 						<input type="text" class="form-control" id="signupAddress" name="signupAddress">
 					</div>
 						<button type="submit" class="btn btn-primary">Signup</button>
@@ -80,7 +80,7 @@
             $username = test_input($_POST['username']);
             $password = test_input($_POST['password']);
 
-            $con = new mysqli('localhost', 'root', '', 'newquizapp');
+            $con = new mysqli('localhost', 'root', '', 'quizapp');
             
             if(mysqli_connect_errno()){
               echo "Failed to connect to database! " . mysqli_connect_error();

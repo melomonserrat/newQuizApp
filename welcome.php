@@ -7,12 +7,12 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 
     <title>Quiz App</title>
   
   </head>
-  <body style="font-family: 'Helvetica';">
+  <body style="font-family: 'Helvetica'; background-color: #a6b2c4;">
 	<?php
 		session_start();
 	?>
@@ -35,6 +35,7 @@
 		</form>
 		</nav>
 	</div>
+	<div class="hero">
 	<section id="hero">
 		<div class="h-txt text-light">
 			<div class="starter-template">
@@ -43,8 +44,11 @@
 			</div>
 		</div>
 	</section>
+	</div>
 	
 	<br><br>
+
+	<div class="homeSplash">
 	<div class="row" style="margin-left:20px;">
 		<div class="col-sm-4">
 			<div class="card text-white bg-dark mb-3" style="max-width: 25rem;">
@@ -74,7 +78,7 @@
 			</div>
 		</div>
 	</div>
-	
+	</div>
 	<?php
 		if(isset($_POST['form'])){
 			switch($_POST['form']){
@@ -93,7 +97,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="welcome.js"></script>
   </body>
   
 </html>

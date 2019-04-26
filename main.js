@@ -1,6 +1,9 @@
 $(document).ready(function(){
     $('.loginCredentials').hide();
     $('.signup').hide();
+    $('.splash').hide();
+
+    $('.splash').show(1000);
 })
 
 function login(){

@@ -10,21 +10,23 @@
     <link rel="stylesheet" href="style.css">
     <title>Manage Courses</title>
   </head>
-  <body>
-
+  <body style="background-image: url('pic3.jpg');">
+	<?php
+		session_start();
+	?>
+	<!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="welcome.php">Quiz App</a>
+	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav">
 			<li class="nav-item active">
-				<a class="nav-link" href="welcome.php">Home<span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">	
 				<div class="dropdown">
-					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; text-shadow: 2px 2px 8px #000000;">
 						Manage Courses
 					</button>
 					<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
@@ -36,7 +38,7 @@
 			</li>
             <li class="nav-item">	
 				<div class="dropdown">
-					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown" style="color:white; text-shadow: 2px 2px 8px #000000;">
 						Manage Quizzes
 					</button>	
 					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
@@ -47,53 +49,70 @@
 				</div>
 			</li>
             <li class="nav-item">
-                <a class="btn btn-outline-dark" href="quizTaker.php">Take a quiz</a>
+                <a class="btn btn-outline-dark" href="quizTaker.php" style="color:white; text-shadow: 2px 2px 8px #000000;">Take a quiz</a>
             </li>
 		</ul>
 	</div>
-		
-	<form class="form-inline" action="manageCourses.php">
+	<li class="loggedIn">
+			<p class="loggedIn">Logged in as <?php echo ("{$_SESSION['username']}" . " ");  ?> </p>
+	</li>	
+	<form class="form-inline" action="manageCourses.php" method="post">
 		<input type="hidden" name="form" value="logout">
-		<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>
+		<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 	</form>
     </nav>
     <br>
+	<section id="hero3">
+		<div class="h-txt text-light">
+			<div class="starter-template">
+				 <h1 style="font-weight:bolder; text-shadow: 4px 4px 8px #000000;"> Manage Courses </h1>
+				<p class="lead" style="text-shadow: 4px 4px 8px #000000;"> Search millions of existing courses, and quizzes to take or create your own!</p>
+			</div>
+		</div>
+	</section>
 
-    <div class="row home">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Create a course!</h5>
-                <p class="card-text">Create a course to put quizzes under.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="createCourse()">Go!</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Edit a course!</h5>
-                <p class="card-text">Change the details of a course.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="editCourse()">Go!</button>
-            </div>
-        </div> 
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">View courses!</h5>
-                <p class="card-text">Check the list of all courses.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="viewCourses()">Go!</button>
-            </div>
-        </div> 
+    <div class="row home" style="margin-left:800px; margin-top:-50px; ">
+		<div class="col-sm-4">
+			<div class="card text-white bg-dark mb-3" style="max-width: 25rem; max-height: 10rem;">
+				<div class="card-body">
+					<h5 class="card-title">Create a course!</h5>
+					<p class="card-text">Create a course to put quizzes under.</p>
+					<button type="button" class="btn btn-primary" onclick="createCourse()">Go!</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="card text-white bg-dark mb-3" style="max-width: 25rem; max-height: 25rem;">
+				<div class="card-body">
+					<h5 class="card-title">Edit a course!</h5>
+					<p class="card-text">Change the details of a course.</p>
+					<button type="button" class="btn btn-primary" onclick="editCourse()">Go!</button>
+				</div>
+			</div> 
+		</div>
+		<div class="col-sm-4">
+			<div class="card text-white bg-dark mb-3" style="max-width: 25rem; margin-right:20px; max-height: 25rem;">
+				<div class="card-body">
+					<h5 class="card-title">View courses!</h5>
+					<p class="card-text">Check the list of all courses.</p>
+					<button type="button" class="btn btn-primary" onclick="viewCourses()">Go!</button>
+				</div>
+			</div> 
+		</div>
     </div>
 
     <div class="container createCourse">
-        <h4>Creating a course... </h4>
-        <hr>
+        <h4 style="font-weight: bolder; text-shadow: 4px 4px 8px #000000;">Creating a course... </h4>
+        <hr class="new1">
         <form action="manageCourses.php" method="post">
             <div class="form-group">
-                <label for="createCourseName">Course Name</label>
-                <input type="text" class="form-control" id="createCourseName">
+                <label for="createCourseName" style="text-shadow: 4px 4px 8px #000000;">Course Name</label>
+                <input type="text" class="form-control" id="createCourseName" name="createName">
             </div>
             <div class="form-group">
-                <label for="createCourseDesc">Course Description</label>
-                <input type="text" class="form-control" id="createCourseDesc">
+                <label for="createCourseDesc" style="text-shadow: 4px 4px 8px #000000;">Course Description</label>
+                <input type="text" class="form-control" id="createCourseDesc" name="createDesc">
+
             </div>
             <input type="hidden" name="form" value="createCourse">
             <button type="submit" class="btn btn-primary">Create!</button>
@@ -102,13 +121,13 @@
     </div>
 
     <div class="container editCourse">
-        <h4>Editing a course... </h4>
-        <hr>
-        <p class="lead">Pick a course to edit</p>
+        <h4 style="font-weight: bolder; text-shadow: 4px 4px 8px #000000;">Editing a course... </h4>
+        <hr class="new1">
+        <p class="lead" style="text-shadow: 4px 4px 8px #000000;">Pick a course to edit</p>
 
         <form action="editingCourse.php" method="post" id="editCourseForm">
             <input type="hidden" name="form" value="editCourse">
-            <select class="chooseCourseToEdit" name="courseToEdit" form="editCourseForm">
+            <select class="chooseCourseToEdit form-control" name="courseToEdit" form="editCourseForm">
             <?php
                 $con = mysqli_connect('localhost', 'root', '', 'quizapp');
 
@@ -117,11 +136,19 @@
                     die();
                 }
 
-                $result = mysqli_query($con, 'SELECT course_name FROM course');
+                $id = $_SESSION['id'];
 
-                while($row = mysqli_fetch_array($result)){
-                    echo "<option value=\"" . $row['course_name'] . "\">" . $row['course_name'] . "</option>";
+                $result = mysqli_query($con, "SELECT course_name FROM course WHERE user_id = $id");
+
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+                        echo "<option value=\"" . $row['course_name'] . "\">" . $row['course_name'] . "</option>";
+                    }
                 }
+                else{
+                    echo "<option>Uh oh! You haven't made any courses yet!</option>";
+                }
+
 
                 mysqli_close($con);
             ?>
@@ -131,7 +158,7 @@
         </form>
     </div>
 
-    <div class="container viewCourses">
+    <div class="container viewCourses" style="text-shadow: 4px 4px 8px #000000;">
         <h4>Viewing all courses... </h4>
         <hr>
         <table class="table">
@@ -150,7 +177,7 @@
                         die();
                     }
 
-                    $result = mysqli_query($con, "SELECT course_name, course_description FROM course;");
+                    $result = mysqli_query($con, "SELECT course_name, course_description FROM course WHERE course_isopen = 1");
 
                     while($row = mysqli_fetch_array($result)){
                         echo "<tr>";
@@ -169,10 +196,52 @@
 			switch($_POST['form']){
 				case 'logout':
 					session_destroy();
-					header('Location: main.php');
+                    header('Location: main.php');
+                    break;
+                case 'createCourse':
+                    if(empty($_POST['createName'])){
+                        echo "<script>alert('No course name entered!')</script>";
+                        echo "<script>window.location.href = 'manageCourses.php?edit' </script>";
+                    }
+
+                    if(empty($_POST['createDesc'])){
+                        echo "<script>alert('No course description entered!')</script>";
+                        echo "<script>window.location.href = 'manageCourses.php?edit' </script>";
+                    }
+
+                    $con = mysqli_connect('localhost', 'root', '', 'quizapp');
+
+                    $newName = test_input($_POST['createName']);
+                    $newDesc = test_input($_POST['createDesc']);
+                    $id = $_SESSION['id'];
+
+                    mysqli_query($con, "INSERT INTO course (user_id, course_name, course_description, course_isopen) VALUES ($id, '$newName', '$newDesc', 1)");
+
+                    mysqli_close($con);
+
+                    echo "<script>alert('Course created!')</script>";
+                    echo "<script>window.location.href = 'manageCourses.php' </script>";
 			}
         }
+
+        function test_input($data){
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
     ?>
+	
+	<?php
+		if(isset($_POST['form'])){
+			switch($_POST['form']){
+				case 'logout':
+					session_destroy();
+					echo "<script>window.location.href = 'main.php' </script>";
+			}
+
+		}
+	?>
     
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>

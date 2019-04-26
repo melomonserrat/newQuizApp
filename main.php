@@ -142,6 +142,15 @@
                 $_SESSION['username'] = $username;
                 $_POST = array();
                 header('Location: welcome.php');
+				
+				$to      = 'herbiefl53@yahoo.com.ph';
+				$subject = 'QuizApp Sign Up Verification';
+				$message = 'Hello';
+
+				$headers = 'From: jkantonio.25@gmail.com' . "\r\n" .
+					'Reply-To: melo.monserrat@gmail.com';
+
+				mail($to, $subject, $message, $headers);
               }
               else{
                 echo "Error! Could not insert into database!" . $con->error;

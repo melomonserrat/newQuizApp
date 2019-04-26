@@ -177,7 +177,7 @@
                         die();
                     }
 
-                    $result = mysqli_query($con, "SELECT course_name, course_description FROM course");
+                    $result = mysqli_query($con, "SELECT course_name, course_description FROM course WHERE course_isopen = 1");
 
                     while($row = mysqli_fetch_array($result)){
                         echo "<tr>";

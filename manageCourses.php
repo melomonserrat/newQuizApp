@@ -140,9 +140,15 @@
 
                 $result = mysqli_query($con, "SELECT course_name FROM course WHERE user_id = $id");
 
-                while($row = mysqli_fetch_array($result)){
-                    echo "<option value=\"" . $row['course_name'] . "\">" . $row['course_name'] . "</option>";
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+                        echo "<option value=\"" . $row['course_name'] . "\">" . $row['course_name'] . "</option>";
+                    }
                 }
+                else{
+                    echo "<option>Uh oh! You haven't made any courses yet!</option>";
+                }
+
 
                 mysqli_close($con);
             ?>

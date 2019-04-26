@@ -69,7 +69,8 @@
     </div>
 
     <div class="container createCourse">
-        <h5>Creating a course... </h5>
+        <h4>Creating a course... </h4>
+        <hr>
         <form action="manageCourses.php" method="post">
             <div class="form-group">
                 <label for="createCourseName">Course Name</label>
@@ -86,7 +87,8 @@
     </div>
 
     <div class="container editCourse">
-        <h5>Editing a course... </h5>
+        <h4>Editing a course... </h4>
+        <hr>
         <p class="lead">Pick a course to edit</p>
 
         <form action="manageCourses.php" method="post" id="editCourseForm">
@@ -110,11 +112,13 @@
             ?>
             </select> <br> <br>
             <button type="submit" class="btn btn-primary">Edit!</button>
+            <button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>
         </form>
     </div>
 
     <div class="container viewCourses">
-        <h5>Viewing all courses... </h5>
+        <h4>Viewing all courses... </h4>
+        <hr>
         <table class="table">
             <thead>
                 <tr>
@@ -144,6 +148,7 @@
                 ?>
             </tbody>
         </table>
+        <button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>
     </div>
     
     <?php

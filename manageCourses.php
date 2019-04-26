@@ -28,7 +28,9 @@
 						Manage Courses
 					</button>
 					<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
-						<a class="dropdown-item" href="javascript:manageCourse()">Manage a course</a>
+						<a class="dropdown-item" href="manageCourses.php?create">Create a course</a>
+                        <a class="dropdown-item" href="manageCourses.php?edit">Edit a course</a>
+                        <a class="dropdown-item" href="manageCourses.php?view">View courses</a>
 					</div>
 				</div>
 			</li>
@@ -79,6 +81,7 @@
             </div>
             <input type="hidden" name="form" value="createCourse">
             <button type="submit" class="btn btn-primary">Create!</button>
+            <button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>
         </form>
     </div>
 

@@ -137,7 +137,9 @@
                     die();
                 }
 
-                $result = mysqli_query($con, 'SELECT course_name FROM course');
+                $id = $_SESSION['id'];
+
+                $result = mysqli_query($con, 'SELECT course_name FROM course WHERE user_id = $id');
 
                 while($row = mysqli_fetch_array($result)){
                     echo "<option value=\"" . $row['course_name'] . "\">" . $row['course_name'] . "</option>";
@@ -170,7 +172,7 @@
                         die();
                     }
 
-                    $result = mysqli_query($con, "SELECT course_name, course_description FROM course;");
+                    $result = mysqli_query($con, "SELECT course_name, course_description FROM course");
 
                     while($row = mysqli_fetch_array($result)){
                         echo "<tr>";
@@ -206,8 +208,9 @@
 
                     $newName = test_input($_POST['createName']);
                     $newDesc = test_input($_POST['createDesc']);
+                    $id = $_SESSION['id'];
 
-                    mysqli_query($con, "INSERT INTO course (course_name, course_description, course_isopen) VALUES ('$newName', '$newDesc', 1)");
+                    mysqli_query($con, "INSERT INTO course (course_name, course_description, course_isopen, user_id) VALUES ('$newName', '$newDesc', 1, $id)");
 
                     mysqli_close($con);
 

@@ -88,7 +88,7 @@
               echo "Failed to connect to database! " . mysqli_connect_error();
             }
             else{
-              $result = mysqli_query($con, "SELECT * FROM registered_user WHERE User_Name = '$username' AND User_Password = '$password'");
+              $result = mysqli_query($con, "SELECT user_id, user_name FROM registered_user WHERE User_Name = '$username' AND User_Password = '$password'");
 
               if(!mysqli_fetch_row($result)){
                 mysqli_close($con);
@@ -97,12 +97,12 @@
               }
               else{
                 $id = '';
-                while($row = $result->fetch_assoc()){
+                while($row = mysqli_fetch_array($result)){
                   $id = $row['user_id'];
                 }
                 mysqli_close($con);
                 session_start();
-                $_SESSION['user_id'] = $id;
+                $_SESSION['id'] = $id;
                 $_SESSION['username'] = $username;
                 $_POST = array();
                 header('Location: welcome.php');

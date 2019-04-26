@@ -44,10 +44,56 @@
 	</nav>
 
 
-	<h1>QUIZ UNDERGOING</h1>
+	<h3>You are currently taking the quiz: <?php echo $_POST['quizName']; ?></h3>
 	<?php session_start();
-		echo $_SESSION['username'];
-		echo $_SESSION['quizID']; ?>
+
+		$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
+		if($mysqli->connect_error){
+			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
+		}else{
+			$sql = "SELECT * FROM question where Quiz_ID = ".$_POST['quizID'];
+			$result = $mysqli->query($sql);
+			$count =0;
+			while($question = mysqli_fetch_assoc($result)) {
+				if($question['Quiz_Type'] == 'MC'){
+					$sql = "SELECT * FROM multiplechoice where Question_ID = ".$question['Question_ID'];
+					$choices = $mysqli->query($sql);
+				}else if($question['Quiz_Type'] == 'I'){
+
+				}else if($question['Quiz_Type'] == 'ToF'){
+
+				}
+
+				?>
+				<div class="card" align="center">
+					<div class="card-body text-center">
+					<div class="title">
+						<h4><?php 
+						$count++; 
+						echo $count.": ". $question['Question_Description']; ?></h4>
+					</div>
+					<div class="desc" align="text-left"><?php
+						while($choice = mysqli_fetch_assoc($choices)){
+							echo "A: ".$choice['Choice1']."<br>"."B: ".$choice['Choice2']."<br>"."C: ".$choice['Choice3']."<br>"."B: ".$choice['Choice4'];
+						}
+						if($question['Quiz_Type'] == 'MC'){
+							echo "<br><form method='post'><input type='text' maxlength='1' name=''></form>";
+						}else if($question['Quiz_Type'] == 'I'){
+							echo "<br><form method='post'><input type='text' maxlength='50' name=''></form>";
+						}else if($question['Quiz_Type'] == 'ToF'){
+							echo "<br><form method='post'><input type='text' maxlength='1' name=''></form>";
+						}
+						echo "Answer: ".$question['Quiz_Answer'];
+					?>
+						
+					</div>
+					</div>
+				</div>
+
+			<?php }
+		}
+	?>
+
 
 	<?php
 		if(isset($_POST['form'])){

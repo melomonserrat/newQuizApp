@@ -42,18 +42,18 @@
 			<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>
 		</form>
 	</nav>
-	<div class="card-columns">
+	<div class="card-columns" align="center">
 	<?php
 		session_start();
+
 		echo $_SESSION['username'];
-		$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
+		$mysqli = new mysqli( 'localhost', 'root', '', 'newquizapp');
 		if($mysqli->connect_error){
 			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
 		}else{
 			$sql = "SELECT * FROM course";
 			$result = $mysqli->query($sql);
 			$count = 0;
-
 
 			if ($result->num_rows > 0) {
 			    // output data of each row
@@ -98,13 +98,15 @@
 								  </thead>
 								  <tbody>
 					        <?php while($recordQuiz = mysqli_fetch_assoc($quizCourseID)) {?>
-					        	<?php $_SESSION['quizID'] = $recordQuiz['Quiz_ID']; ?>
 				        	    <tr>
 							      <td><?php echo $recordQuiz['Quiz_Name']; ?></td>
 							      <td><?php echo $recordQuiz['Quiz_Difficulty']; ?></td>
-							      <th><?php echo $recordQuiz['Quiz_Description']; ?></th>
+							      <td><?php echo $recordQuiz['Quiz_Description']; ?></td>
 							      <td><?php echo $recordQuiz['Quiz_PassingScore']; ?></td>
-							      <td><form action="quizTaking.php" method="post"><input type="submit" name="takeQuiz" value="Take Quiz"></form></td>
+							      <td><form action="quizTaking.php" method="post">
+							      	<input type="hidden" name="quizID" value="<?php echo $recordQuiz['Quiz_ID'];?>">
+							      	<input type="hidden" name="quizName" value="<?php echo $recordQuiz['Quiz_Name'];?>">
+							      	<input type="submit" name="takeQuiz" value="Take Quiz"></form></td>
 							    </tr>
 					    	<?php } ?>
 					    		  </tbody>

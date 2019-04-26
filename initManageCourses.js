@@ -1,9 +1,4 @@
 $(document).ready(function(){
-    // $('.home').hide();
-    // $('.createCourse').hide();
-    // $('.editCourse').hide();
-    // $('.viewCourses').hide();
-
     $('.home, .createCourse, .editCourse, .viewCourses').hide();
 
     if(window.location.href.indexOf("create") > -1){

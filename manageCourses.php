@@ -34,6 +34,9 @@
 					</div>
 				</div>
 			</li>
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" href="quizTaker.php">Take a quiz</a>
+            </li>
 		</ul>
 	</div>
 		
@@ -91,11 +94,11 @@
         <hr>
         <p class="lead">Pick a course to edit</p>
 
-        <form action="manageCourses.php" method="post" id="editCourseForm">
+        <form action="editingCourse.php" method="post" id="editCourseForm">
             <input type="hidden" name="form" value="editCourse">
             <select class="chooseCourseToEdit" name="courseToEdit" form="editCourseForm">
             <?php
-                $con = mysqli_connect('localhost', 'root', '', 'newquizapp');
+                $con = mysqli_connect('localhost', 'root', '', 'quizapp');
 
                 if(mysqli_connect_errno()){
                     echo "Failed to connect to database! " . mysqli_connect_error();
@@ -128,7 +131,7 @@
             </thead>
             <tbody>
                 <?php
-                    $con = mysqli_connect('localhost','root', '', 'newquizapp');
+                    $con = mysqli_connect('localhost','root', '', 'quizapp');
 
                     if(mysqli_connect_errno()){
                         echo "Failed to connect to database! " . mysqli_connect_error();

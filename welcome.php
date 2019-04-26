@@ -12,7 +12,7 @@
     <title>Quiz App</title>
   
   </head>
-  <body style="font-family: 'Helvetica';">
+  <body style="font-family: 'Helvetica'; background-color: #a6b2c4;">
 	<?php
 		session_start();
 	?>

@@ -44,7 +44,8 @@
 	</nav>
 	<div class="card-columns">
 	<?php
-		//session_start();
+		session_start();
+		echo $_SESSION['username'];
 		$mysqli = new mysqli( 'localhost', 'root', '', 'newquizapp');
 		if($mysqli->connect_error){
 			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
@@ -72,8 +73,9 @@
 					</div>
 					<button type="button" class="btn btn-primary" data-toggle="modal" <?php echo "data-target='#myModal".$count."'" ?> >View Quiz List</button>
 					</div>
+
 					<div class="modal" <?php echo "id='myModal". $count."'" ?> >
-					  <div class="modal-dialog">
+					  <div class="modal-dialog modal-lg">
 					    <div class="modal-content">
 
 					      <!-- Modal Header -->
@@ -84,18 +86,19 @@
 
 					      <!-- Modal body -->
 					      <div class="modal-body">
-					      		<table>
+					      		<table class="table-striped">
 								  <thead>
 								    <tr>
 									    <th>Title</th>
 									    <th>Difficulty</th>
 									    <th>Description<th>
 								      	<th>Passing Score</th>
-								      	<th></th>
+								      	<th> </th>
 								    </tr>
 								  </thead>
 								  <tbody>
 					        <?php while($recordQuiz = mysqli_fetch_assoc($quizCourseID)) {?>
+					        	<?php $_SESSION['quizID'] = $recordQuiz['Quiz_ID']; ?>
 				        	    <tr>
 							      <td><?php echo $recordQuiz['Quiz_Name']; ?></td>
 							      <td><?php echo $recordQuiz['Quiz_Difficulty']; ?></td>

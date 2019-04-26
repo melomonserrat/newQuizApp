@@ -54,7 +54,7 @@
 		</ul>
 	</div>
 	<li class="loggedIn">
-			<p class="loggedIn">Logged in as <?php echo ("{$_SESSION['username']}"." ");  ?> </p>
+			<p class="loggedIn">Logged in as <?php echo ("{$_SESSION['username']}"." {$_SESSION['id']}");  ?> </p>
 	</li>	
 	<form class="form-inline" action="manageCourses.php" method="post">
 		<input type="hidden" name="form" value="logout">

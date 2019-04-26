@@ -97,7 +97,8 @@
               }
               else{
                 $id = '';
-                while($row = mysqli_fetch_array($result)){
+
+                while($row = mysqli_fetch_row($result)){
                   $id = $row['user_id'];
                 }
                 mysqli_close($con);

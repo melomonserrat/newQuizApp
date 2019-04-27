@@ -92,11 +92,19 @@
 
 			    	$sql1 = "SELECT * FROM quiz WHERE  Course_ID = ". $record['Course_ID'];
 
-
-
-			    	//$sql1 = "SELECT quiz.Quiz_ID, quiz.Quiz_Name, quiz.Quiz_Difficulty, quiz.Quiz_Description, quiz.Course_ID, quiz.QuizPassingScore, quiz.Quiz_Type FROM quiz INNER JOIN course ON quiz.Course_ID = course.Course_ID WHERE Course_isOpen = 0 AND Course_ID = 123";
 			    	$quizCourseID = $mysqli->query($sql1);
+			    	$temp = $mysqli->query($sql1);
 			    	$count = $count +1;
+			
+
+
+			    	if($temp->num_rows < 1){
+			    		continue;
+			    	}
+					
+
+
+
 	?>	
 		<div class="container cardQuiz" >
 			<div class="card text-white bg-dark mb-0" style="margin-top:50px; margin-left:275px; max-width: 25rem;">
@@ -144,9 +152,6 @@
 					        	}else if($recordQuiz['Quiz_Type'] == 'I'){
 					        		$quizType = 'Identification';
 					        	}
-
-
-
 					        	?>
 				        	    <tr>
 							      <td><?php echo $recordQuiz['Quiz_Name']; ?></td>
@@ -159,7 +164,8 @@
 							      	<input type="hidden" name="quizName" value="<?php echo $recordQuiz['Quiz_Name'];?>">
 							      	<input type="submit" name="takeQuiz" value="Take Quiz"></form></td>
 							    </tr>
-					    	<?php } ?>
+					    	<?php }
+					    	 ?>
 					    		  </tbody>
 								  </table>
 					      </div>

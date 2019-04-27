@@ -42,9 +42,9 @@
 						Manage Quizzes
 					</button>	
 					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
-						<a class="dropdown-item" href="">Create a quiz</a>
-						<a class="dropdown-item" href="">Edit a quiz</a>
-						<a class="dropdown-item" href="">View a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?create">Create a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?edit">Edit a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?view">View a quiz</a>
 					</div>
 				</div>
 			</li>

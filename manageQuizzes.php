@@ -11,46 +11,58 @@
     <title>Manage Quizzes</title>
   </head>
   <body>
-  
+  <?php
+	session_start();
+  ?>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="welcome.php">Quiz App</a>
-		
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav">	
-				<li class="nav-item active">
-					<a class="nav-link" href="welcome.php">Home<span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">	
-					<div class="dropdown">
-						<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown">
-							Manage Quizzes
-						</button>	
-						<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
-							<a class="dropdown-item" href="manageQuizzes.php?create">Create a quiz</a>
-							<a class="dropdown-item" href="manageQuizzes.php?edit">Edit a quiz</a>
-							<a class="dropdown-item" href="manageQuizzes.php?view">View a quiz</a>
-						</div>
+	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav">
+			<li class="nav-item active">
+			</li>
+			<li class="nav-item">	
+				<div class="dropdown">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; text-shadow: 2px 2px 8px #000000;">
+						Manage Courses
+					</button>
+					<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
+						<a class="dropdown-item" href="manageCourses.php?create">Create a course</a>
+                        <a class="dropdown-item" href="manageCourses.php?edit">Edit a course</a>
+                        <a class="dropdown-item" href="manageCourses.php?view">View courses</a>
 					</div>
-				</li>
-			</ul>
-		</div>
-			
-		<form class="form-inline" action="main.php">
-			<input type="hidden" name="form" value="logout">
-			<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>
-		</form>
-		
+				</div>
+			</li>
+            <li class="nav-item">	
+				<div class="dropdown">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown" style="color:white; text-shadow: 2px 2px 8px #000000;">
+						Manage Quizzes
+					</button>	
+					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
+						<a class="dropdown-item" href="manageQuizzes.php?create">Create a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?edit">Edit a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?view">View a quiz</a>
+					</div>
+				</div>
+			</li>
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" href="quizTaker.php" style="color:white; text-shadow: 2px 2px 8px #000000;">Take a quiz</a>
+            </li>
+		</ul>
+	</div>
+	<li class="loggedIn">
+			<p class="loggedIn">Logged in as <?php echo ("{$_SESSION['username']}" . " ");  ?> </p>
+	</li>	
+	<form class="form-inline" action="manageCourses.php" method="post">
+		<input type="hidden" name="form" value="logout">
+		<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
+	</form>
     </nav>
     <br>
 	
 	 <?php
-		session_start();
-		
-		
 		if (isset($_POST["create"])) {
 		
 		if(empty($_POST["createQuizName"])){
@@ -197,13 +209,39 @@
 		<div class="" style="width: 50rem;">
 			<div class="container">
 				<h5>Editing a quiz... </h5>
-				<p class="lead">Pick a quiz to edit</p>					
-				<select class="">
+				<p class="lead">Pick a quiz to edit</p>	
 
-				</select>
-				
-				<button type="submit" class="btn btn-primary">Create!</button>
-				<button class="btn btn-primary" onclick="goBackToHome()">Go back</button>
+				<form action="editingQuiz.php" method="post" id="editCourseForm">
+            		<input type="hidden" name="form" value="editQuiz">
+            		<select class="chooseCourseToEdit form-control" name="courseToEdit" form="editCourseForm">
+            		<?php
+                		$con = mysqli_connect('localhost', 'root', '', 'quizapp');
+
+                		if(mysqli_connect_errno()){
+                    		echo "Failed to connect to database! " . mysqli_connect_error();
+                    		die();
+                		}
+
+                		$id = $_SESSION['id'];
+
+                		$result = mysqli_query($con, "SELECT quiz_name FROM quiz WHERE user_id = $id");
+
+                		if(mysqli_num_rows($result) > 0){
+                    		while($row = mysqli_fetch_array($result)){
+                        		echo "<option value=\"" . $row['course_name'] . "\">" . $row['course_name'] . "</option>";
+                    		}
+                		}
+                		else{
+                    		echo "<option>Uh oh! You haven't made any quizzes yet!</option>";
+                		}		
+
+
+                		mysqli_close($con);
+            		?>
+            		</select> <br> <br>
+            		<button type="submit" class="btn btn-primary">Edit!</button>
+            		<button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>
+        		</form>
 			</div>
 		</div>
 	</div>

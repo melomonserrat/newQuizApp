@@ -129,12 +129,14 @@
                         $quizDesc = '';
                         $quizDiff = '';
                         $quizPass = '';
+                        $quizType = '';
                         
                         while($row = $result->fetch_assoc()){
                             $quizId = $row['quiz_id'];
                             $quizDesc = $row['quiz_description'];
                             $quizDiff = $row['quiz_difficulty'];
                             $quizPass = $row['quiz_passingscore'];
+                            $quizType = $row['quiz_type'];
                         }
 
                         mysqli_close($con);
@@ -177,7 +179,14 @@
                 <?php
                     echo "<input type=\"hidden\" name=\"edited\" value=\"$quizId\">";
                 ?>
-				
+
+                <div class="addQuestionField">
+
+                </div>
+
+				<button type="button" class="btn btn-primary" onclick="addQuestion($quizType)">Add a question</button>
+                <button type="button" class="btn btn-primary" onclick="addTag()">Add a tag</button>
+
 				<?php
 					if(isset($_POST['form'])){
 						switch($_POST['form']){
@@ -196,6 +205,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="editingQuiz.js"></script>
     </body>
 
 </html>

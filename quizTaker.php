@@ -81,7 +81,7 @@
 		if($mysqli->connect_error){
 			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
 		}else{
-			$sql = "SELECT * FROM course";
+			$sql = "SELECT * FROM course WHERE Course_isOpen = 1";
 			$result = $mysqli->query($sql);
 			$count = 0;
 
@@ -90,7 +90,11 @@
 			    while($record = mysqli_fetch_assoc($result)) {
 
 
-			    	$sql1 = "SELECT * FROM quiz WHERE Course_ID = ". $record['Course_ID'];
+			    	$sql1 = "SELECT * FROM quiz WHERE  Course_ID = ". $record['Course_ID'];
+
+
+
+			    	//$sql1 = "SELECT quiz.Quiz_ID, quiz.Quiz_Name, quiz.Quiz_Difficulty, quiz.Quiz_Description, quiz.Course_ID, quiz.QuizPassingScore, quiz.Quiz_Type FROM quiz INNER JOIN course ON quiz.Course_ID = course.Course_ID WHERE Course_isOpen = 0 AND Course_ID = 123";
 			    	$quizCourseID = $mysqli->query($sql1);
 			    	$count = $count +1;
 	?>	

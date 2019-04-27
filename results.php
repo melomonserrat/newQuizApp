@@ -80,7 +80,7 @@
 			if(mysqli_query($mysqli, $sql)){
 				echo "<span>Your record has been updated! Thank you for using QuizApp</span>";
 			} else{
-			    echo "<span>Ohno! You have already taken this quiz today, try again tommorow</span>.";
+			    echo "<span>Ohno! You have already taken this quiz today, this try will not be recorded. Come back tommorow.</span>.";
 			}
 		}
 	?>

@@ -298,11 +298,8 @@
 				<button type="button" class="btn btn-primary" onclick="addQuestion()">Add question</button>
 				
 				<br><br>
-<<<<<<< HEAD
 				
 				<input type="hidden" name="form" value="createQuiz">
-=======
->>>>>>> 6fd817442ae82c71b31585ba0b90c868fd47e125
 			
 				<button type="submit" class="btn btn-primary" name="create">Create!</button>
 				<button class="btn btn-primary" onclick="goBackToHome()">Go back</button>

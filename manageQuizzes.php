@@ -14,7 +14,7 @@
   <?php
 	session_start();
   ?>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -63,7 +63,7 @@
 		<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 	</form>
     </nav>
-    <br>
+    <br><br><br>
 	
 	<section id="hero5">
 		<div class="h-txt text-dark">
@@ -229,7 +229,7 @@
 		<div class="col-sm-2">
 			<div class="card text-white bg-dark mb-1" style="max-width: 15rem;">
 				<div class="card-body">
-					<h5 class="card-title">View quizes!</h5>
+					<h5 class="card-title">View quizzes!</h5>
 					<p class="card-text">Check the list of all quizzes.</p>
 					<button type="button" class="btn btn-primary-outline" onclick="viewQuizzes()">Go!</button>
 				</div>
@@ -237,7 +237,7 @@
 		</div>
     </div>
 	
-	<div align="center" id="createQuiz" style="	margin-right: 90px; width: 650px;">
+	<div align="center" id="createQuiz" style="	margin-right: 90px; margin-top:-250px; width: 650px;">
 		<div class="" style="width: 50rem;">
 			<h5>Creating a quiz...</h5>		
 			<form action="manageQuizzes.php" method="post">
@@ -299,7 +299,7 @@
 	
 	
 	
-	<div class="container" align="center" id="editQuizzes">	
+	<div class="container" align="center" id="editQuizzes" style="margin-right: 900px; margin-top:-250px; width: 650px;">	
 		<div class="" style="width: 50rem;">
 			<div class="container">
 				<h5>Editing a quiz... </h5>
@@ -340,7 +340,7 @@
 		</div>
 	</div>
 
-    <div class="container viewQuizzes" style="text-shadow: 4px 4px 8px #000000;" id="viewQuizzes">
+    <div class="container viewQuizzes" style="margin-right: 800px; margin-top:-250px; width: 650px;" id="viewQuizzes">
         <h4>Viewing all quizzes... </h4>
         <hr>
         <table class="table">

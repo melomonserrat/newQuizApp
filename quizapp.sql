@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2019 at 09:31 PM
+-- Generation Time: Apr 27, 2019 at 04:10 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -120,18 +120,18 @@ CREATE TABLE `question` (
   `Quiz_ID` int(11) NOT NULL,
   `Question_ID` int(11) NOT NULL,
   `Question_Description` varchar(250) NOT NULL,
-  `Quiz_Type` enum('I','MC','MT','ToF') NOT NULL,
-  `Quiz_Answer` varchar(50) NOT NULL
+  `Question_Type` enum('I','MC','MT','ToF') NOT NULL,
+  `Question_Answer` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `question`
 --
 
-INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Quiz_Answer`) VALUES
+INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Question_Type`, `Question_Answer`) VALUES
 (1, 1, 'How to print text?', 'MC', 'printf'),
-(1, 2, 'The way to import the header file for standard input and output', 'I', '#include<stdio.h>'),
-(1, 3, 'To access the values that the user enters, the syntax to use is scanf.', 'ToF', 'True'),
+(2, 2, 'The way to import the header file for standard input and output', 'I', '#include<stdio.h>'),
+(4, 3, 'To access the values that the user enters, the syntax to use is scanf.', 'ToF', 'True'),
 (1, 4, 'What kind of a programming language is C', 'MC', 'Procedural');
 
 -- --------------------------------------------------------
@@ -146,20 +146,21 @@ CREATE TABLE `quiz` (
   `Quiz_Difficulty` enum('EASY','MEDIUM','HARD') DEFAULT NULL,
   `Quiz_Description` varchar(250) DEFAULT NULL,
   `Course_ID` int(11) DEFAULT NULL,
-  `Quiz_PassingScore` int(4) NOT NULL
+  `Quiz_PassingScore` int(4) NOT NULL,
+  `Quiz_Type` enum('MC','I','ToF','MT') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quiz`
 --
 
-INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`) VALUES
-(1, 'C Test no. 1', 'EASY', 'Test to see basic C syntax', 11, 60),
-(2, 'C Test no. 2', 'EASY', NULL, 11, 60),
-(4, 'Can you Java 1', 'EASY', NULL, 23, 60),
-(5, 'Can you Java 2', 'MEDIUM', NULL, 23, 60),
-(6, 'Data Structures Exam 1', 'MEDIUM', NULL, 123, 50),
-(7, 'Data Structures Exam 2', 'HARD', NULL, 123, 45);
+INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`) VALUES
+(1, 'C Test no. 1', 'EASY', 'Test to see basic C syntax', 11, 60, 'MC'),
+(2, 'C Test no. 2', 'EASY', NULL, 11, 60, 'I'),
+(4, 'Can you Java 1', 'EASY', NULL, 23, 60, 'I'),
+(5, 'Can you Java 2', 'MEDIUM', NULL, 23, 60, 'ToF'),
+(6, 'Data Structures Exam 1', 'MEDIUM', NULL, 123, 50, 'MT'),
+(7, 'Data Structures Exam 2', 'HARD', NULL, 123, 45, 'MC');
 
 -- --------------------------------------------------------
 
@@ -179,13 +180,7 @@ CREATE TABLE `quiz_log` (
 --
 
 INSERT INTO `quiz_log` (`Quiz_ID`, `User_ID`, `Quiz_Score`, `Quiz_Date`) VALUES
-(1, 2, 75, '0000-00-00'),
-(1, 3, 85, '0000-00-00'),
-(1, 4, 95, '0000-00-00'),
-(1, 4, 0, '2019-04-26'),
-(2, 2, 93, '0000-00-00'),
-(4, 3, 85, '0000-00-00'),
-(6, 4, 0, '2019-04-26');
+(2, 5, 0, '2019-04-27');
 
 -- --------------------------------------------------------
 
@@ -210,7 +205,8 @@ INSERT INTO `registered_user` (`User_ID`, `User_Name`, `User_Email`, `User_Addre
 (2, 'Bjorn Richardson', 'bjornrichson@yahoo.com', 'No. 54 Rodeo Drive, LA, CA', 'ilikeice'),
 (3, 'Neo Anderson', 'neo@yahoo.com', 'The Matrix, Everywhere', 'ilovetrinity'),
 (4, 'Johnny Blaze', 'grider@yahoo.com', '123 Mephisto St., 7th Ring, Hell', 'imissroxanne'),
-(5, 'ken', 'asdf@a.com', '123', 'ken');
+(5, 'ken', 'asdf@a.com', '123', 'ken'),
+(6, 'bob', '', '', 'bobafett');
 
 -- --------------------------------------------------------
 
@@ -222,13 +218,6 @@ CREATE TABLE `trueorfalse` (
   `Question_ID` int(11) NOT NULL,
   `Answer` enum('TRUE','FALSE') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `trueorfalse`
---
-
-INSERT INTO `trueorfalse` (`Question_ID`, `Answer`) VALUES
-(3, 'TRUE');
 
 --
 -- Indexes for dumped tables
@@ -319,7 +308,7 @@ ALTER TABLE `quiz`
 -- AUTO_INCREMENT for table `registered_user`
 --
 ALTER TABLE `registered_user`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

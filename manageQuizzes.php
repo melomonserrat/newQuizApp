@@ -48,7 +48,7 @@
 				</div>
 			</li>
 			<li class="nav-item">
-				<a href="userProfile.php" class="btn btn-outline-dark">User Profile</a>
+				<a href="userProfile.php" class="btn btn-outline-dark" style="color:white; text-shadow: 2px 2px 8px #000000;">User Profile</a>
 			</li>
             <li class="nav-item">
                 <a class="btn btn-outline-dark" href="quizTaker.php" style="color:white; text-shadow: 2px 2px 8px #000000;">Take a quiz</a>
@@ -131,27 +131,33 @@
 	?> 
 
     <div class="row home" style="margin-top:-250px; margin-left: 30px;">
-        <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Create a quiz!</h5>
-                <p class="card-text">Create a quiz for your quizzes.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="createQuiz()">Go!</button>
-            </div>
-        </div>
-        <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Edit a quiz!</h5>
-                <p class="card-text">Change the details of a quizzes.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="editQuiz()">Go!</button>
-            </div>
-        </div> 
-        <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-                <h5 class="card-title">View quizes!</h5>
-                <p class="card-text">Check the list of all quizzes.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="viewQuizzes()">Go!</button>
-            </div>
-        </div> 
+		<div class="col-sm-2">
+			<div class="card text-white bg-dark mb-1" style="max-width: 15rem;">
+				<div class="card-body">
+					<h5 class="card-title">Create a quiz!</h5>
+					<p class="card-text">Create a quiz for your quizzes.</p>
+					<button type="button" class="btn btn-primary-outline" onclick="createQuiz()">Go!</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="card text-white bg-dark mb-1" style="max-width: 15rem;">
+				<div class="card-body">
+					<h5 class="card-title">Edit a quiz!</h5>
+					<p class="card-text">Change the details of a quizzes.</p>
+					<button type="button" class="btn btn-primary-outline" onclick="editQuiz()">Go!</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="card text-white bg-dark mb-1" style="max-width: 15rem;">
+				<div class="card-body">
+					<h5 class="card-title">View quizes!</h5>
+					<p class="card-text">Check the list of all quizzes.</p>
+					<button type="button" class="btn btn-primary-outline" onclick="viewQuizzes()">Go!</button>
+				</div>
+			</div> 
+		</div>
     </div>
 	
 	<div align="center" id="createQuiz">
@@ -257,16 +263,40 @@
 		</div>
 	</div>
 
-    <div class="container" align="center" id="viewQuizzes">
-		<div class="" style="width: 50rem;">
-		<h5>View Quizzes </h5>
-	
-	
-	
-	<button type="submit" class="btn btn-primary">Create!</button>
-	<button class="btn btn-primary" onclick="goBackToHome()">Go back</button>
-		</div>
-	</div>
+    <div class="container viewQuizzes" style="text-shadow: 4px 4px 8px #000000;" id="viewQuizzes">
+        <h4>Viewing all quizzes... </h4>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+					<th scope="col">Quiz Name</th>
+                    <th scope="col">Quiz Description</th>
+					<th scope="col">Quiz Difficulty</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $con = mysqli_connect('localhost','root', '', 'quizapp');
+
+                    if(mysqli_connect_errno()){
+                        echo "Failed to connect to database! " . mysqli_connect_error();
+                        die();
+                    }
+
+                    $result = mysqli_query($con, "SELECT quiz_name, quiz_description, quiz.quiz_difficulty FROM quiz,course WHERE quiz.Course_ID = course.Course_ID AND course.Course_isOpen = 1");
+
+                    while($row = mysqli_fetch_array($result)){
+                        echo "<tr>";
+                        echo "<td>" . $row['quiz_name'] . "</td>";
+                        echo "<td>" . $row['quiz_description'] . "</td>";
+						echo "<td>" . $row['quiz_difficulty'] . "</td>";
+                        echo "</tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>
+    </div>
     
     <?php
 		if(isset($_POST['form'])){

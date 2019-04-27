@@ -49,7 +49,7 @@
 				</div>
 			</li>
             <li class="nav-item">
-				<a href="userProfile.php" class="btn btn-outline-dark">User Profile</a>
+				<a href="userProfile.php" class="btn btn-outline-dark" style="color:white; text-shadow: 2px 2px 8px #000000;">User Profile</a>
 			</li>
             <li class="nav-item">
                 <a class="btn btn-outline-dark" href="quizTaker.php" style="color:white; text-shadow: 2px 2px 8px #000000;">Take a quiz</a>

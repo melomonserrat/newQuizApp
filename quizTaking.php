@@ -16,24 +16,14 @@
   	<?php
 		session_start();
 	?>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav">
-				<li class="nav-item">	
-					<div class="dropdown">
-						<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; text-shadow: 2px 2px 8px #000000;">
-							Manage Courses
-						</button>
 
-						<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
-							<a class="dropdown-item" href="javascript:manageCourse()">Manage a course</a>
-						</div>
-					</div>
-				</li>
 			</ul>
 		</div>
 		<li class="loggedIn">
@@ -44,7 +34,7 @@
 			<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 		</form>
 	</nav>
-
+	<br><br>
 
 	<h3 style="font-weight:bolder; text-shadow: 4px 4px 8px #000000; color:white; text-align:center;">You are currently taking the quiz: <?php echo $_POST['quizName']; ?></h3>
 	<form method="post" action="results.php" >

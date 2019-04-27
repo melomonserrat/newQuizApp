@@ -75,7 +75,6 @@
 	</section>
 	 <?php
 		
-		session_start();
 		
 		if (isset($_POST["create"])) {
 		

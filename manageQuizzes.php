@@ -257,16 +257,40 @@
 		</div>
 	</div>
 
-    <div class="container" align="center" id="viewQuizzes">
-		<div class="" style="width: 50rem;">
-		<h5>View Quizzes </h5>
-	
-	
-	
-	<button type="submit" class="btn btn-primary">Create!</button>
-	<button class="btn btn-primary" onclick="goBackToHome()">Go back</button>
-		</div>
-	</div>
+    <div class="container viewQuizzes" style="text-shadow: 4px 4px 8px #000000;" id="viewQuizzes">
+        <h4>Viewing all quizzes... </h4>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+					<th scope="col">Quiz Name</th>
+                    <th scope="col">Quiz Description</th>
+					<th scope="col">Quiz Difficulty</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $con = mysqli_connect('localhost','root', '', 'quizapp');
+
+                    if(mysqli_connect_errno()){
+                        echo "Failed to connect to database! " . mysqli_connect_error();
+                        die();
+                    }
+
+                    $result = mysqli_query($con, "SELECT quiz_name, quiz_description, quiz.quiz_difficulty FROM quiz,course WHERE quiz.Course_ID = course.Course_ID AND course.Course_isOpen = 1");
+
+                    while($row = mysqli_fetch_array($result)){
+                        echo "<tr>";
+                        echo "<td>" . $row['quiz_name'] . "</td>";
+                        echo "<td>" . $row['quiz_description'] . "</td>";
+						echo "<td>" . $row['quiz_difficulty'] . "</td>";
+                        echo "</tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" onclick="goBackToHome();">Go back</button>
+    </div>
     
     <?php
 		if(isset($_POST['form'])){

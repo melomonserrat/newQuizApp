@@ -76,9 +76,9 @@
 						Manage Quizzes
 					</button>	
 					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
-						<a class="dropdown-item" href="">Create a quiz</a>
-						<a class="dropdown-item" href="">Edit a quiz</a>
-						<a class="dropdown-item" href="">View a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?create">Create a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?edit">Edit a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?view">View a quiz</a>
 					</div>
 				</div>
 			</li>
@@ -123,7 +123,7 @@
                             die();
                         }
 
-                        $result = mysqli_query($con, "SELECT quiz_id, quiz_description, quiz_difficulty, quiz_passingscore FROM quiz WHERE quiz_name = \"$quizName\"");
+                        $result = mysqli_query($con, "SELECT quiz_id, quiz_description, quiz_difficulty, quiz_passingscore, quiz_type FROM quiz WHERE quiz_name = \"$quizName\"");
 
                         $quizId = '';
                         $quizDesc = '';
@@ -179,12 +179,11 @@
                 <?php
                     echo "<input type=\"hidden\" name=\"edited\" value=\"$quizId\">";
                 ?>
-
-                <div class="addQuestionField">
-
-                </div>
-
-				<button type="button" class="btn btn-primary" onclick="addQuestion($quizType)">Add a question</button>
+                
+                <?php
+                    echo "<button type=\"button\" class=\"btn btn-primary\" onclick=\"addQuestion('$quizType')\">Add a question</button>";
+                ?>
+				
                 <button type="button" class="btn btn-primary" onclick="addTag()">Add a tag</button>
 
 				<?php
@@ -198,7 +197,7 @@
 					}
 				?>
                 <button type="submit" class="btn btn-primary">Edit</button>
-                <a class="btn btn-primary" href="manageCourses.php?edit">Go back</a>
+                <a class="btn btn-primary" href="manageQuizzes.php?edit">Go back</a>
             </form>
         </div>
     

@@ -209,7 +209,7 @@
 				
 				<br><br>
 				
-				<input type="hidden" name="form" value="createCourse">
+				<input type="hidden" name="form" value="createQuiz">
 			
 				<button type="submit" class="btn btn-primary" name="create">Create!</button>
 				<button class="btn btn-primary" onclick="goBackToHome()">Go back</button>

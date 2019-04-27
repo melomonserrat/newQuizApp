@@ -74,6 +74,8 @@
 		</div>
 	</section>
 	 <?php
+		
+		
 		if (isset($_POST["create"])) {
 		
 		if(empty($_POST["createQuizName"])){
@@ -103,7 +105,7 @@
 		$id = $_SESSION["id"];
 		
 		$conn = new mysqli('localhost','root', '', 'quizapp');
-
+		
 		// Check connection
 		if ($conn->connect_error) {
 			die("");
@@ -114,20 +116,108 @@
 		$sql ="INSERT INTO quiz (Quiz_ID, Quiz_Name, Quiz_Difficulty, Quiz_Description, Course_ID, Quiz_PassingScore, User_ID) VALUES 
 		(NULL, '$newName', '$newDiff', '$newDesc', '0', '$newPass', '$id')";
 		
+		mysqli_query($conn, $sql);
+		
 		//mysqli_query($con, "INSERT INTO course (user_id, course_name, course_description, course_isopen) VALUES ($id, '$newName', '$newDesc', 1)");
-
+		
+		if($_POST["quizType"]=="identification"){
+			
+			for($c=0;$c<sizeof($_POST["question"]);$c++){
+				//echo $_POST["question"][$c]."<br>";
+				//echo $_POST["answer"][$c]."<br>";
+				
+				$last_id = mysqli_insert_id($conn);
+				
+				$question=$_POST["question"][$c];
+				$answer=$_POST["answer"][$c];
+				
+				$sql="INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Quiz_Answer`) VALUES ('$last_id', NULL, '$question','I','$answer')";
+				
+				mysqli_query($conn, $sql);
+				
+				$last_id = mysqli_insert_id($conn);
+				
+				$sql="INSERT INTO `identification` (`Question_ID`, `Answer`) VALUES ('$last_id', '$answer')";
+				
+				mysqli_query($conn, $sql);
+				
+			}
+			
+		}
+		
+		if($_POST["quizType"]=="multipleChoice"){
+			
+			for($c=0;$c<sizeof($_POST["question"]);$c++){
+				/* echo $_POST["question"][$c]."<br>";
+				echo $_POST["inputA"][$c]."<br>";
+				echo $_POST["inputB"][$c]."<br>";
+				echo $_POST["inputC"][$c]."<br>";
+				echo $_POST["inputD"][$c]."<br>";
+				echo $_POST["answer"][$c]."<br>"; */
+				
+				$last_id = mysqli_insert_id($conn);
+				
+				$question= $_POST["question"][$c];
+				$inputA= $_POST["inputA"][$c];
+				$inputB= $_POST["inputB"][$c];
+				$inputC= $_POST["inputC"][$c];
+				$inputD= $_POST["inputD"][$c];
+				$answer= $_POST["answer"][$c];
+				
+				$sql="INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Quiz_Answer`) VALUES ('$last_id', NULL, '$question','MC','$answer')";
+				
+				mysqli_query($conn, $sql);
+				
+				$last_id = mysqli_insert_id($conn);
+				
+				$sql="INSERT INTO `multiplechoice` (`Question_ID`, `Choice1`, `Choice2`, `Choice3`, `Choice4`) VALUES ('$last_id', '$inputA', '$inputB', '$inputC', '$inputD')";
+				
+				mysqli_query($conn, $sql); 
+				
+			}
+			
+		}
+		
+		if($_POST["quizType"]=="trueOrFalse"){
+			
+			for($c=0;$c<sizeof($_POST["question"]);$c++){
+				//echo $_POST["question"][$c]."<br>";
+				//echo $_POST["answer"][$c]."<br>";
+				
+				$last_id = mysqli_insert_id($conn);
+				
+				$question=$_POST["question"][$c];
+				$answer=$_POST["answer"][$c];
+				
+				$sql="INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Quiz_Answer`) VALUES ('$last_id', NULL, '$question','ToF','$answer')";
+				
+				mysqli_query($conn, $sql);
+				
+				$last_id = mysqli_insert_id($conn);
+				
+				$sql="INSERT INTO `identification` (`Question_ID`, `Answer`) VALUES ('$last_id', '$answer')";
+				
+				mysqli_query($conn, $sql);
+				
+			}
+			
+		}
+		
+		
+		
 		$conn->close();
 		session_destroy();
+		
 		}
 		// Create connection
-
 		
 		function test_input($data) {
 		  $data = trim($data);
 		  $data = stripslashes($data);
 		  $data = htmlspecialchars($data);
 		  return $data;
-		}		
+		}
+			
 	?> 
 
     <div class="row home" style="margin-top:-250px; margin-left: 30px;">
@@ -160,7 +250,7 @@
 		</div>
     </div>
 	
-	<div align="center" id="createQuiz">
+	<div align="center" id="createQuiz" style="	margin-right: 90px; width: 650px;">
 		<div class="" style="width: 50rem;">
 			<h5>Creating a quiz...</h5>		
 			<form action="manageQuizzes.php" method="post">
@@ -192,10 +282,10 @@
 				
 				<select onchange="clearQuestionContainer()" onclick="getQuizType()" class="custom-select" id="quizType" name="quizType">
 				  <option selected disabled>Choose the quiz type...</option>
-				  <option value="identification">Identification</option>
-				  <option value="multipleChoice">Multiple choice</option>
-				  <option value="matchingType">Matching type</option>					  
-				  <option value="trueOrFalse">True or False</option>
+				  <option value="I">Identification</option>
+				  <option value="MC">Multiple choice</option>
+				  <option value="MT">Matching type</option>					  
+				  <option value="ToF">True or False</option>
 				</select>
 				
 				<!--<div class="form-group">
@@ -208,8 +298,11 @@
 				<button type="button" class="btn btn-primary" onclick="addQuestion()">Add question</button>
 				
 				<br><br>
+<<<<<<< HEAD
 				
 				<input type="hidden" name="form" value="createQuiz">
+=======
+>>>>>>> 6fd817442ae82c71b31585ba0b90c868fd47e125
 			
 				<button type="submit" class="btn btn-primary" name="create">Create!</button>
 				<button class="btn btn-primary" onclick="goBackToHome()">Go back</button>

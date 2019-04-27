@@ -75,13 +75,13 @@ function getQuizType(){
 
 function addQuestion(){
 	
-	if(getQuizType()=="identification"){
+	if(getQuizType()=="I"){
 		identificationQuestion();
-	}else if(getQuizType()=="multipleChoice"){
+	}else if(getQuizType()=="MC"){
 		multipleChoiceQuestion();
-	}else if(getQuizType()=="matchingType"){
+	}else if(getQuizType()=="MT"){
 		matchingTypeQuestion();
-	}else if(getQuizType()=="trueOrFalse"){
+	}else if(getQuizType()=="ToF"){
 		trueOrFalseQuestion();
 	}
 	
@@ -98,7 +98,7 @@ function identificationQuestion(){
 	
 	var question=document.createElement("input");
 	question.type="text";
-	question.name="question";
+	question.name="question[]";
 	
 	var label1=document.createElement("label");
 	label1.innerHTML="Question";
@@ -108,7 +108,7 @@ function identificationQuestion(){
 	
 	var answer=document.createElement("input");
 	answer.type="text";
-	answer.name="answer";
+	answer.name="answer[]";
 	
 	questionContainer.appendChild(label1);
 	//quizCard.appendChild('<p><br></p>');
@@ -134,7 +134,7 @@ function multipleChoiceQuestion(){
 	
 	var question=document.createElement("input");
 	question.type="text";
-	question.name="question";
+	question.name="question[]";
 	
 	var label1=document.createElement("label");
 	label1.innerHTML="Question";
@@ -154,36 +154,57 @@ function multipleChoiceQuestion(){
 	var label6=document.createElement("label");
 	label6.innerHTML="Answer";	
 	
-	var choiceA=document.createElement("input");
-	choiceA.type="text";
-	choiceA.name="choiceA";
+	var inputA=document.createElement("input");
+	inputA.type="text";
+	inputA.name="intputA[]";
 	
-	var choiceB=document.createElement("input");
-	choiceB.type="text";
-	choiceB.name="choiceB";
+	var inputB=document.createElement("input");
+	inputB.type="text";
+	inputB.name="inputB[]";
 	
-	var choiceC=document.createElement("input");
-	choiceC.type="text";
-	choiceC.name="choiceC";
+	var inputC=document.createElement("input");
+	inputC.type="text";
+	inputC.name="inputC[]";
 	
-	var choiceD=document.createElement("input");
-	choiceD.type="text";
-	choiceD.name="choiceD";
+	var inputD=document.createElement("input");
+	inputD.type="text";
+	inputD.name="inputD[]";
 	
-	var answer=document.createElement("input");
+	var choiceA=document.createElement("option");
+	choiceA.value="A";
+	choiceA.innerHTML="A";
+	
+	var choiceB=document.createElement("option");
+	choiceB.value="B";
+	choiceB.innerHTML="B";
+	
+	var choiceC=document.createElement("option");
+	choiceC.value="C";
+	choiceC.innerHTML="C";
+	
+	var choiceD=document.createElement("option");
+	choiceD.value="D";
+	choiceD.innerHTML="D";
+	
+	var answer=document.createElement("select");
 	answer.type="text";
-	answer.name="answer";
+	answer.name="answer[]";
+	
+	answer.appendChild(choiceA);
+	answer.appendChild(choiceB);
+	answer.appendChild(choiceC);
+	answer.appendChild(choiceD);
 	
 	questionContainer.appendChild(label1);
 	questionContainer.appendChild(question);
 	questionContainer.appendChild(label2);
-	questionContainer.appendChild(choiceA);
+	questionContainer.appendChild(inputA);
 	questionContainer.appendChild(label3);
-	questionContainer.appendChild(choiceB);
+	questionContainer.appendChild(inputB);
 	questionContainer.appendChild(label4);
-	questionContainer.appendChild(choiceC);
+	questionContainer.appendChild(inputC);
 	questionContainer.appendChild(label5);
-	questionContainer.appendChild(choiceD);
+	questionContainer.appendChild(inputD);
 	questionContainer.appendChild(label6);
 	questionContainer.appendChild(answer);
 	
@@ -209,7 +230,7 @@ function trueOrFalseQuestion(){
 	
 	var question=document.createElement("input");
 	question.type="text";
-	question.name="question";
+	question.name="question[]";
 	
 	var label1=document.createElement("label");
 	label1.innerHTML="Question";
@@ -219,14 +240,14 @@ function trueOrFalseQuestion(){
 	
 	var answer=document.createElement("select");
 	answer.className="custom-select";
-	answer.id="answer";
+	answer.name="answer[]";
 	
 	var trueChoice=document.createElement("option");
-	trueChoice.value="trueChoice";
+	trueChoice.value="TRUE";
 	trueChoice.innerHTML="True";
 	
 	var falseChoice=document.createElement("option");
-	falseChoice.value="falseChoice";
+	falseChoice.value="FALSE";
 	falseChoice.innerHTML="False";
 	
 	answer.appendChild(trueChoice);

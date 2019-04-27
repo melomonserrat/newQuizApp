@@ -69,7 +69,7 @@
 		<div class="h-txt text-dark">
 			<div class="starter-template">
 				 <h1 style="font-weight:bolder;"> Manage Quizzes </h1>
-				<p class="lead" style="text-shadow: 1px 1px 1px #000000;"> Search millions of existing courses, and quizzes to take or create your own!</p>
+				<p class="lead" style="text-shadow: 1px 1px 1px #000000;"> Create and edit your own quizzes, or answer existing ones.</p>
 			</div>
 		</div>
 	</section>

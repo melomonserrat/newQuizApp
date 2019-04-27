@@ -15,7 +15,7 @@
 		session_start();
 	?>
 	<!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -64,12 +64,12 @@
 		<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 	</form>
     </nav>
-    <br>
+    <br><br><br>
 	<section id="hero3">
 		<div class="h-txt text-light">
 			<div class="starter-template">
 				 <h1 style="font-weight:bolder; text-shadow: 4px 4px 8px #000000;"> Manage Courses </h1>
-				<p class="lead" style="text-shadow: 4px 4px 8px #000000;"> Search millions of existing courses, and quizzes to take or create your own!</p>
+				<p class="lead" style="text-shadow: 4px 4px 8px #000000;"> Create, edit, and view existing courses on the database.</p>
 			</div>
 		</div>
 	</section>

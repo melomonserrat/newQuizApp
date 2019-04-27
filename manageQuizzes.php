@@ -250,7 +250,7 @@
 		</div>
     </div>
 	
-	<div align="center" id="createQuiz" style="	margin-right: 90px; width: 650px;">
+	<div align="center" id="createQuiz" style="	margin-right: 90px; margin-top:-250px; width: 650px;">
 		<div class="" style="width: 50rem;">
 			<h5>Creating a quiz...</h5>		
 			<form action="manageQuizzes.php" method="post">
@@ -298,11 +298,8 @@
 				<button type="button" class="btn btn-primary" onclick="addQuestion()">Add question</button>
 				
 				<br><br>
-<<<<<<< HEAD
 				
 				<input type="hidden" name="form" value="createQuiz">
-=======
->>>>>>> 6fd817442ae82c71b31585ba0b90c868fd47e125
 			
 				<button type="submit" class="btn btn-primary" name="create">Create!</button>
 				<button class="btn btn-primary" onclick="goBackToHome()">Go back</button>
@@ -315,7 +312,7 @@
 	
 	
 	
-	<div class="container" align="center" id="editQuizzes">	
+	<div class="container" align="center" id="editQuizzes" style="margin-right: 900px; margin-top:-250px; width: 650px;">	
 		<div class="" style="width: 50rem;">
 			<div class="container">
 				<h5>Editing a quiz... </h5>
@@ -356,7 +353,7 @@
 		</div>
 	</div>
 
-    <div class="container viewQuizzes" style="text-shadow: 4px 4px 8px #000000;" id="viewQuizzes">
+    <div class="container viewQuizzes" style="margin-right: 800px; margin-top:-250px; width: 650px;" id="viewQuizzes">
         <h4>Viewing all quizzes... </h4>
         <hr>
         <table class="table">

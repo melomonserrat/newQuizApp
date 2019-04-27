@@ -56,7 +56,7 @@
 	</section>
 	
 	<div class="card-columns" align="center">
-	<?phpsession_start();
+	<?php
 		$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
 		if($mysqli->connect_error){
 			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
@@ -101,20 +101,35 @@
 					      		<table class="table-striped">
 								  <thead>
 								    <tr>
-									    <th>Title</th>
-									    <th>Difficulty</th>
-									    <th>Description<th>
-								      	<th>Passing Score</th>
-								      	<th> </th>
+									    <th style="min-width:100px">Title</th>
+									    <th style="min-width:100px">Difficulty</th>
+									    <th style="min-width:200px">Description</th>
+								      	<th style="min-width:120px">Passing Score</th>
+								      	<th style="min-width:120px">Type</th>
+								      	<th width="50px"></th>
 								    </tr>
 								  </thead>
 								  <tbody>
-					        <?php while($recordQuiz = mysqli_fetch_assoc($quizCourseID)) {?>
+					        <?php while($recordQuiz = mysqli_fetch_assoc($quizCourseID)) {
+					        	if($recordQuiz['Quiz_Type'] == 'MC'){
+					        		$quizType = 'Multiple Choice';
+					        	}else if($recordQuiz['Quiz_Type'] == 'MT'){
+					        		$quizType = 'Matching Type';
+					        	}else if($recordQuiz['Quiz_Type'] == 'ToF'){
+									$quizType = 'True or False';
+					        	}else if($recordQuiz['Quiz_Type'] == 'I'){
+					        		$quizType = 'Identification';
+					        	}
+
+
+
+					        	?>
 				        	    <tr>
 							      <td><?php echo $recordQuiz['Quiz_Name']; ?></td>
 							      <td><?php echo $recordQuiz['Quiz_Difficulty']; ?></td>
 							      <td><?php echo $recordQuiz['Quiz_Description']; ?></td>
 							      <td><?php echo $recordQuiz['Quiz_PassingScore']; ?></td>
+							      <td><?php echo $quizType; ?></td>
 							      <td><form action="quizTaking.php" method="post">
 							      	<input type="hidden" name="quizID" value="<?php echo $recordQuiz['Quiz_ID'];?>">
 							      	<input type="hidden" name="quizName" value="<?php echo $recordQuiz['Quiz_Name'];?>">

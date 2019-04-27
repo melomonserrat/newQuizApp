@@ -60,7 +60,7 @@
 			$score = 0;
 			while($question = mysqli_fetch_assoc($result)) {
 				$index = "question".$count;
-				if($question['Quiz_Answer'] == $_POST[$index]){
+				if($question['Question_Answer'] == $_POST[$index]){
 					$score++;
 				}
 				$count++;

@@ -55,7 +55,7 @@
 			$result = $mysqli->query($sql);
 			$count =0;
 			while($question = mysqli_fetch_assoc($result)) {
-				if($question['Quiz_Type'] == 'MC'){
+				if($question['Question_Type'] == 'MC'){
 					$sql = "SELECT * FROM multiplechoice where Question_ID = ".$question['Question_ID'];
 					$choices = $mysqli->query($sql); ?>
 					<div class="card" align="center">
@@ -69,13 +69,13 @@
 								while($choice = mysqli_fetch_assoc($choices)){
 									echo "A: ".$choice['Choice1']."<br>"."B: ".$choice['Choice2']."<br>"."C: ".$choice['Choice3']."<br>"."D: ".$choice['Choice4']."<br>";
 								}
-								//echo "Answer: ".$question['Quiz_Answer'];
+								//echo "Answer: ".$question['Question_Answer'];
 								echo "<br><input type='text' maxlength='50' name='question".$count."'>";
 							?>	
 							</div>
 						</div>
 					</div>
-				<?php }else if($question['Quiz_Type'] == 'I'){?>
+				<?php }else if($question['Question_Type'] == 'I'){?>
 					<div class="card" align="center">
 						<div class="card-body text-center">
 							<div class="title">
@@ -84,13 +84,13 @@
 								echo $count.": ". $question['Question_Description']; ?></h4>
 							</div>
 							<div class="desc" align="text-left"><?php
-								//echo "Answer: ".$question['Quiz_Answer'];
+								//echo "Answer: ".$question['Question_Answer'];
 								echo "<br><input type='text' maxlength='50' name='question".$count."'>";
 							?>	
 							</div>
 						</div>
 					</div>
-				<?php }else if($question['Quiz_Type'] == 'ToF'){?>
+				<?php }else if($question['Question_Type'] == 'ToF'){?>
 					<div class="card" align="center">
 						<div class="card-body text-center">
 							<div class="title">
@@ -99,7 +99,7 @@
 								echo $count.": ". $question['Question_Description']; ?></h4>
 							</div>
 							<div class="desc" align="text-left"><?php
-							// echo "Answer: ".$question['Quiz_Answer'];
+							// echo "Answer: ".$question['Question_Answer'];
 								echo "<br><input type='text' maxlength='4' name='question".$count."'>";
 				}?>	
 							</div>

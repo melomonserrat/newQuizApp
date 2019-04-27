@@ -13,7 +13,7 @@
   
   </head>
   <?php session_start(); ?>
-  <body>
+  <body style="background-image: url('pic6.jpg'); background-size: cover;">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,20 +82,21 @@
 			}
 		}
 	?>
-
-		<div class="container profile">
-		<?php
-			if ($result->num_rows > 0) {
-				echo "You have taken ".$result->num_rows ." quizzes.<br>";
-				while($userhisto = mysqli_fetch_assoc($result)) {
-					echo $userhisto['Quiz_Name'].": ".$userhisto['Quiz_Description']." | Score: ".$userhisto['Quiz_Score']." | Date: ".$userhisto['Quiz_Date']."<br>";
+		<section id="hero6">
+			<div class="container profile h-txt text-dark starter-template" style="font-weight:bolder;">
+			<?php
+				if ($result->num_rows > 0) {
+					echo "<h1 style='text-shadow: 1px 1px 1px #000000;'>You have taken ".$result->num_rows ." quizzes.</h1><br>";
+					while($userhisto = mysqli_fetch_assoc($result)) {
+						echo $userhisto['Quiz_Name'].": ".$userhisto['Quiz_Description']." | Score: ".$userhisto['Quiz_Score']." | Date: ".$userhisto['Quiz_Date']."<br>";
+					}
 				}
-			}
-			else{
-				echo "You haven't taken any quizzes yet. Proceed to Take a Quiz to do so.";
-			}
-			?>
-		</div>
+				else{
+					echo "You haven't taken any quizzes yet. Proceed to Take a Quiz to do so.";
+				}
+				?>
+			</div>
+		</section>
 
 	<?php
 		if(isset($_POST['form'])){

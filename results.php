@@ -12,7 +12,7 @@
     <title>Quiz App</title>
   
   </head>
-  <body>
+  <body style="background-image: url('pic7.jpg'); background-size: cover;">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="welcome.php">Quiz App</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,12 +20,9 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav">
-				<li class="nav-item active">
-					<a class="nav-link" href="welcome.php">Home<span class="sr-only">(current)</span></a>
-				</li>
 				<li class="nav-item">	
 					<div class="dropdown">
-						<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; text-shadow: 2px 2px 8px #000000;">
 							Manage Courses
 						</button>
 
@@ -39,14 +36,14 @@
 		
 		<form class="form-inline" action="quizmaker.php">
 			<input type="hidden" name="form" value="logout">
-			<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>
+			<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 		</form>
 	</nav>
 
 
 
 	<?php session_start();?>
-	<div align="center">
+	<div align="center" class="resultContainer">
 	<h1>You took the quiz: <?php echo $_POST['quizName']; ?></h1>
 	
 	<?php
@@ -75,7 +72,7 @@
 
 			$formated_date = date("Y-m-d", time());
 
-			$sql = "INSERT INTO quiz_log (Quiz_ID, User_ID, Quiz_Score, Quiz_Date) VALUES (".$_POST['quizID'].",".$_SESSION['id'].",".$score.",'".$formated_date."')";
+			$sql = "INSERT INTO quiz_log (Quiz_ID, User_ID_Take, Quiz_Score, Quiz_Date) VALUES (".$_POST['quizID'].",".$_SESSION['id'].",".$score.",'".$formated_date."')";
 
 			if(mysqli_query($mysqli, $sql)){
 				echo "<span>Your record has been updated! Thank you for using QuizApp</span>";

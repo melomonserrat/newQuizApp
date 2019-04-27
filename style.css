@@ -67,6 +67,12 @@
 	margin-top:-225px;
 }
 
+#hero6{
+	margin-left: 900px;
+	margin-top:50px;
+}
+
+
 .cardQuiz{
 	margin-left: -250px;
 	margin-bottom: 10px;
@@ -98,6 +104,15 @@
 	color:white;
 	margin-right: 90px;
     width: 650px;
+}
+
+.resultContainer{
+	color:white;
+	text-shadow: 2px 2px 8px #000000;
+}
+
+#createQuiz{
+	
 }
 
 hr.new1 {

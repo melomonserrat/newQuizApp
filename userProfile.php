@@ -41,15 +41,18 @@
 						Manage Quizzes
 					</button>	
 					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
-						<a class="dropdown-item" href="">Create a quiz</a>
-						<a class="dropdown-item" href="">Edit a quiz</a>
-						<a class="dropdown-item" href="">View a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?create">Create a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?edit">Edit a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?view">View a quiz</a>
 					</div>
 				</div>
 			</li>
-            <li class="nav-item">
-                <a class="btn btn-outline-dark" href="quizTaker.php" style="color:white; text-shadow: 2px 2px 8px #000000;">Take a quiz</a>
-            </li>
+			<li class="nav-item">
+				<a href="userProfile.php" class="btn btn-outline-dark">User Profile</a>
+			</li>
+      <li class="nav-item">
+        <a class="btn btn-outline-dark" href="quizTaker.php" style="color:white; text-shadow: 2px 2px 8px #000000;">Take a quiz</a>
+      </li>
 		</ul>
 	</div>
 	<li class="loggedIn">

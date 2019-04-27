@@ -22,7 +22,7 @@
 
 .navbar .navbar-brand{
 	font-weight: bolder;
-	color: white;
+	color: pink;
 }
 
 .navbar-nav > li{
@@ -43,8 +43,6 @@
 
 
 #hero{
-	background-image: url("pic.jpg");
-	background-size: cover;
 	height:500px;
 	margin-top:-50px;
 }
@@ -62,6 +60,11 @@
 #hero4{
 	margin-left: 275px;
 	margin-top:-150px;
+}
+
+#hero5{
+	margin-left: 275px;
+	margin-top:250px;
 }
 
 .cardQuiz{

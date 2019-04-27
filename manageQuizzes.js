@@ -98,7 +98,8 @@ function identificationQuestion(){
 	
 	var question=document.createElement("input");
 	question.type="text";
-	question.name="question[]";
+	question.id="shit";
+	question.name="question";
 	
 	var label1=document.createElement("label");
 	label1.innerHTML="Question";
@@ -118,6 +119,8 @@ function identificationQuestion(){
 	
 	document.getElementById("questionContainer").append(questionContainer);
 	document.getElementById("questionContainer").append(document.createElement("br"));
+	
+	alert(document.getElementById("shit").getAttribute("name"));
 	
 }
 

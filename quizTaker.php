@@ -16,36 +16,53 @@
 	<?php
 		session_start();
 	?>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav">
-				<li class="nav-item">	
-					<div class="dropdown">
-						<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; text-shadow: 2px 2px 8px #000000;">
-							Manage Courses
-						</button>
-
-						<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
-							<a class="dropdown-item" href="manageCourses.php?create">Create a course</a>
-							<a class="dropdown-item" href="manageCourses.php?edit">Edit a course</a>
-							<a class="dropdown-item" href="manageCourses.php?view">View courses</a>
-						</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav">
+			<li class="nav-item active">
+			</li>
+			<li class="nav-item">	
+				<div class="dropdown">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; text-shadow: 2px 2px 8px #000000;">
+						Manage Courses
+					</button>
+					<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
+						<a class="dropdown-item" href="manageCourses.php?create">Create a course</a>
+                        <a class="dropdown-item" href="manageCourses.php?edit">Edit a course</a>
+                        <a class="dropdown-item" href="manageCourses.php?view">View courses</a>
 					</div>
-				</li>
-			</ul>
-		</div>
-		<li class="loggedIn">
+				</div>
+			</li>
+            <li class="nav-item">	
+				<div class="dropdown">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown" style="color:white; text-shadow: 2px 2px 8px #000000;">
+						Manage Quizzes
+					</button>	
+					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
+						<a class="dropdown-item" href="manageQuizzes.php?create">Create a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?edit">Edit a quiz</a>
+						<a class="dropdown-item" href="manageQuizzes.php?view">View a quiz</a>
+					</div>
+				</div>
+			</li>
+            <li class="nav-item">
+                <a class="btn btn-outline-dark" href="quizTaker.php" style="color:white; text-shadow: 2px 2px 8px #000000;">Take a quiz</a>
+            </li>
+		</ul>
+	</div>
+	<li class="loggedIn">
 			<p class="loggedIn">Logged in as <?php echo ("{$_SESSION['username']}" . " ");  ?> </p>
-		</li>	
-		<form class="form-inline" action="quizmaker.php">
-			<input type="hidden" name="form" value="logout">
-			<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
-		</form>
-	</nav>
+	</li>	
+	<form class="form-inline" action="manageCourses.php" method="post">
+		<input type="hidden" name="form" value="logout">
+		<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
+	</form>
+    </nav>
+    <br>
 	<section id="hero4">
 		<div class="h-txt text-light">
 			<div class="starter-template">
@@ -56,7 +73,8 @@
 	</section>
 	
 	<div class="card-columns" align="center">
-	<?phpsession_start();
+	<?php
+		//session_start();
 		$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
 		if($mysqli->connect_error){
 			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);

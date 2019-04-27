@@ -16,7 +16,7 @@
 	<?php
 		session_start();
 	?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -50,7 +50,7 @@
 				</div>
 			</li>
 			<li class="nav-item">
-				<a href="userProfile.php" class="btn btn-outline-dark">User Profile</a>
+				<a href="userProfile.php" class="btn btn-outline-dark" style="color:white; text-shadow: 2px 2px 8px #000000;">User Profile</a>
 			</li>
       <li class="nav-item">
         <a class="btn btn-outline-dark" href="quizTaker.php" style="color:white; text-shadow: 2px 2px 8px #000000;">Take a quiz</a>
@@ -94,7 +94,7 @@
 			    	$quizCourseID = $mysqli->query($sql1);
 			    	$count = $count +1;
 	?>	
-		<div class="container cardQuiz">
+		<div class="container cardQuiz" >
 			<div class="card text-white bg-dark mb-0" style="margin-top:50px; margin-left:275px; max-width: 25rem;">
 				<div class="card-body text-center">
 					<div class="title">

@@ -17,7 +17,7 @@
 		session_start();
 	?>
 	
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	<a class="navbar-brand" href="welcome.php" style="text-shadow: 2px 2px 8px #000000;">Quiz App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -28,7 +28,7 @@
 			</li>
 			<li class="nav-item">	
 				<div class="dropdown">
-					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; text-shadow: 2px 2px 8px #000000;">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; text-shadow: 4px 4px 8px #000000;">
 						Manage Courses
 					</button>
 					<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
@@ -40,7 +40,7 @@
 			</li>
             <li class="nav-item">	
 				<div class="dropdown">
-					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown" style="color:white; text-shadow: 2px 2px 8px #000000;">
+					<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageQuizzesDropdown" data-toggle="dropdown" style="color:white; text-shadow: 4px 4px 8px #000000;">
 						Manage Quizzes
 					</button>	
 					<div class="dropdown-menu" aria-labelledby="manageQuizzesDropdown">
@@ -75,12 +75,11 @@
 			</div>
 		</div>
 	</section>
-	</div>
+	
 	
 	<br><br>
 
-	<div class="homeSplash">
-	<div class="row" style="margin-left:20px;">
+	<div class="row" style="margin-left:20px; margin-top:-100px;">
 		<div class="col-sm-4">
 			<div class="card text-white bg-dark mb-3" style="max-width: 25rem;">
 				<div class="card-body">

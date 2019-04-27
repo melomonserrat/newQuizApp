@@ -219,9 +219,9 @@
 				<h5>Editing a quiz... </h5>
 				<p class="lead">Pick a quiz to edit</p>	
 
-				<form action="editingQuiz.php" method="post" id="editCourseForm">
+				<form action="editingQuiz.php" method="post" id="editQuizForm">
             		<input type="hidden" name="form" value="editQuiz">
-            		<select class="chooseCourseToEdit form-control" name="courseToEdit" form="editCourseForm">
+            		<select class="chooseCourseToEdit form-control" name="quizToEdit" form="editQuizForm">
             		<?php
                 		$con = mysqli_connect('localhost', 'root', '', 'quizapp');
 
@@ -236,7 +236,7 @@
 
                 		if(mysqli_num_rows($result) > 0){
                     		while($row = mysqli_fetch_array($result)){
-                        		echo "<option value=\"" . $row['course_name'] . "\">" . $row['course_name'] . "</option>";
+                        		echo "<option value=\"" . $row['quiz_name'] . "\">" . $row['quiz_name'] . "</option>";
                     		}
                 		}
                 		else{

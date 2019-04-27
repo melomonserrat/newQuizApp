@@ -17,20 +17,25 @@
     <?php
         if(isset($_POST['edited'])){
             if(empty($_POST['editName'])){
-                echo "<script>alert('No course name entered!')</script>";
-                echo "<script>window.location.href = 'manageCourses.php?edit' </script>";
+                echo "<script>alert('No quiz name entered!')</script>";
+                echo "<script>window.location.href = 'manageQuizzes.php?edit' </script>";
             }
 
             if(empty($_POST['editDesc'])){
-                echo "<script>alert('No course description entered!')</script>";
-                echo "<script>window.location.href = 'manageCourses.php?edit' </script>";
+                echo "<script>alert('No quiz description entered!')</script>";
+                echo "<script>window.location.href = 'manageQuizzes.php?edit' </script>";
+            }
+
+            if(empty($_POST['editPass'])){
+                echo "<script>alert('No passing score entered!')</script>";
+                echo "<script>window.location.href = 'manageQuizzes.php?edit' </script>";
             }
 
             $id = $_POST['edited'];
             $newName = $_POST['editName'];
             $newDesc = $_POST['editDesc'];
-            $newOpen = $_POST['isOpen'];
-            echo $id;
+            $newDiff = $_POST['editDiff'];
+            $newPass = $_POST['editPass'];
 
             $con = mysqli_connect('localhost', 'root', '', 'quizapp');
 
@@ -38,12 +43,12 @@
                 echo "Failed to connect to database! " . mysqli_connect_error();
             }
 
-            mysqli_query($con, "UPDATE course SET course_name = '$newName', course_description = '$newDesc', course_isopen = $newOpen WHERE course_id = $id");
+            mysqli_query($con, "UPDATE quiz SET quiz_name = '$newName', quiz_description = '$newDesc', quiz_difficulty = '$newDiff', quiz_passingscore = $newPass WHERE quiz_id = $id");
 
             mysqli_close($con);
 
-            echo "<script>alert('Course edited!')</script>";
-            echo "<script>window.location.href = 'manageCourses.php?edit' </script>";
+            echo "<script>alert('Quiz edited!')</script>";
+            echo "<script>window.location.href = 'manageQuizzes.php?edit' </script>";
         }
     ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -95,14 +100,14 @@
             <?php
                 $quizName = $_POST['quizToEdit'];
 
-                echo "<h3 style='font-weight:bolder; text-shadow: 4px 4px 8px #000000;'>Editing $courseName</h3><hr>";
+                echo "<h3 style='font-weight:bolder; text-shadow: 4px 4px 8px #000000;'>Editing $quizName</h3><hr>";
             ?>
 			<hr class="new1">
             <form action="editingQuiz.php" method="post">
                 <div class="form-group">
                     <label for="editName" style="font-weight:bolder; text-shadow: 4px 4px 8px #000000;">Quiz Name</label>
                     <?php
-                        echo "<input type=\"text\" class=\"form-control\" id=\"editName\" name=\"editName\" value=\"$courseName\">";
+                        echo "<input type=\"text\" class=\"form-control\" id=\"editName\" name=\"editName\" value=\"$quizName\">";
                     ?>
                 </div>
                 <div class="form-group">
@@ -134,34 +139,40 @@
                         echo "<input type=\"text\" class=\"form-control\" id=\"editDesc\" name=\"editDesc\" value=\"$quizDesc\">";
                     ?>
                 </div>
-                <div class="form-group">
-                    <label for="isOpen" style="text-shadow: 4px 4px 8px #000000;">Is this course open?</label> <br>
 
-                    <div class="form-check-inline">
+                <div class="form-group">
+                    <label for="editDiff">Quiz Difficulty</label>
+                    <select class="custom-select" name="editDiff" id="editDiff">
+
                     <?php
-                        if($courseIsOpen == '1'){
-                            echo "<input class=\"form-check-input\" type=\"radio\" name=\"isOpen\" id=\"courseIsOpen\" value=\"1\" checked>";
+                        if($quizDiff == 'easy'){
+                            echo "<option value=\"EASY\" selected>Easy</option>";
+                            echo "<option value=\"MEDIUM\">Medium</option>";
+                            echo "<option value=\"HARD\">Hard</option>";
+                        }  
+                        else if($quizDiff == 'medium'){
+                            echo "<option value=\"EASY\">Easy</option>";
+                            echo "<option value=\"MEDIUM\" selected>Medium</option>";
+                            echo "<option value=\"HARD\">Hard</option>";
                         }
                         else{
-                            echo "<input class=\"form-check-input\" type=\"radio\" name=\"isOpen\" id=\"courseIsOpen\" value=\"1\">";
+                            echo "<option value=\"EASY\" selected>Easy</option>";
+                            echo "<option value=\"MEDIUM\">Medium</option>";
+                            echo "<option value=\"HARD\" selected>Hard</option>";
                         }
                     ?>
-                    <label class="form-check-label" for="isOpen" style="text-shadow: 4px 4px 8px #000000;">Yes</label>
-                    </div>
-                    <div class="form-check-inline">
-                    <?php
-                        if($courseIsOpen == '1'){
-                            echo "<input class=\"form-check-input\" type=\"radio\" name=\"isOpen\" id=\"courseNotOpen\" value=\"0\">";
-                        }
-                        else{
-                            echo "<input class=\"form-check-input\" type=\"radio\" name=\"isOpen\" id=\"courseNotOpen\" value=\"0\" checked>";
-                        }
-                    ?>
-                    <label class="form-check-label" for="notOpen" style="text-shadow: 4px 4px 8px #000000;">No</label>
-                    </div>
+                    </select>
                 </div>
+
+                <div class="form-group">
+                    <label for="editPass">Passing Score</label>
+                    <?php
+                    echo "<input type=\"number\" class=\"form-control\" id=\"editPass\" name=\"editPass\" value=\"$quizPass\">";
+                    ?>
+                </div>
+                
                 <?php
-                    echo "<input type=\"hidden\" name=\"edited\" value=\"$courseId\">";
+                    echo "<input type=\"hidden\" name=\"edited\" value=\"$quizId\">";
                 ?>
 				
 				<?php

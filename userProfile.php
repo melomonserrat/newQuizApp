@@ -69,25 +69,27 @@
 		$mysqli = new mysqli( 'localhost', 'root', '', 'quizapp');
 		if($mysqli->connect_error){
 			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
-		}else{
+		}
+		else{
 			$sql = "SELECT quiz.Quiz_Name, quiz.Quiz_Description, quiz_log.Quiz_Score, quiz_log.Quiz_Date FROM quiz INNER JOIN quiz_log ON quiz.quiz_ID = quiz_log.quiz_ID WHERE User_ID = ".$_SESSION['id'];
 
 			$result = $mysqli->query($sql);
-			
+		}
+	?>
 
+		<div class="container profile">
+		<?php
 			if ($result->num_rows > 0) {
 				echo "You have taken ".$result->num_rows." quizzes.<br>";
 				while($userhisto = mysqli_fetch_assoc($result)) {
 					echo $userhisto['Quiz_Name'].": ".$userhisto['Quiz_Description']." | Score: ".$userhisto['Quiz_Score']." | Date: ".$userhisto['Quiz_Date']."<br>";
 				}
-			}else{
+			}
+			else{
 				echo "You haven't taken any quizzes yet. Proceed to Take a Quiz to do so.";
 			}
-
-
-			
-		}
-	?>
+			?>
+		</div>
 
 	<?php
 		if(isset($_POST['form'])){

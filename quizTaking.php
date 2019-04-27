@@ -71,8 +71,10 @@
 								while($choice = mysqli_fetch_assoc($choices)){
 									echo "A: ".$choice['Choice1']."<br>"."B: ".$choice['Choice2']."<br>"."C: ".$choice['Choice3']."<br>"."D: ".$choice['Choice4']."<br>";
 								}
-								//echo "Answer: ".$question['Question_Answer'];
-								echo "<br><input type='text' maxlength='50' name='question".$count."'>";
+								echo "<br><input type='radio' name='question".$count."'"." value = 'A' ".">A";
+								echo "<input type='radio' name='question".$count."'"." value = 'B' ".">B";
+								echo "<input type='radio' name='question".$count."'"." value = 'C' ".">C";
+								echo "<input type='radio' name='question".$count."'"." value = 'D' ".">D";
 							?>	
 							</div>
 						</div>

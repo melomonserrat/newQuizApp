@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="styles.css">
     <title>Manage Quizzes</title>
   </head>
   <body style="background-image: url('pic4.jpg'); background-size: cover;">
@@ -65,7 +65,7 @@
 	<section id="hero5">
 		<div class="h-txt text-dark">
 			<div class="starter-template">
-				 <h1 style="font-weight:bolder; text-shadow: 1px 1px 1px #000000;"> Manage Quizzes </h1>
+				 <h1 style="font-weight:bolder;"> Manage Quizzes </h1>
 				<p class="lead" style="text-shadow: 1px 1px 1px #000000;"> Search millions of existing courses, and quizzes to take or create your own!</p>
 			</div>
 		</div>
@@ -127,22 +127,22 @@
 		}		
 	?> 
 
-    <div class="row home">
-        <div class="card">
+    <div class="row home" style="margin-top:-250px; margin-left: 30px;">
+        <div class="card text-white bg-dark mb-3">
             <div class="card-body">
                 <h5 class="card-title">Create a quiz!</h5>
                 <p class="card-text">Create a quiz for your quizzes.</p>
                 <button type="button" class="btn btn-primary-outline" onclick="createQuiz()">Go!</button>
             </div>
         </div>
-        <div class="card">
+        <div class="card text-white bg-dark mb-3">
             <div class="card-body">
                 <h5 class="card-title">Edit a quiz!</h5>
                 <p class="card-text">Change the details of a quizzes.</p>
                 <button type="button" class="btn btn-primary-outline" onclick="editQuiz()">Go!</button>
             </div>
         </div> 
-        <div class="card">
+        <div class="card text-white bg-dark mb-3">
             <div class="card-body">
                 <h5 class="card-title">View quizes!</h5>
                 <p class="card-text">Check the list of all quizzes.</p>

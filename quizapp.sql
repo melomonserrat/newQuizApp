@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2019 at 04:10 AM
+-- Generation Time: Apr 27, 2019 at 07:03 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -31,19 +31,22 @@ SET time_zone = "+00:00";
 CREATE TABLE `course` (
   `Course_ID` int(11) NOT NULL,
   `Course_Name` varchar(50) NOT NULL,
-  `Course_Description` varchar(250) NOT NULL,
-  `Course_isOpen` tinyint(1) NOT NULL
+  `Course_Description` varchar(1000) NOT NULL,
+  `Course_isOpen` tinyint(1) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course`
 --
 
-INSERT INTO `course` (`Course_ID`, `Course_Name`, `Course_Description`, `Course_isOpen`) VALUES
-(11, 'Intro to ComSci: C language', 'Learn how to code in C language!!', 1),
-(21, 'C++ Course', 'After C, improve with C++', 1),
-(23, 'Java: The Programming Language', 'Learn how to take over the world with Java', 1),
-(123, 'Data Structures', 'Use any language you want to implement several data structures', 0);
+INSERT INTO `course` (`Course_ID`, `Course_Name`, `Course_Description`, `Course_isOpen`, `user_id`) VALUES
+(11, 'Intro to ComSci: C language', 'Learn how to code in C language!!', 1, 0),
+(21, 'C++ Course', 'After C, improve with C++', 1, 0),
+(23, 'Java: The Programming Language', 'Learn how to take over the world with Java', 1, 0),
+(123, 'Data Structures', 'Use any language you want to implement several data structures', 1, 5),
+(124, 'Computer Architecture and Organization', 'This course covers the function and design of the various units of digital computers that store and process information.  It deals with the units of the computer that receive information from and that send computed results to the outside world. It also covers the conceptual design and fundamental operational structure of computer systems, as well the factors influencing their evolution.', 1, 5),
+(125, 'BS Wesley', 'Pogi ko', 1, 7);
 
 -- --------------------------------------------------------
 
@@ -129,10 +132,10 @@ CREATE TABLE `question` (
 --
 
 INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Question_Type`, `Question_Answer`) VALUES
-(1, 1, 'How to print text?', 'MC', 'printf'),
+(1, 1, 'How to print text?', 'MC', 'A'),
 (2, 2, 'The way to import the header file for standard input and output', 'I', '#include<stdio.h>'),
 (4, 3, 'To access the values that the user enters, the syntax to use is scanf.', 'ToF', 'True'),
-(1, 4, 'What kind of a programming language is C', 'MC', 'Procedural');
+(1, 4, 'What kind of a programming language is C', 'MC', 'B');
 
 -- --------------------------------------------------------
 
@@ -147,20 +150,21 @@ CREATE TABLE `quiz` (
   `Quiz_Description` varchar(250) DEFAULT NULL,
   `Course_ID` int(11) DEFAULT NULL,
   `Quiz_PassingScore` int(4) NOT NULL,
-  `Quiz_Type` enum('MC','I','ToF','MT') NOT NULL
+  `Quiz_Type` enum('MC','I','ToF','MT') NOT NULL,
+  `User_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quiz`
 --
 
-INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`) VALUES
-(1, 'C Test no. 1', 'EASY', 'Test to see basic C syntax', 11, 60, 'MC'),
-(2, 'C Test no. 2', 'EASY', NULL, 11, 60, 'I'),
-(4, 'Can you Java 1', 'EASY', NULL, 23, 60, 'I'),
-(5, 'Can you Java 2', 'MEDIUM', NULL, 23, 60, 'ToF'),
-(6, 'Data Structures Exam 1', 'MEDIUM', NULL, 123, 50, 'MT'),
-(7, 'Data Structures Exam 2', 'HARD', NULL, 123, 45, 'MC');
+INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`, `User_ID`) VALUES
+(1, 'C Test no. 1', 'EASY', 'Test to see basic C syntax', 11, 60, 'MC', 1),
+(2, 'C Test no. 2', 'EASY', NULL, 11, 60, 'I', 2),
+(4, 'Can you Java 1', 'EASY', NULL, 23, 60, 'I', 2),
+(5, 'Can you Java 2', 'MEDIUM', NULL, 23, 60, 'ToF', 3),
+(6, 'Data Structures Exam 1', 'MEDIUM', NULL, 123, 50, 'MT', 0),
+(7, 'Data Structures Exam 2', 'HARD', NULL, 123, 45, 'MC', 0);
 
 -- --------------------------------------------------------
 
@@ -170,7 +174,7 @@ INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description
 
 CREATE TABLE `quiz_log` (
   `Quiz_ID` int(11) NOT NULL,
-  `User_ID` int(11) NOT NULL,
+  `User_ID_Take` int(11) NOT NULL,
   `Quiz_Score` int(4) NOT NULL,
   `Quiz_Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -179,8 +183,13 @@ CREATE TABLE `quiz_log` (
 -- Dumping data for table `quiz_log`
 --
 
-INSERT INTO `quiz_log` (`Quiz_ID`, `User_ID`, `Quiz_Score`, `Quiz_Date`) VALUES
-(2, 5, 0, '2019-04-27');
+INSERT INTO `quiz_log` (`Quiz_ID`, `User_ID_Take`, `Quiz_Score`, `Quiz_Date`) VALUES
+(1, 5, 2, '2019-04-27'),
+(1, 7, 1, '2019-04-27'),
+(2, 5, 0, '2019-04-27'),
+(4, 5, 0, '2019-04-27'),
+(4, 7, 0, '2019-04-27'),
+(6, 5, 0, '2019-04-27');
 
 -- --------------------------------------------------------
 
@@ -206,7 +215,8 @@ INSERT INTO `registered_user` (`User_ID`, `User_Name`, `User_Email`, `User_Addre
 (3, 'Neo Anderson', 'neo@yahoo.com', 'The Matrix, Everywhere', 'ilovetrinity'),
 (4, 'Johnny Blaze', 'grider@yahoo.com', '123 Mephisto St., 7th Ring, Hell', 'imissroxanne'),
 (5, 'ken', 'asdf@a.com', '123', 'ken'),
-(6, 'bob', '', '', 'bobafett');
+(6, 'bob', '', '', 'bobafett'),
+(7, 'wes', 'wesley.buibui@gmail.com', 'tandang sora', '123');
 
 -- --------------------------------------------------------
 
@@ -260,15 +270,16 @@ ALTER TABLE `question`
 -- Indexes for table `quiz`
 --
 ALTER TABLE `quiz`
-  ADD PRIMARY KEY (`Quiz_ID`);
+  ADD PRIMARY KEY (`Quiz_ID`),
+  ADD KEY `Course_ID` (`Course_ID`),
+  ADD KEY `User_id` (`User_ID`);
 
 --
 -- Indexes for table `quiz_log`
 --
 ALTER TABLE `quiz_log`
-  ADD PRIMARY KEY (`Quiz_ID`,`User_ID`,`Quiz_Date`),
-  ADD KEY `Quiz_ID` (`Quiz_ID`),
-  ADD KEY `User_ID` (`User_ID`);
+  ADD PRIMARY KEY (`Quiz_ID`,`User_ID_Take`,`Quiz_Date`),
+  ADD KEY `Quiz_ID` (`Quiz_ID`);
 
 --
 -- Indexes for table `registered_user`
@@ -290,7 +301,7 @@ ALTER TABLE `trueorfalse`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `Course_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `Course_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `question`
@@ -308,7 +319,7 @@ ALTER TABLE `quiz`
 -- AUTO_INCREMENT for table `registered_user`
 --
 ALTER TABLE `registered_user`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -340,11 +351,17 @@ ALTER TABLE `question`
   ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`Quiz_ID`) REFERENCES `quiz` (`Quiz_ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
+-- Constraints for table `quiz`
+--
+ALTER TABLE `quiz`
+  ADD CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`Course_ID`) REFERENCES `course` (`Course_ID`);
+
+--
 -- Constraints for table `quiz_log`
 --
 ALTER TABLE `quiz_log`
   ADD CONSTRAINT `quiz_log_ibfk_1` FOREIGN KEY (`Quiz_ID`) REFERENCES `quiz` (`Quiz_ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `quiz_log_ibfk_2` FOREIGN KEY (`User_ID`) REFERENCES `registered_user` (`User_ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `quiz_log_ibfk_2` FOREIGN KEY (`User_ID_Take`) REFERENCES `registered_user` (`User_ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `trueorfalse`

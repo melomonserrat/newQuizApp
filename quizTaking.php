@@ -94,7 +94,7 @@
 							</div>
 							<div class="desc" align="text-left"><?php
 							// echo "Answer: ".$question['Question_Answer'];
-								echo "<br><input type='text' maxlength='4' name='question".$count."'>";
+								echo "<br><input type='text' maxlength='5' name='question".$count."'>";
 				}?>	
 							</div>
 						</div>

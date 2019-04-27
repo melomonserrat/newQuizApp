@@ -71,16 +71,22 @@
 			die( 'Connect Error: ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
 		}
 		else{
-			$sql = "SELECT quiz.Quiz_Name, quiz.Quiz_Description, quiz_log.Quiz_Score, quiz_log.Quiz_Date FROM quiz INNER JOIN quiz_log ON quiz.quiz_ID = quiz_log.quiz_ID WHERE User_ID = ".$_SESSION['id'];
+			$sql = "SELECT quiz.Quiz_Name, quiz.Quiz_Description, quiz_log.Quiz_Score, quiz_log.Quiz_Date FROM quiz INNER JOIN quiz_log ON quiz.quiz_ID = quiz_log.quiz_ID WHERE User_ID_Take = ".$_SESSION['id'];
+
+			//$result = $mysqli->query($sql);
 
 			$result = $mysqli->query($sql);
+
+			if (!$result) {
+			    trigger_error('Invalid query: ' . $mysqli->error);
+			}
 		}
 	?>
 
 		<div class="container profile">
 		<?php
 			if ($result->num_rows > 0) {
-				echo "You have taken ".$result->num_rows." quizzes.<br>";
+				echo "You have taken ".$result->num_rows ." quizzes.<br>";
 				while($userhisto = mysqli_fetch_assoc($result)) {
 					echo $userhisto['Quiz_Name'].": ".$userhisto['Quiz_Description']." | Score: ".$userhisto['Quiz_Score']." | Date: ".$userhisto['Quiz_Date']."<br>";
 				}

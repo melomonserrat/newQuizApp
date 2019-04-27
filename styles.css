@@ -43,8 +43,6 @@
 
 
 #hero{
-	background-image: url("pic.jpg");
-	background-size: cover;
 	height:500px;
 	margin-top:-50px;
 }

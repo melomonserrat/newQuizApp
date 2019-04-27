@@ -22,7 +22,7 @@
 
 .navbar .navbar-brand{
 	font-weight: bolder;
-	color: white;
+	color: pink;
 }
 
 .navbar-nav > li{
@@ -60,6 +60,11 @@
 #hero4{
 	margin-left: 275px;
 	margin-top:-150px;
+}
+
+#hero5{
+	margin-left: 275px;
+	margin-top:250px;
 }
 
 .cardQuiz{

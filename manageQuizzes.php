@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="style.css">
     <title>Manage Quizzes</title>
   </head>
-  <body>
+  <body style="background-image: url('pic4.jpg'); background-size: cover;">
   <?php
 	session_start();
   ?>
@@ -65,6 +65,14 @@
     </nav>
     <br>
 	
+	<section id="hero5">
+		<div class="h-txt text-dark">
+			<div class="starter-template">
+				 <h1 style="font-weight:bolder; text-shadow: 1px 1px 1px #000000;"> Manage Quizzes </h1>
+				<p class="lead" style="text-shadow: 1px 1px 1px #000000;"> Search millions of existing courses, and quizzes to take or create your own!</p>
+			</div>
+		</div>
+	</section>
 	 <?php
 		if (isset($_POST["create"])) {
 		

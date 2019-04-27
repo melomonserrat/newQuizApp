@@ -76,7 +76,7 @@
 
     <div class="row home" style="margin-left:800px; margin-top:-50px; ">
 		<div class="col-sm-4">
-			<div class="card text-white bg-dark mb-3" style="max-width: 25rem; max-height: 10rem;">
+			<div class="card text-white bg-dark mb-3" style="max-width: 25rem; max-height: 15rem;">
 				<div class="card-body">
 					<h5 class="card-title">Create a course!</h5>
 					<p class="card-text">Create a course to put quizzes under.</p>

@@ -251,7 +251,7 @@
 		</div>
     </div>
 	
-	<div align="center" id="createQuiz">
+	<div align="center" id="createQuiz" style="	margin-right: 90px; width: 650px;">
 		<div class="" style="width: 50rem;">
 			<h5>Creating a quiz...</h5>		
 			<form action="manageQuizzes.php" method="post">

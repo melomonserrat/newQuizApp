@@ -161,7 +161,7 @@
                 <?php
                     echo "<input type=\"hidden\" name=\"edited\" value=\"$courseId\">";
                 ?>
-				
+
 				<?php
 					if(isset($_POST['form'])){
 						switch($_POST['form']){

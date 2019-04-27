@@ -107,7 +107,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-4" style="margin-left:505px;">
 			<div class="card text-white bg-dark mb-3" style="max-width: 25rem;">
 				<div class="card-body">
 					<h5 class="card-title">User Profile</h5>

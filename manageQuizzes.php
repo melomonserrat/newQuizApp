@@ -131,27 +131,33 @@
 	?> 
 
     <div class="row home" style="margin-top:-250px; margin-left: 30px;">
-        <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Create a quiz!</h5>
-                <p class="card-text">Create a quiz for your quizzes.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="createQuiz()">Go!</button>
-            </div>
-        </div>
-        <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Edit a quiz!</h5>
-                <p class="card-text">Change the details of a quizzes.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="editQuiz()">Go!</button>
-            </div>
-        </div> 
-        <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-                <h5 class="card-title">View quizes!</h5>
-                <p class="card-text">Check the list of all quizzes.</p>
-                <button type="button" class="btn btn-primary-outline" onclick="viewQuizzes()">Go!</button>
-            </div>
-        </div> 
+		<div class="col-sm-2">
+			<div class="card text-white bg-dark mb-1" style="max-width: 15rem;">
+				<div class="card-body">
+					<h5 class="card-title">Create a quiz!</h5>
+					<p class="card-text">Create a quiz for your quizzes.</p>
+					<button type="button" class="btn btn-primary-outline" onclick="createQuiz()">Go!</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="card text-white bg-dark mb-1" style="max-width: 15rem;">
+				<div class="card-body">
+					<h5 class="card-title">Edit a quiz!</h5>
+					<p class="card-text">Change the details of a quizzes.</p>
+					<button type="button" class="btn btn-primary-outline" onclick="editQuiz()">Go!</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="card text-white bg-dark mb-1" style="max-width: 15rem;">
+				<div class="card-body">
+					<h5 class="card-title">View quizes!</h5>
+					<p class="card-text">Check the list of all quizzes.</p>
+					<button type="button" class="btn btn-primary-outline" onclick="viewQuizzes()">Go!</button>
+				</div>
+			</div> 
+		</div>
     </div>
 	
 	<div align="center" id="createQuiz">

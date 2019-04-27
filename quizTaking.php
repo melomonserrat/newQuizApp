@@ -23,17 +23,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav">
-				<li class="nav-item">	
-					<div class="dropdown">
-						<button class="btn btn-outline-dark dropdown-toggle" type="button" id="manageCoursesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; text-shadow: 2px 2px 8px #000000;">
-							Manage Courses
-						</button>
 
-						<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
-							<a class="dropdown-item" href="javascript:manageCourse()">Manage a course</a>
-						</div>
-					</div>
-				</li>
 			</ul>
 		</div>
 		<li class="loggedIn">

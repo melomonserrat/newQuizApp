@@ -123,20 +123,22 @@
                             die();
                         }
 
-                        $result = mysqli_query($con, "SELECT quiz_id, quiz_description, quiz_difficulty, quiz_passingscore, quiz_type FROM quiz WHERE quiz_name = \"$quizName\"");
+                        $result = mysqli_query($con, "SELECT quiz_id, quiz_description, quiz_difficulty, quiz_passingscore, quiz_type, is_closed FROM quiz WHERE quiz_name = \"$quizName\"");
 
                         $quizId = '';
                         $quizDesc = '';
                         $quizDiff = '';
                         $quizPass = '';
                         $quizType = '';
-                        
+                        $isClosed = '';
+
                         while($row = $result->fetch_assoc()){
                             $quizId = $row['quiz_id'];
                             $quizDesc = $row['quiz_description'];
                             $quizDiff = $row['quiz_difficulty'];
                             $quizPass = $row['quiz_passingscore'];
                             $quizType = $row['quiz_type'];
+                            $isClosed = $row['is_closed'];
                         }
 
                         mysqli_close($con);
@@ -185,6 +187,15 @@
                 ?>
 				
                 <button type="button" class="btn btn-primary" onclick="addTag()">Add a tag</button>
+
+                <?php
+                    function closeQuiz() {
+                        mysqli_query($con, "UPDATE quiz SET is_closed = 1 WHERE quiz_id = \"$quizId\"");
+                    }
+
+                ?>
+
+                <button type="button" class="btn btn-primary" onclick="closeQuiz()">Mark as Closed</button>
 
 				<?php
 					if(isset($_POST['form'])){

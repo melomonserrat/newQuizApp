@@ -11,7 +11,18 @@
 
     <body style="background-image: url('pic3.jpg');">
 	<?php
-		session_start();
+        session_start();
+        
+        if(isset($_POST['markClosed'])){
+            $id = $_POST['markClosed'];
+
+            $con = mysqli_connect('localhost', 'root', '', 'quizapp');
+
+            mysqli_query($con, "UPDATE quiz SET is_closed = 0 WHERE Quiz_ID = $id");
+
+            mysqli_close($con);
+            echo "Quiz closed!";
+        }
 	?>
     <body>
     <?php
@@ -182,20 +193,16 @@
                     echo "<input type=\"hidden\" name=\"edited\" value=\"$quizId\">";
                 ?>
                 
-                <?php
-                    echo "<button type=\"button\" class=\"btn btn-primary\" onclick=\"addQuestion('$quizType')\">Add a question</button>";
-                ?>
+                <!-- <?php
+                    //echo "<button type=\"button\" class=\"btn btn-primary\" onclick=\"addQuestion('$quizType')\">Add a question</button>";
+                ?> -->
 				
                 <button type="button" class="btn btn-primary" onclick="addTag()">Add a tag</button>
-
+                
                 <?php
-                    function closeQuiz() {
-                        mysqli_query($con, "UPDATE quiz SET is_closed = 1 WHERE quiz_id = \"$quizId\"");
-                    }
-
+                    echo "<button id=\"$quizId\" type=\"button\" class=\"btn btn-primary markClosed\">Mark as Closed</button>";
                 ?>
-
-                <button type="button" class="btn btn-primary" onclick="closeQuiz()">Mark as Closed</button>
+                
 
 				<?php
 					if(isset($_POST['form'])){

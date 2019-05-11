@@ -75,7 +75,6 @@
 	</section>
 	 <?php
 		
-		
 		if (isset($_POST["create"])) {
 		
 		if(empty($_POST["createQuizName"])){
@@ -100,8 +99,9 @@
 		
 		$newName = test_input($_POST["createQuizName"]);
 		$newDesc = test_input($_POST["createQuizDescription"]);
-		$newDiff = test_input($_POST["quizDifficulty"]);
+		$newDiff = $_POST["quizDifficulty"];
 		$newPass = test_input($_POST["quizPassingScore"]);
+		$newType = $_POST["quizType"];
 		$id = $_SESSION["id"];
 		
 		$conn = new mysqli('localhost','root', '', 'quizapp');
@@ -113,16 +113,15 @@
 		}
 		
 		//echo "Connected successfully";
-		$sql ="INSERT INTO quiz (Quiz_ID, Quiz_Name, Quiz_Difficulty, Quiz_Description, Course_ID, Quiz_PassingScore, User_ID) VALUES 
-		(NULL, '$newName', '$newDiff', '$newDesc', '0', '$newPass', '$id')";
+		$sql ="INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`, `User_ID`) VALUES 
+		(NULL, '$newName', '$newDiff', '$newDesc', NULL, '$newPass', '$newType', '$id')";
 		
 		mysqli_query($conn, $sql);
 		
-		//mysqli_query($con, "INSERT INTO course (user_id, course_name, course_description, course_isopen) VALUES ($id, '$newName', '$newDesc', 1)");
-		
-		if($_POST["quizType"]=="identification"){
+ 		if($_POST["quizType"]=="I"){
 			
 			for($c=0;$c<sizeof($_POST["question[]"]);$c++){
+
 				//echo $_POST["question"][$c]."<br>";
 				//echo $_POST["answer"][$c]."<br>";
 				
@@ -130,8 +129,16 @@
 				
 				$question=$_POST["question[]"][$c];
 				$answer=$_POST["answer[]"][$c];
+
+
 				
-				$sql="INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Quiz_Answer`) VALUES ('$last_id', NULL, '$question','I','$answer')";
+				$last_id = mysqli_insert_id($conn);
+				
+				$question=test_input($_POST["question[]"][$c]);
+				$answer=test_input($_POST["answer[]"][$c]);
+
+				
+				$sql="INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Question_Answer`) VALUES ('$last_id', NULL, '$question','I','$answer')";
 				
 				mysqli_query($conn, $sql);
 				
@@ -145,9 +152,10 @@
 			
 		}
 		
-		if($_POST["quizType"]=="multipleChoice"){
+		if($_POST["quizType"]=="MC"){
 			
 			for($c=0;$c<sizeof($_POST["question[]"]);$c++){
+
 				/* echo $_POST["question"][$c]."<br>";
 				echo $_POST["inputA"][$c]."<br>";
 				echo $_POST["inputB"][$c]."<br>";
@@ -163,8 +171,19 @@
 				$inputC= $_POST["inputC[]"][$c];
 				$inputD= $_POST["inputD[]"][$c];
 				$answer= $_POST["answer[]"][$c];
+
+
+				$last_id = mysqli_insert_id($conn);
 				
-				$sql="INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Quiz_Answer`) VALUES ('$last_id', NULL, '$question','MC','$answer')";
+				$question=test_input($_POST["question[]"][$c]);
+				$inputA=test_input($_POST["inputA[]"][$c]);
+				$inputB=test_input($_POST["inputB[]"][$c]);
+				$inputC=test_input($_POST["inputC[]"][$c]);
+				$inputD=test_input($_POST["inputD[]"][$c]);
+				$answer=$_POST["answer[]"][$c];
+
+				
+				$sql="INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Question_Answer`) VALUES ('$last_id', NULL, '$question','MC','$answer')";
 				
 				mysqli_query($conn, $sql);
 				
@@ -178,18 +197,26 @@
 			
 		}
 		
-		if($_POST["quizType"]=="trueOrFalse"){
+		if($_POST["quizType"]=="ToF"){
 			
 			for($c=0;$c<sizeof($_POST["question[]"]);$c++){
+
 				//echo $_POST["question"][$c]."<br>";
 				//echo $_POST["answer"][$c]."<br>";
 				
 				$last_id = mysqli_insert_id($conn);
 				
 				$question=$_POST["question[]"][$c];
+
+
+				
+				$last_id = mysqli_insert_id($conn);
+				
+				$question=test_input($_POST["question[]"][$c]);
+
 				$answer=$_POST["answer[]"][$c];
 				
-				$sql="INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Quiz_Answer`) VALUES ('$last_id', NULL, '$question','ToF','$answer')";
+				$sql="INSERT INTO `question` (`Quiz_ID`, `Question_ID`, `Question_Description`, `Quiz_Type`, `Question_Answer`) VALUES ('$last_id', NULL, '$question','ToF','$answer')";
 				
 				mysqli_query($conn, $sql);
 				
@@ -199,16 +226,13 @@
 				
 				mysqli_query($conn, $sql);
 				
-			}
+			} 
 			
-		}
-		
-		
+		} 
 		
 		$conn->close();
 		
 		}
-		// Create connection
 		
 		function test_input($data) {
 		  $data = trim($data);
@@ -216,6 +240,7 @@
 		  $data = htmlspecialchars($data);
 		  return $data;
 		}
+			
 			
 	?> 
 

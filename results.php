@@ -26,7 +26,7 @@
 							Manage Courses
 						</button>
 
-						<div class="dropdown-menu" aria-labelledby="manageCoursesDropdown">
+						<div class="dropdown-menu" aria-labelledby="msanageCoursesDropdown">
 							<a class="dropdown-item" href="javascript:manageCourse()">Manage a course</a>
 						</div>
 					</div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2019 at 05:16 AM
+-- Generation Time: May 27, 2019 at 06:10 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -148,7 +148,7 @@ CREATE TABLE `quiz` (
   `Quiz_Name` varchar(50) NOT NULL,
   `Quiz_Difficulty` enum('EASY','MEDIUM','HARD') DEFAULT NULL,
   `Quiz_Description` varchar(250) DEFAULT NULL,
-  `Course_ID` int(11) DEFAULT NULL,
+  `Course_ID` int(11) NOT NULL,
   `Quiz_PassingScore` int(4) NOT NULL,
   `Quiz_Type` enum('MC','I','ToF','MT') NOT NULL,
   `User_ID` int(11) NOT NULL,
@@ -273,7 +273,7 @@ ALTER TABLE `question`
 ALTER TABLE `quiz`
   ADD PRIMARY KEY (`Quiz_ID`),
   ADD KEY `Course_ID` (`Course_ID`),
-  ADD KEY `User_id` (`User_ID`);
+  ADD KEY `User_ID` (`User_ID`);
 
 --
 -- Indexes for table `quiz_log`
@@ -356,7 +356,7 @@ ALTER TABLE `question`
 -- Constraints for table `quiz`
 --
 ALTER TABLE `quiz`
-  ADD CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`Course_ID`) REFERENCES `course` (`Course_ID`);
+  ADD CONSTRAINT `quiz_course_id` FOREIGN KEY (`Course_ID`) REFERENCES `course` (`Course_ID`);
 
 --
 -- Constraints for table `quiz_log`

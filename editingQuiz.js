@@ -1,15 +1,29 @@
 $(document).ready(function(){
-    $('.markClosed').click(function(){
-        let toClose = this.id;
+    $('.markClosed').on('click', function(){
+        let toClose = $(this).attr('id');
 
         $.ajax({
             url: 'editingQuiz.php',
             type: 'POST',
             data: {'markClosed': toClose},
             success: function(result){
-                alert(result);
-                window.location = 'welcome.php';
+                alert('Quiz closed!');
+                window.location.replace('welcome.php');
             }
         });
-    })
+    });
+
+    $('.markOpen').click('click', function(){
+        let toOpen = $(this).attr('id');
+
+        $.ajax({
+            url: 'editingQuiz.php',
+            type: 'POST',
+            data: {'markOpen': toOpen},
+            success: function(result){
+                alert('Quiz opened!');
+                window.location.replace('welcome.php');
+            }
+        });
+    });
 })

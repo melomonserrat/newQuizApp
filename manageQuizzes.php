@@ -397,13 +397,14 @@
                         die();
                     }
 
-                    $result = mysqli_query($con, "SELECT quiz_name, quiz_description, quiz.quiz_difficulty FROM quiz,course WHERE quiz.Course_ID = course.Course_ID AND course.Course_isOpen = 1 AND quiz.is_open = 1");
+                    $result = mysqli_query($con, "SELECT quiz_id, quiz_name, quiz_description, quiz.quiz_difficulty FROM quiz,course WHERE quiz.Course_ID = course.Course_ID AND course.Course_isOpen = 1 AND quiz.is_open = 1");
 
                     while($row = mysqli_fetch_array($result)){
-                        echo "<tr>";
+                        echo "<tr id=\"" . $row['quiz_id'] . "\">";
                         echo "<td>" . $row['quiz_name'] . "</td>";
                         echo "<td>" . $row['quiz_description'] . "</td>";
 						echo "<td>" . $row['quiz_difficulty'] . "</td>";
+						echo "<td><button type=\"button\" class=\"btn btn-primary viewQuizButton\">View</button>";
                         echo "</tr>";
                     }
                 ?>
@@ -429,5 +430,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="initManageQuizzes.js"></script>
 	<script type="text/javascript" src="manageQuizzes.js"></script>
+	<script type="text/javascript" src="viewStats.js"></script>
   </body>
 </html>

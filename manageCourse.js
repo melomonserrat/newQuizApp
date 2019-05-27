@@ -57,3 +57,4 @@ function goBackToHome(){
         $('.createCourse').hide(1000);
     }
 }
+

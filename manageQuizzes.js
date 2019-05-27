@@ -99,7 +99,7 @@ function identificationQuestion(){
 	var question=document.createElement("input");
 	question.type="text";
 	question.id="shit";
-	question.name="question";
+	question.name='question[]';
 	
 	var label1=document.createElement("label");
 	label1.innerHTML="Question";

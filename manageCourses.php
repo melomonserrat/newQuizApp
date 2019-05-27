@@ -65,6 +65,9 @@
 		<button class="btn btn-dark my-2 my-sm-0" type="submit" style="text-shadow: 2px 2px 8px #000000;">Logout</button>
 	</form>
     </nav>
+
+
+
     <br><br><br>
 	<section id="hero3">
 		<div class="h-txt text-light">
@@ -256,5 +259,6 @@
 	<script type="text/javascript" src="initManageCourses.js"></script>
 	<script type="text/javascript" src="initManageCourses2.js"></script>
     <script type="text/javascript" src="manageCourse.js"></script>
+    <script type="text/javascript" src="viewStats.js"></script>
   </body>
 </html>

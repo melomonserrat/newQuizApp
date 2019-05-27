@@ -18,10 +18,21 @@
 
             $con = mysqli_connect('localhost', 'root', '', 'quizapp');
 
-            mysqli_query($con, "UPDATE quiz SET is_closed = 0 WHERE Quiz_ID = $id");
+            mysqli_query($con, "UPDATE quiz SET is_open = 0 WHERE Quiz_ID = $id");
 
             mysqli_close($con);
             echo "Quiz closed!";
+        }
+
+        if(isset($_POST['markOpen'])){
+            $id = $_POST['markOpen'];
+
+            $con = mysqli_connect('localhost', 'root', '', 'quizapp');
+
+            mysqli_query($con, "UPDATE quiz SET is_open = 1 WHERE Quiz_ID = $id");
+
+            mysqli_close($con);
+            echo "Quiz opened!";
         }
 	?>
     <body>
@@ -54,7 +65,7 @@
                 echo "Failed to connect to database! " . mysqli_connect_error();
             }
 
-            mysqli_query($con, "UPDATE quiz SET quiz_name = '$newName', quiz_description = '$newDesc', quiz_difficulty = '$newDiff', quiz_passingscore = $newPass WHERE quiz_id = $id");
+            mysqli_query($con, "UPDATE quiz SET quiz_name = '$newName', quiz_description = '$newDesc', quiz_difficulty = '$newDiff', quiz_passingscore = '$newPass' WHERE quiz_id = $id");
 
             mysqli_close($con);
 
@@ -134,14 +145,14 @@
                             die();
                         }
 
-                        $result = mysqli_query($con, "SELECT quiz_id, quiz_description, quiz_difficulty, quiz_passingscore, quiz_type, is_closed FROM quiz WHERE quiz_name = \"$quizName\"");
+                        $result = mysqli_query($con, "SELECT quiz_id, quiz_description, quiz_difficulty, quiz_passingscore, quiz_type, is_open FROM quiz WHERE quiz_name = \"$quizName\"");
 
                         $quizId = '';
                         $quizDesc = '';
                         $quizDiff = '';
                         $quizPass = '';
                         $quizType = '';
-                        $isClosed = '';
+                        $isOpen = '';
 
                         while($row = $result->fetch_assoc()){
                             $quizId = $row['quiz_id'];
@@ -149,7 +160,7 @@
                             $quizDiff = $row['quiz_difficulty'];
                             $quizPass = $row['quiz_passingscore'];
                             $quizType = $row['quiz_type'];
-                            $isClosed = $row['is_closed'];
+                            $isOpen = $row['is_open'];
                         }
 
                         mysqli_close($con);
@@ -200,7 +211,13 @@
                 <button type="button" class="btn btn-primary" onclick="addTag()">Add a tag</button>
                 
                 <?php
-                    echo "<button id=\"$quizId\" type=\"button\" class=\"btn btn-primary markClosed\">Mark as Closed</button>";
+                //var_dump($isOpen);
+                    if($isOpen == '1'){
+                        echo "<button id=\"$quizId\" type=\"button\" class=\"btn btn-primary markClosed\">Mark as Closed</button>";
+                    }
+                    else{
+                        echo "<button id=\"$quizId\" type=\"button\" class=\"btn btn-primary markOpen\">Mark as Open</button>";
+                    }
                 ?>
                 
 

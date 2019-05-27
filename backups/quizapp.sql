@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2019 at 05:16 AM
+-- Generation Time: Apr 27, 2019 at 07:03 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -151,21 +151,20 @@ CREATE TABLE `quiz` (
   `Course_ID` int(11) DEFAULT NULL,
   `Quiz_PassingScore` int(4) NOT NULL,
   `Quiz_Type` enum('MC','I','ToF','MT') NOT NULL,
-  `User_ID` int(11) NOT NULL,
-  `is_open` tinyint(1) NOT NULL DEFAULT '0'
+  `User_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quiz`
 --
 
-INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`, `User_ID`, `is_open`) VALUES
-(1, 'C Test no. 1', 'EASY', 'Test to see basic C syntax', 11, 60, 'MC', 1, 1),
-(2, 'C Test no. 2', 'EASY', NULL, 11, 60, 'I', 2, 0),
-(4, 'Can you Java 1', 'EASY', NULL, 23, 60, 'I', 2, 0),
-(5, 'Can you Java 2', 'MEDIUM', NULL, 23, 60, 'ToF', 3, 0),
-(6, 'Data Structures Exam 1', 'MEDIUM', NULL, 123, 50, 'MT', 0, 0),
-(7, 'Data Structures Exam 2', 'HARD', NULL, 123, 45, 'MC', 0, 0);
+INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`, `User_ID`) VALUES
+(1, 'C Test no. 1', 'EASY', 'Test to see basic C syntax', 11, 60, 'MC', 1),
+(2, 'C Test no. 2', 'EASY', NULL, 11, 60, 'I', 2),
+(4, 'Can you Java 1', 'EASY', NULL, 23, 60, 'I', 2),
+(5, 'Can you Java 2', 'MEDIUM', NULL, 23, 60, 'ToF', 3),
+(6, 'Data Structures Exam 1', 'MEDIUM', NULL, 123, 50, 'MT', 0),
+(7, 'Data Structures Exam 2', 'HARD', NULL, 123, 45, 'MC', 0);
 
 -- --------------------------------------------------------
 
@@ -280,8 +279,7 @@ ALTER TABLE `quiz`
 --
 ALTER TABLE `quiz_log`
   ADD PRIMARY KEY (`Quiz_ID`,`User_ID_Take`,`Quiz_Date`),
-  ADD KEY `Quiz_ID` (`Quiz_ID`),
-  ADD KEY `quiz_log_ibfk_2` (`User_ID_Take`);
+  ADD KEY `Quiz_ID` (`Quiz_ID`);
 
 --
 -- Indexes for table `registered_user`

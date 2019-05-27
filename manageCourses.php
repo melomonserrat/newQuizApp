@@ -164,7 +164,7 @@
     <div class="container viewCourses" style="text-shadow: 4px 4px 8px #000000;">
         <h4>Viewing all courses... </h4>
         <hr>
-        <table class="table courseTable" style="color: white;">
+        <table class="table" id="courseTable" style="color: white;">
             <thead>
                 <tr>
                     <th scope="col">Course Name</th>
@@ -184,10 +184,10 @@
                     $result = mysqli_query($con, "SELECT course_name, course_description, course_id FROM course WHERE course_isopen = 1");
 
                     while($row = mysqli_fetch_array($result)){
-                        echo "<tr id=\"" . $row['course_id'] . "\">";
+                        echo "<tr id=\"" . $row['course_id'] . "\" class=\"courseTableRow\">";
                         echo "<td>" . $row['course_name'] . "</td>";
                         echo "<td>" . $row['course_description'] . "</td>";
-                        echo "<td><button type=\"button\" class=\"btn btn-primary viewCourseButton\" onclick=\"viewCourse(this)\">View</button></td>";
+                        echo "<td><button type=\"button\" class=\"btn btn-primary viewCourseButton\">View</button></td>";
                         echo "</tr>";
                     }
                 ?>

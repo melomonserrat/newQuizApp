@@ -13,4 +13,4 @@ $(document).ready(function(){
     else{
         $('.home').show(1000);
     }
-})
+});

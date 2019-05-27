@@ -82,6 +82,17 @@
 			}
 		}
 	?>
+	<div class="profileHome">
+		<button type="button" id="viewQuizHistory" class="btn btn-primary">View Quiz History</button>
+		<button type="button" id="viewCourseHistory" class="btn btn-primary">View Course History</button>
+	</div>
+
+	<div class="courseHistory">
+		<p>course history goes here</p>
+		<button type="button" class="btn btn-primary goToHome">Go back</button>
+	</div>
+
+	<div class="quizHistory">
 		<section id="hero6">
 			<div class="container profile h-txt text-dark starter-template" style="font-weight:bolder;">
 			<?php
@@ -95,8 +106,10 @@
 					echo "You haven't taken any quizzes yet. Proceed to Take a Quiz to do so.";
 				}
 				?>
+				<button type="button" class="btn btn-primary goToHome">Go back</button>
 			</div>
 		</section>
+	</div>
 
 	<?php
 		if(isset($_POST['form'])){
@@ -116,7 +129,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="welcome.js"></script>
+		<script type="text/javascript" src="userProfile.js"></script>
   
   </body>
   

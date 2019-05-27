@@ -105,6 +105,8 @@
 				else{
 					echo "You haven't taken any quizzes yet. Proceed to Take a Quiz to do so.";
 				}
+
+				mysqli_close($mysqli);
 				?>
 				<button type="button" class="btn btn-primary goToHome">Go back</button>
 			</div>

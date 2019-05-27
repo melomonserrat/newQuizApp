@@ -81,12 +81,18 @@
                 $numTakers = mysqli_query($con, "SELECT COUNT(DISTINCT quiz_log.user_id_take) as totalTakers FROM quiz_log, quiz, course WHERE quiz_log.quiz_id = quiz.quiz_id AND quiz.course_id = $index");
 
                 $totalNumberOfQuizzes = mysqli_query($con, "SELECT COUNT(*) as totalQuizzes FROM quiz WHERE course_id = $index");
+                $printTotalQ = mysqli_fetch_assoc($totalNumberOfQuizzes);
+                $totalNumberOfQuizzes = $printTotalQ['totalQuizzes'];
+                //var_dump($totalNumberOfQuizzes);
+
+                //$test = mysqli_query($con, "SELECT quiz_log.user_id_take, COUNT(DISTINCT quiz_log.user_id_take) as totalCompleters FROM quiz_log WHERE (SELECT quiz_log.quiz_id, SUM(value=quiz_log.user_id_take) as userId FROM quiz_log, quiz WHERE quiz_log.quiz_id = quiz.quiz_id AND quiz.course_id = $index GROUP BY quiz_log.quiz_id");
+                //var_dump($test);
+
                 $totalNumberQuizzesTaken = mysqli_query($con, "SELECT quiz_log.user_id_take, COUNT(*) as totalQuizzesTaken FROM quiz_log, quiz WHERE quiz_log.quiz_id = quiz.quiz_id AND quiz.course_id = $index GROUP BY quiz_log.user_id_take");
-                $totalNumberCompleters = mysqli_query($con, "SELECT COUNT(DISTINCT quiz_log.user_id_take) as totalCompleters FROM quiz_log WHERE (SELECT quiz_log.user_id_take, COUNT(*) as totalQuizzesTaken FROM quiz_log, quiz WHERE quiz_log.quiz_id = quiz.quiz_id AND quiz.course_id = $index GROUP BY quiz_log.user_id_take) = (SELECT COUNT(*) as totalQuizzes FROM quiz WHERE quiz.course_id = $index)");
+                $totalNumberCompleters = mysqli_query($con, "SELECT COUNT(DISTINCT quiz_log.user_id_take) as totalCompleters FROM quiz_log WHERE () = $totalNumberOfQuizzes");
                 var_dump($totalNumberCompleters);
 
                 $printTotalTaken = mysqli_fetch_assoc($totalNumberQuizzesTaken);
-                $printTotalQ = mysqli_fetch_assoc($totalNumberOfQuizzes);
                 //echo $printTotalQ['totalQuizzes'];
                 //echo $printTotalTaken['totalQuizzesTaken'];
 
@@ -95,6 +101,8 @@
                 //var_dump($numCompleters);
                 $printTakers = mysqli_fetch_assoc($numTakers);
                 $printName = mysqli_fetch_assoc($courseName);
+
+                mysqli_close($con);
             ?>
             <div class="card">
                 <h4 class="card-title"><?php echo $printName['course_name'] ?></h4>

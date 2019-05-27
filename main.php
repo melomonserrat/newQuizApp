@@ -81,14 +81,15 @@
 
             $username = test_input($_POST['username']);
             $password = test_input($_POST['password']);
-
+			$hashPassword = md5($password);
+			
             $con = new mysqli('localhost', 'root', '', 'quizapp');
             
             if(mysqli_connect_errno()){
               echo "Failed to connect to database! " . mysqli_connect_error();
             }
             else{
-              $result = mysqli_query($con, "SELECT user_id FROM registered_user WHERE user_name = '$username' AND user_password = '$password'");
+              $result = mysqli_query($con, "SELECT user_id FROM registered_user WHERE user_name = '$username' AND user_password = '$hashPassword'");
 
               if(!mysqli_fetch_row($result)){
                 mysqli_close($con);
@@ -96,7 +97,6 @@
                 echo "<script type=\"text/javascript\">window.location.replace('main.php');</script>";
               }
               else{
-
                 $id = '';
 
                 foreach($result as $row){
@@ -146,7 +146,8 @@
                 echo "<script type=\"text/javascript\">window.location.replace('main.php');</script>";
               }
               else{
-                $sql = "INSERT INTO registered_user (user_name, user_email, user_address, user_password) VALUES ('$username', '$email', '$address', '$password')";
+				  $hashPassword = md5($password);
+                $sql = "INSERT INTO registered_user (user_name, user_email, user_address, user_password) VALUES ('$username', '$email', '$address', '$hashPassword')";
 
                 if($con->query($sql) === true){
                   $result = mysqli_query($con, "SELECT user_id FROM registered_user WHERE user_name = '$username'");

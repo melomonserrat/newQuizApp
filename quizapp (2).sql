@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2019 at 02:35 PM
+-- Generation Time: May 28, 2019 at 03:31 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `quiz`
+-- Database: `quizapp`
 --
 
 -- --------------------------------------------------------
@@ -152,20 +152,21 @@ CREATE TABLE `quiz` (
   `Quiz_PassingScore` int(4) NOT NULL,
   `Quiz_Type` enum('MC','I','ToF','MT') NOT NULL,
   `User_ID` int(11) NOT NULL,
-  `is_open` tinyint(1) NOT NULL DEFAULT '0'
+  `is_open` tinyint(1) NOT NULL DEFAULT '0',
+  `tags` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quiz`
 --
 
-INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`, `User_ID`, `is_open`) VALUES
-(1, 'C Test no. 1', 'EASY', 'Test to see basic C syntax', 11, 60, 'MC', 1, 1),
-(2, 'C Test no. 2', 'EASY', NULL, 11, 60, 'I', 2, 0),
-(4, 'Can you Java 1', 'EASY', NULL, 23, 60, 'I', 2, 0),
-(5, 'Can you Java 2', 'MEDIUM', NULL, 23, 60, 'ToF', 3, 0),
-(6, 'Data Structures Exam 1', 'MEDIUM', NULL, 123, 50, 'MT', 0, 0),
-(7, 'Data Structures Exam 2', 'HARD', NULL, 123, 45, 'MC', 0, 0);
+INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`, `User_ID`, `is_open`, `tags`) VALUES
+(1, 'C Test no. 1asdasdasd', 'HARD', 'Test to see basic C syntax', 11, 60, 'MC', 1, 1, NULL),
+(2, 'C Test no. 2', 'EASY', NULL, 11, 60, 'I', 2, 0, NULL),
+(4, 'Can you Java 1', 'EASY', NULL, 23, 60, 'I', 2, 0, NULL),
+(5, 'Can you Java 2', 'MEDIUM', NULL, 23, 60, 'ToF', 3, 0, NULL),
+(6, 'Data Structures Exam 1', 'MEDIUM', NULL, 123, 50, 'MT', 0, 0, NULL),
+(7, 'Data Structures Exam 2', 'HARD', NULL, 123, 45, 'MC', 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -177,20 +178,21 @@ CREATE TABLE `quiz_log` (
   `Quiz_ID` int(11) NOT NULL,
   `User_ID_Take` int(11) NOT NULL,
   `Quiz_Score` int(4) NOT NULL,
-  `Quiz_Date` date NOT NULL
+  `Quiz_Date` date NOT NULL,
+  `passed` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quiz_log`
 --
 
-INSERT INTO `quiz_log` (`Quiz_ID`, `User_ID_Take`, `Quiz_Score`, `Quiz_Date`) VALUES
-(1, 5, 2, '2019-04-27'),
-(1, 7, 1, '2019-04-27'),
-(2, 5, 0, '2019-04-27'),
-(4, 5, 0, '2019-04-27'),
-(4, 7, 0, '2019-04-27'),
-(6, 5, 0, '2019-04-27');
+INSERT INTO `quiz_log` (`Quiz_ID`, `User_ID_Take`, `Quiz_Score`, `Quiz_Date`, `passed`) VALUES
+(1, 5, 2, '2019-04-27', 1),
+(1, 7, 1, '2019-04-27', 0),
+(2, 5, 0, '2019-04-27', 0),
+(4, 5, 0, '2019-04-27', 0),
+(4, 7, 0, '2019-04-27', 0),
+(6, 5, 0, '2019-04-27', 0);
 
 -- --------------------------------------------------------
 

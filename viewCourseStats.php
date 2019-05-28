@@ -89,8 +89,10 @@
                 //var_dump($test);
 
                 $totalNumberQuizzesTaken = mysqli_query($con, "SELECT quiz_log.user_id_take, COUNT(*) as totalQuizzesTaken FROM quiz_log, quiz WHERE quiz_log.quiz_id = quiz.quiz_id AND quiz.course_id = $index GROUP BY quiz_log.user_id_take");
-                $totalNumberCompleters = mysqli_query($con, "SELECT COUNT(DISTINCT quiz_log.user_id_take) as totalCompleters FROM quiz_log WHERE () = $totalNumberOfQuizzes");
+                $totalNumberCompleters = mysqli_query($con, "SELECT COUNT(DISTINCT quiz_log.user_id_take) as totalCompleters FROM quiz_log WHERE (SELECT quiz_log.user_id_take, COUNT(*) as totalQuizzesTaken FROM quiz_log, quiz WHERE quiz_log.quiz_id = quiz.quiz_id AND quiz.course_id = $index GROUP BY quiz_log.user_id_take) = (SELECT COUNT(*) as totalQuizzes FROM quiz WHERE course_id = $index)");
                 var_dump($totalNumberCompleters);
+                //var_dump($totalNumberQuizzesTaken);
+                //var_dump($totalNumberOfQuizzes);
 
                 $printTotalTaken = mysqli_fetch_assoc($totalNumberQuizzesTaken);
                 //echo $printTotalQ['totalQuizzes'];

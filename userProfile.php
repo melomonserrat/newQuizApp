@@ -85,11 +85,32 @@
 	<div class="profileHome">
 		<button type="button" id="viewQuizHistory" class="btn btn-primary">View Quiz History</button>
 		<button type="button" id="viewCourseHistory" class="btn btn-primary">View Course History</button>
+		<a href="viewCurrentCourses.php"  id="viewCurrentCourses" class="btn btn-primary">View Current Courses</button>
 	</div>
+	
+	<?php
+		$courseHisto = mysqli_query($mysqli, "SELECT course.course_name as course_name, course.course_description as course_description, course_log.course_status as course_status FROM course_log, course WHERE course_log.user_id = " . $_SESSION['id'] . " AND course.course_id = course_log.course_id AND course_log.course_status IS NOT NULL");
 
+	?>
 	<div class="courseHistory">
-		<p>course history goes here</p>
-		<button type="button" class="btn btn-primary goToHome">Go back</button>
+		<section id="hero6">
+			<div class="container profile h-txt text-dark starter-template" style="font-weight:bolder;">
+			<?php
+				if ($courseHisto) {
+					echo "<h1 style='text-shadow: 1px 1px 1px #000000;'>You have completed " . $courseHisto->num_rows . " courses.</h1><br>";
+					while($userhisto = mysqli_fetch_assoc($courseHisto)) {
+						echo $userhisto['course_name'] . ": " . $userhisto['course_description'] . " | Status: " . $userhisto['course_status'] . "<br>";
+					}
+				}
+				else{
+					echo "You haven't completed any courses yet!";
+				}
+
+				mysqli_close($mysqli);
+				?>
+				<button type="button" class="btn btn-primary goToHome">Go back</button>
+			</div>
+		</section>
 	</div>
 
 	<div class="quizHistory">

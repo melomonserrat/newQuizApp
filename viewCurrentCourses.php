@@ -11,14 +11,6 @@
     <body>
     <?php
         session_start();
-        
-        if(!isset($_GET['index'])){
-            echo "<script>alert('An error has occured!')</script>";
-            echo "<script>window.location.replace('welcome.php')</script>";
-        }
-        else{
-            $index = $_GET['index'];
-        }
 	?>
 	<!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -77,23 +69,60 @@
             <?php
                 $con = mysqli_connect('localhost', 'root', '', 'quizapp');
 
-                $courseName = mysqli_query($con, "SELECT course_name FROM course WHERE course_id = $index");
-                $numTakers = mysqli_query($con, "SELECT COUNT(DISTINCT user_id) as totalTakers FROM course_log WHERE course_id = $index");
-
-                $totalNumberCompleters = mysqli_query($con, "SELECT COUNT(DISTINCT course_log.user_id) as totalComplete FROM course_log WHERE course_log.course_id = $index AND course_log.course_status IS NOT NULL");
-
-                $printComp = mysqli_fetch_assoc($totalNumberCompleters);
-                $printTakers = mysqli_fetch_assoc($numTakers);
-                $printName = mysqli_fetch_assoc($courseName);
-
-                mysqli_close($con);
+                $userCourses = mysqli_query($con, "SELECT course.course_name as course_name, course.course_description as course_desc, course.course_id as course_id FROM course, course_log WHERE course_log.user_id =" .  $_SESSION['id'] . " AND course_log.course_id = course.course_id");
+                //var_dump($userCourses);
+                //mysqli_close($con);
             ?>
             <div class="card">
-                <h4 class="card-title"><?php echo $printName['course_name'] ?></h4>
-                <h5 class="card-subtitle mb-2 text-muted">Course Statistics</h5>
-                <p class="card-text"> Number of Takers: <?php echo $printTakers['totalTakers'] ?></p>
-                <p class="card-text"> Number of Completers: <?php echo $printComp['totalComplete'] ?></p>
-                <p class="card-text"> Average Completion Rate: <?php echo ($printComp['totalComplete']/$printTakers['totalTakers'])*100 . "%" ?></p>
+                <h4 class="card-title">My Current Courses</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Course Name</td>
+                            <td>Course Description</td>
+                            <td>Number of Quizzes Taken</td>
+                            <td>Number of Total Quizzes</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            while($course = mysqli_fetch_assoc($userCourses)){
+                                $userId = $_SESSION['id'];
+                                $currentCourseId = $course['course_id'];
+                                //$quizzesTaken = mysqli_query($con, "");
+                                $quizzesTotal = mysqli_query($con, "SELECT COUNT(*) as totalQuizzes FROM quiz WHERE quiz.course_id = $currentCourseId");
+                                $totalTaken = mysqli_query($con, "SELECT COUNT(DISTINCT quiz_log.quiz_id) as totalTaken FROM quiz_log, quiz WHERE quiz_log.user_id_take = $userId AND quiz_log.quiz_id = quiz.quiz_id AND quiz.course_id = $currentCourseId");
+                                //var_dump($totalTaken);
+                                if($quizzesTotal){
+                                    $printTotalQuizzes = mysqli_fetch_assoc($quizzesTotal);
+                                }
+
+                                if($totalTaken){
+                                    $printTotalTaken = mysqli_fetch_assoc($totalTaken);
+                                }
+
+                                echo "<tr id=\"$currentCourseId\">";
+                                echo "<td>" . $course['course_name'] . "</td>";
+                                echo "<td>" . $course['course_id'] . "</td>";
+                                if($totalTaken){
+                                    echo "<td class=\"totalTaken\">" . $printTotalTaken['totalTaken'] . "</td>";
+                                }
+                                else{
+                                    echo "<td>0</td>";
+                                }
+                                if($quizzesTotal){
+                                    echo "<td class=\"totalQuizzes\">" . $printTotalQuizzes['totalQuizzes'] . "</td>"; 
+                                }
+                                else{
+                                    echo "<td>0</td>"; 
+                                }
+                                echo "<td><button type=\"button\" class=\"btn btn-primary completeCourse\">Complete Course!</button></td>";
+                                echo "</tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table>
                 <button type="button" class="btn btn-primary goBackCourse">Go back</button>
             </div>
         </div>
@@ -112,9 +141,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="initManageCourses.js"></script>
-        <script type="text/javascript" src="manageCourse.js"></script>
-        <script type="text/javascript" src="viewStats.js"></script>
+        <script type="text/javascript" src="viewCurrentCourses.js"></script>
     </body>
 
 </html>

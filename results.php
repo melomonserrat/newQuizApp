@@ -70,6 +70,16 @@
 				echo ". You failed, try again and study harder next time!</h3>";
 			}
 
+			$quizId = $_POST['quizId'];
+			$userId = $_SESSION['id'];
+
+			$getCourseId = mysqli_query($mysqli, "SELECT quiz.course_id AS course_id FROM quiz WHERE quiz.quiz_id = $quizId");
+			$courseId = mysqli_fetch_assoc($getCourseId);
+
+			if(!(mysqli_query($mysqli, "SELECT COUNT(*) FROM course_log WHERE course_log.course_id = $courseId AND course_log.user_id = $userId"))){
+				mysqli_query($mysqli, "INSERT INTO course_log (course_id, user_id) VALUES ($courseId, $userId)");
+			}
+
 			$formated_date = date("Y-m-d", time());
 
 			$sql = "INSERT INTO quiz_log (Quiz_ID, User_ID_Take, Quiz_Score, Quiz_Date) VALUES (".$_POST['quizID'].",".$_SESSION['id'].",".$score.",'".$formated_date."')";

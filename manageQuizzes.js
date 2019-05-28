@@ -98,7 +98,6 @@ function identificationQuestion(){
 	
 	var question=document.createElement("input");
 	question.type="text";
-	question.id="shit";
 	question.name='question[]';
 	
 	var label1=document.createElement("label");
@@ -119,8 +118,6 @@ function identificationQuestion(){
 	
 	document.getElementById("questionContainer").append(questionContainer);
 	document.getElementById("questionContainer").append(document.createElement("br"));
-	
-	alert(document.getElementById("shit").getAttribute("name"));
 	
 }
 
@@ -225,6 +222,27 @@ function matchingTypeQuestion(){
 	questionContainer.id="questionCard";
 	questionContainer.align="center";
 	
+	var premise=document.createElement("input");
+	premise.type="text";
+	premise.name='premise[]';
+	
+	var label1=document.createElement("label");
+	label1.innerHTML="Premise/Question";
+	
+	var label2=document.createElement("label");
+	label2.innerHTML="Response";	
+	
+	var answer=document.createElement("input");
+	answer.type="text";
+	answer.name="answer[]";	
+	
+	questionContainer.appendChild(label1);
+	questionContainer.appendChild(premise);
+	questionContainer.appendChild(label2);
+	questionContainer.appendChild(answer);
+	
+	document.getElementById("questionContainer").append(questionContainer);
+	document.getElementById("questionContainer").append(document.createElement("br"));
 	
 }
 

@@ -105,6 +105,7 @@
 		$course = $_POST["courseType"];
 		$newQuizisOpen = (int) $_POST["isOpen"];
 		$id = $_SESSION["id"];
+		$tags = $_POST["quizTags"];
 		
 		$conn = new mysqli('localhost','root', '', 'quizapp');
 		
@@ -115,16 +116,13 @@
 			echo "hello";
 		}
 		
-		//echo "Connected successfully";
-		$sql ="INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`, `User_ID`, `is_open`) VALUES (NULL, '$newName', '$newDiff', '$newDesc', '$course', '$newPass', '$newPass', '$id', '$newQuizisOpen')";
-		
-		if ($conn->query($sql) === TRUE) {
-			echo "New record created successfully"."<br>";
-		} else {
-			echo "Error: " . $sql . "<br>" . $conn->error;
+		if($course != "Standalone"){
+			$sql ="INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`, `User_ID`, `is_open`, `tags`) VALUES (NULL, '$newName', '$newDiff', '$newDesc','$course', '$newPass', '$newPass', '$id', '$newQuizisOpen', '$tags')";
+		}else{
+			$sql ="INSERT INTO `quiz` (`Quiz_ID`, `Quiz_Name`, `Quiz_Difficulty`, `Quiz_Description`, `Course_ID`, `Quiz_PassingScore`, `Quiz_Type`, `User_ID`, `is_open`, `tags`) VALUES (NULL, '$newName', '$newDiff', '$newDesc', NULL, '$newPass', '$newPass', '$id', '$newQuizisOpen', '$tags')";
 		}
 		
-		echo sizeof($_POST["question"]);
+		mysqli_query($conn, $sql);
 		
  		if($_POST["quizType"]=="I"){
 			
@@ -174,8 +172,6 @@
 				
 				$result = mysqli_query($conn, $sql);
 				
-				var_dump($result);
-				
 				$last_id = mysqli_insert_id($conn);
 				
 				$sql="INSERT INTO `trueorfalse`(`Question_ID`, `Answer`) VALUES ($last_id, $answer)";
@@ -210,13 +206,38 @@
 				
 				var_dump($result);
 				
-				$last_id = mysqli_insert_id($conn);
+				$last_id = mysqli_insert_id($conn);	
 				
-				$sql="INSERT INTO `multiplechoice`(`Question_ID`, `Choice1`, `Choice2`, `Choice3`, `Choice4`) VALUES ('$last_id','choiceA','choiceB','choiceC','choiceD')";
+				$sql="INSERT INTO `multiplechoice`(`Question_ID`, `Choice1`, `Choice2`, `Choice3`, `Choice4`) VALUES ('$last_id','$choiceA','$choiceB','$choiceC','$choiceD')";
 				
 				$result = mysqli_query($conn, $sql);
 				
 				var_dump($result);
+				
+			}
+			
+		}
+		
+		 if($_POST["quizType"]=="MT"){
+			
+			for($c=0;$c<sizeof($_POST["premise"]);$c++){
+				
+				$last_id = mysqli_insert_id($conn);
+				
+				$last_id = mysqli_insert_id($conn);
+				
+				$question=test_input($_POST["premise"][$c]);
+				$answer=test_input($_POST["answer"][$c]);
+				
+				$sql="INSERT INTO `question`(`Quiz_ID`, `Question_ID`, `Question_Description`, `Question_Type`, `Question_Answer`) VALUES ('$last_id',NULL,'$question',3,'$answer')";
+				
+				$result = mysqli_query($conn, $sql);
+				
+				$last_id = mysqli_insert_id($conn);
+				
+				$sql="INSERT INTO `matchingtype` (`Question_ID`, `Answer`) VALUES ('$last_id', '$answer')";
+				
+				mysqli_query($conn, $sql);
 				
 			}
 			
@@ -298,6 +319,7 @@
 				
 				<select class="custom-select" id="courseType" name="courseType">
 				  <option selected disabled>Choose the course...</option>
+				  <option>Standalone</option>
 					<?php
 					
 					$con = mysqli_connect('localhost','root', '', 'quizapp');
@@ -336,15 +358,15 @@
 				</select>
 				
 				<div class="checkbox">
-				  <label><input type="checkbox" value="1" name="isOpen">Open</label>
+				  <label><input type="checkbox" value="1" name="isOpen"> Open</label>
 				</div>
 				<div class="checkbox">
-				  <label><input type="checkbox" value="0" name="isOpen">Close</label>
+				  <label><input type="checkbox" value="0" name="isOpen"> Close</label>
 				</div>
 				
 				<div class="form-group">
 					<label for="quizTags">Tags</label>
-					<input type="text" class="form-control" id="quizTags">
+					<input type="text" class="form-control" id="quizTags" name="quizTags">
 				</div>
 				
 				<br><br>

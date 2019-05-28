@@ -79,11 +79,24 @@
 
                 $courseName = mysqli_query($con, "SELECT course_name FROM course WHERE course_id = $index");
                 $numTakers = mysqli_query($con, "SELECT COUNT(DISTINCT user_id) as totalTakers FROM course_log WHERE course_id = $index");
-
                 $totalNumberCompleters = mysqli_query($con, "SELECT COUNT(DISTINCT course_log.user_id) as totalComplete FROM course_log WHERE course_log.course_id = $index AND course_log.course_status IS NOT NULL");
 
-                $printComp = mysqli_fetch_assoc($totalNumberCompleters);
-                $printTakers = mysqli_fetch_assoc($numTakers);
+                if(!$totalNumberCompleters){
+                    $completers = 0;
+                }
+                else{
+                    $printComp = mysqli_fetch_assoc($totalNumberCompleters);
+                    $completers = $printComp['totalComplete'];
+                }
+
+                if(!$numTakers){
+                    $takers = 0;
+                }
+                else{
+                    $printTakers = mysqli_fetch_assoc($numTakers);
+                    $takers = $printTakers['totalTakers'];
+                }
+
                 $printName = mysqli_fetch_assoc($courseName);
 
                 mysqli_close($con);
@@ -91,9 +104,9 @@
             <div class="card">
                 <h4 class="card-title"><?php echo $printName['course_name'] ?></h4>
                 <h5 class="card-subtitle mb-2 text-muted">Course Statistics</h5>
-                <p class="card-text"> Number of Takers: <?php echo $printTakers['totalTakers'] ?></p>
-                <p class="card-text"> Number of Completers: <?php echo $printComp['totalComplete'] ?></p>
-                <p class="card-text"> Average Completion Rate: <?php echo ($printComp['totalComplete']/$printTakers['totalTakers'])*100 . "%" ?></p>
+                <p class="card-text"> Number of Takers: <?php $takers ?></p>
+                <p class="card-text"> Number of Completers: <?php $completers ?></p>
+                <p class="card-text"> Average Completion Rate: <?php echo ($completers/$takers)*100 . "%" ?></p>
                 <button type="button" class="btn btn-primary goBackCourse">Go back</button>
             </div>
         </div>

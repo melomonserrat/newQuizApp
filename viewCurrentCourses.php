@@ -123,7 +123,7 @@
                         ?>
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-primary goBackCourse">Go back</button>
+                <button type="button" class="btn btn-primary goBackCourseList">Go back</button>
             </div>
         </div>
 

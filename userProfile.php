@@ -85,7 +85,7 @@
 	<div class="profileHome">
 		<button type="button" id="viewQuizHistory" class="btn btn-primary">View Quiz History</button>
 		<button type="button" id="viewCourseHistory" class="btn btn-primary">View Course History</button>
-		<a href="viewCurrentCourses.php"  id="viewCurrentCourses" class="btn btn-primary">View Current Courses</button>
+		<a href="viewCurrentCourses.php"  id="viewCurrentCourses" class="btn btn-primary">View Current Courses</a>
 	</div>
 	
 	<?php

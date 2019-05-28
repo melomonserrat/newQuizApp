@@ -43,7 +43,7 @@
             mysqli_close($con);
 
             echo "<script>alert('Course edited!')</script>";
-            echo "<script>window.location.href = 'manageCourses.php?edit' </script>";
+            echo "<script>window.location.href = 'manageCourses.php' </script>";
         }
     ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

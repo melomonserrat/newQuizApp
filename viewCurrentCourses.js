@@ -14,4 +14,8 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('.goBackCourseList').on('click', function(){
+        window.location.replace('manageCourses.php');
+    });
 });

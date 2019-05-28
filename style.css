@@ -123,3 +123,8 @@ hr.new1 {
 	margin-top: 300px;
 	margin-left: 850px;
 }
+
+.currentCard{
+	width: 600px;
+	margin-left: 100px;
+}

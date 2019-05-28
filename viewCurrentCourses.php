@@ -8,7 +8,7 @@
         <title>Viewing Course Statistics</title>
     </head>
 
-    <body>
+    <body style="background-image: url('pic8.jpg'); background-size: cover;">
     <?php
         session_start();
 	?>
@@ -73,16 +73,16 @@
                 //var_dump($userCourses);
                 //mysqli_close($con);
             ?>
-            <div class="card">
+            <div class="card currentCard" >
                 <h4 class="card-title">My Current Courses</h4>
-                <table class="table">
+                <table class="table" >
                     <thead>
                         <tr>
-                            <td>Course Name</td>
-                            <td>Course Description</td>
-                            <td>Number of Quizzes Taken</td>
-                            <td>Number of Total Quizzes</td>
-                            <td>Action</td>
+                            <td scope="col">Course Name</td>
+                            <td scope="col">Course Description</td>
+                            <td scope="col">Number of Quizzes Taken</td>
+                            <td scope="col">Number of Total Quizzes</td>
+                            <td scope="col">Action</td>
                         </tr>
                     </thead>
                     <tbody>

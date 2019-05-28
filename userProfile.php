@@ -124,11 +124,12 @@
 					}
 				}
 				else{
-					echo "You haven't taken any quizzes yet. Proceed to Take a Quiz to do so.";
+					echo "<h1 style='text-shadow: 1px 1px 1px #000000;'>You haven't taken any quizzes yet. Proceed to Take a Quiz to do so.</h1>";
 				}
 
 				mysqli_close($mysqli);
 				?>
+				<br>
 				<button type="button" class="btn btn-primary goToHome">Go back</button>
 			</div>
 		</section>

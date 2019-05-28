@@ -106,7 +106,7 @@
 					echo "You haven't completed any courses yet!";
 				}
 
-				mysqli_close($mysqli);
+				//mysqli_close($mysqli);
 				?>
 				<button type="button" class="btn btn-primary goToHome">Go back</button>
 			</div>

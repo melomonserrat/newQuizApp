@@ -163,7 +163,7 @@
 				$last_id = mysqli_insert_id($conn);
 				
 				$question=$_POST["question"][$c];
-				$answer=$_POST["answer"][$c];
+				$answer= (int) $_POST["answer"][$c];
 				
 				$last_id = mysqli_insert_id($conn);
 				
@@ -178,7 +178,7 @@
 				
 				$last_id = mysqli_insert_id($conn);
 				
-				$sql="INSERT INTO `trueorfalse`(`Question_ID`, `Answer`) VALUES ([value-1],[value-2])";
+				$sql="INSERT INTO `trueorfalse`(`Question_ID`, `Answer`) VALUES ($last_id, $answer)";
 				
 				mysqli_query($conn, $sql);
 				
@@ -194,6 +194,10 @@
 				
 				$question=$_POST["question"][$c];
 				$answer=$_POST["answer"][$c];
+				$choiceA=$_POST["inputA"][$c];
+				$choiceB=$_POST["inputB"][$c];
+				$choiceC=$_POST["inputC"][$c];
+				$choiceD=$_POST["inputD"][$c];
 				
 				$last_id = mysqli_insert_id($conn);
 				
@@ -208,9 +212,11 @@
 				
 				$last_id = mysqli_insert_id($conn);
 				
-				$sql="INSERT INTO `multiplechoice`(`Question_ID`, `Choice1`, `Choice2`, `Choice3`, `Choice4`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5])";
+				$sql="INSERT INTO `multiplechoice`(`Question_ID`, `Choice1`, `Choice2`, `Choice3`, `Choice4`) VALUES ('$last_id','choiceA','choiceB','choiceC','choiceD')";
 				
-				mysqli_query($conn, $sql);
+				$result = mysqli_query($conn, $sql);
+				
+				var_dump($result);
 				
 			}
 			

@@ -71,6 +71,12 @@
 
     <?php
       //if($_SERVER["REQUEST_METHOD"] == "POST"){
+		  
+	use PHPMailer\PHPMailer\PHPMailer;
+	require_once('PHPMailer-master/src/Exception.php');
+	require_once('PHPMailer-master/src/PHPMailer.php');
+	require_once('PHPMailer-master/src/SMTP.php');
+	
       if(isset($_POST['form'])){
         switch($_POST['form']){
           case 'login':
@@ -130,6 +136,65 @@
               echo "<script type=\"text/javascript\">alert('Please enter a valid email!');</script>";
               echo "<script type=\"text/javascript\">window.location.replace('main.php');</script>";
             }
+			
+			$mail = new PHPMailer;
+			
+			//Tell PHPMailer to use SMTP
+			$mail->isSMTP();
+			
+			//Enable SMTP debugging
+			// 0 = off (for production use)
+			// 1 = client messages
+			// 2 = client and server messages
+			$mail->SMTPDebug = 0;
+			
+			//Set the hostname of the mail server
+			$mail->Host = 'smtp.gmail.com';
+
+			//Set the SMTP port number - 587 for authenticated TLS, 465 for ssl
+			$mail->Port = 587;
+			
+			//Set the encryption system to use - ssl (deprecated) or tls
+			$mail->SMTPSecure = 'tls';
+			
+			//Whether to use SMTP authentication
+			$mail->SMTPAuth = true;
+			
+			$mail->SMTPOptions = array(
+				'ssl' => array(
+					'verify_peer' => false,
+					'verify_peer_name' => false,
+					'allow_self_signed' => true
+				)
+			);
+			
+			//Username to use for SMTP authentication - use full email address for gmail
+			$mail->Username = "cmsc127mp@gmail.com";
+			
+			//Password to use for SMTP authentication
+			$mail->Password = "lolre5005";
+
+			//Set who the message is to be sent from
+			$mail->setFrom('cmsc127mp@gmail.com', 'Admin');
+
+			//Set who the message is to be sent to
+			$mail->addAddress($email, $username);
+			
+			//Set the subject line
+			$mail->Subject = 'QuizApp Notification';
+
+			//Read an HTML message body from an external file, convert referenced images to embedded,
+			//convert HTML into a basic plain-text alternative body
+			$mail->msgHTML("Hello ".$username."! <br> You have created an account at QuizApp.");
+			
+			$mail->AltBody = 'This is a plain-text message body';
+				
+			if (!$mail->send()) {
+				echo "Mailer Error: " . $mail->ErrorInfo;
+			} else {
+				echo "Message sent!";
+
+			}
 
             $con = new mysqli('localhost', 'root', '', 'quizapp');
 

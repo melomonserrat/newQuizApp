@@ -219,13 +219,18 @@ function multipleChoiceQuestion(){
 
 function matchingTypeQuestion(){
 	
+	var questionContainer=document.createElement("div");
+	questionContainer.className="card";
+	questionContainer.style.width="40rem"; 
+	questionContainer.id="questionCard";
+	questionContainer.align="center";
 	
 	
 }
 
 function trueOrFalseQuestion(){
 	
-		var questionContainer=document.createElement("div");
+	var questionContainer=document.createElement("div");
 	questionContainer.className="card";
 	questionContainer.style.width="40rem"; 
 	questionContainer.id="questionCard";
@@ -246,11 +251,11 @@ function trueOrFalseQuestion(){
 	answer.name="answer[]";
 	
 	var trueChoice=document.createElement("option");
-	trueChoice.value="TRUE";
+	trueChoice.value="1";
 	trueChoice.innerHTML="True";
 	
 	var falseChoice=document.createElement("option");
-	falseChoice.value="FALSE";
+	falseChoice.value="2";
 	falseChoice.innerHTML="False";
 	
 	answer.appendChild(trueChoice);

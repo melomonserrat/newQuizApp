@@ -85,9 +85,9 @@
 			$sql = "INSERT INTO quiz_log (Quiz_ID, User_ID_Take, Quiz_Score, Quiz_Date) VALUES (".$_POST['quizID'].",".$_SESSION['id'].",".$score.",'".$formated_date."')";
 
 			if(mysqli_query($mysqli, $sql)){
-				echo "<span>Your record has been updated! Thank you for using QuizApp</span>";
+				echo "<span>Your record has been updated! Thank you for using QuizApp!</span>";
 			} else{
-			    echo "<span>Ohno! You have already taken this quiz today, this try will not be recorded. Come back tommorow.</span>.";
+			    echo "<span>Oh no! You have already taken this quiz today. This try will not be recorded. Please come back tomorrow.</span>.";
 			}
 		}
 	?>

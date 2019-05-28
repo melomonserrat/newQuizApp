@@ -263,7 +263,7 @@
 				<div class="card-body">
 					<h5 class="card-title">Create a quiz!</h5>
 					<p class="card-text">Create a quiz for your quizzes.</p>
-					<button type="button" class="btn btn-primary-outline" onclick="createQuiz()">Go!</button>
+					<button type="button" class="btn btn-primary" onclick="createQuiz()">Go!</button>
 				</div>
 			</div>
 		</div>
@@ -272,7 +272,7 @@
 				<div class="card-body">
 					<h5 class="card-title">Edit a quiz!</h5>
 					<p class="card-text">Change the details of a quizzes.</p>
-					<button type="button" class="btn btn-primary-outline" onclick="editQuiz()">Go!</button>
+					<button type="button" class="btn btn-primary" onclick="editQuiz()">Go!</button>
 				</div>
 			</div>
 		</div>
@@ -281,7 +281,7 @@
 				<div class="card-body">
 					<h5 class="card-title">View quizzes!</h5>
 					<p class="card-text">Check the list of all quizzes.</p>
-					<button type="button" class="btn btn-primary-outline" onclick="viewQuizzes()">Go!</button>
+					<button type="button" class="btn btn-primary" onclick="viewQuizzes()">Go!</button>
 				</div>
 			</div> 
 		</div>

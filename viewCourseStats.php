@@ -106,7 +106,11 @@
                 <h5 class="card-subtitle mb-2 text-muted">Course Statistics</h5>
                 <p class="card-text"> Number of Takers: <?php $takers ?></p>
                 <p class="card-text"> Number of Completers: <?php $completers ?></p>
-                <p class="card-text"> Average Completion Rate: <?php echo ($completers/$takers)*100 . "%" ?></p>
+                <p class="card-text"> Average Completion Rate: <?php if($takers == 0){
+																			echo 0 . "%";
+																		}else{
+																			echo ($completers/$takers)*100 . "%";
+																		}?></p>
                 <button type="button" class="btn btn-primary goBackCourse">Go back</button>
             </div>
         </div>
